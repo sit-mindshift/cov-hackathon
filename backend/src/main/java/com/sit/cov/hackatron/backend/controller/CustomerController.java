@@ -34,7 +34,7 @@ public class CustomerController {
     @GetMapping(value = "/customer/{id}")
     public Map<String, Object> findUser(@PathVariable String id) {
 
-        Optional<Customer> customer = customerRepository.findById(Long.parseLong(id));
+        Optional<Customer> customer = customerRepository.findById(id);
         Map<String, Object> responseMap = new HashMap<>();
 
         responseMap.put("customer", customer);
@@ -45,6 +45,7 @@ public class CustomerController {
 
     @PostMapping(value = "/customer")
     public Map<String, Object> saveUser(@RequestBody Customer customer) {
+
         Customer savedCustomer = customerRepository.save(customer);
         Map<String, Object> responseMap = new HashMap<>();
 
