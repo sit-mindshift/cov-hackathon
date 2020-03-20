@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="sm" type="dark" variant="danger">
+    <b-navbar class="navbar" toggleable="sm" type="dark" variant="success">
 
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
@@ -24,4 +24,7 @@
 </script>
 
 <style scoped>
+    .navbar {
+        margin-bottom: 1rem;
+    }
 </style>
