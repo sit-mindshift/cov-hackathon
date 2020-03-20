@@ -1,11 +1,8 @@
 <template>
   <div>
-      All Shops:
-    {{allShops}}
-
-      <p>{{msg}}</p>
+    <h2>All Shops</h2>
+    <b-table striped hover :items="allShops"></b-table>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -16,7 +13,6 @@
   })
   export default class extends Vue {
     private allShops: Shop[] = shops.allShops;
-    private msg: String = "halloooooo";
   }
 </script>
 
