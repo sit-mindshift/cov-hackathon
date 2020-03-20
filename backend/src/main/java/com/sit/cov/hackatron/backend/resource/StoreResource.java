@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sit.cov.hackatron.backend.model.Coordinates;
 import com.sit.cov.hackatron.backend.service.StoreService;
+import com.sit.cov.hackatron.backend.model.Store;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,7 @@ public class StoreResource {
     //TODO Use nicer models, create real Reponse Object
     @GetMapping
     @ResponseBody
-    public ResponseEntity<String> getStores(@RequestBody Coordinates coordinates) {
+    public ResponseEntity<Store> getStores(@RequestBody Coordinates coordinates) {
         return storeService.getStores(coordinates.getLongitude(), coordinates.getLatitude());
     }
 }
