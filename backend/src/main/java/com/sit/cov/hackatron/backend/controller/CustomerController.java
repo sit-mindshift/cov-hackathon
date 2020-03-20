@@ -21,7 +21,7 @@ public class CustomerController {
     @GetMapping(value = "/customers")
     public Map<String, Object> getAllCustomers() {
 
-        List<Customer> customers =  customerRepository.findAll();
+        List<Customer> customers = customerRepository.findAll();
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("customers", customers);
         responseMap.put("status", 200);
@@ -29,7 +29,6 @@ public class CustomerController {
 
         return responseMap;
     }
-
 
 
     @GetMapping(value = "/customer/{id}")
