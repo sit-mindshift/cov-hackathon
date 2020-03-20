@@ -6,7 +6,7 @@
 
 <script>
   import {Component, Vue} from 'vue-property-decorator';
-  import ShopList from '@/components/ShopList.vue';
+  import ShopList from '../components/ShopList.vue';
 
   @Component({
     components: {
