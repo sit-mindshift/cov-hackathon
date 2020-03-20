@@ -1,0 +1,3512 @@
+{
+	"info": {
+		"_postman_id": "6c0f81a8-b381-4b54-bfb6-601d8c8ca7e1",
+		"name": "mobile_server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "prod",
+			"item": [
+				{
+					"name": "backInStockNotificationService",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"deviceToken\": \"abc\",\n\t\"countryCode\": \"DE\",\n\t\"pushDeviceType\": \"IOS\",\n\t\"erpNumber\": \"000000000100248522\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/backInStockNotificationService/register",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"backInStockNotificationService",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unregister",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"deviceToken\": \"abc\",\n\t\"countryCode\": \"DE\",\n\t\"pushDeviceType\": \"IOS\",\n\t\"erpNumber\": \"000000000100248522\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/backInStockNotificationService/unregister",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"backInStockNotificationService",
+										"unregister"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unregisterMultiple",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n\t{\n\t\t\"deviceToken\": \"abc\",\n\t\t\"countryCode\": \"DE\",\n\t\t\"pushDeviceType\": \"IOS\",\n\t\t\"erpNumber\": \"000000000100248522\"\n\t}\n]"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/backInStockNotificationService/unregisterMultiple",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"backInStockNotificationService",
+										"unregisterMultiple"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllRegisteredNotificationsForSpecificReceiver",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"deviceToken\": \"abc\",\n\t\"countryCode\": \"DE\",\n\t\"pushDeviceType\": \"IOS\"\n}\n"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/backInStockNotificationService/findAllRegisteredNotificationsForSpecificReceiver",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"backInStockNotificationService",
+										"findAllRegisteredNotificationsForSpecificReceiver"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "isRegistered",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"deviceToken\": \"abc\",\n\t\"countryCode\": \"DE\",\n\t\"pushDeviceType\": \"IOS\",\n\t\"erpNumber\": \"000000000100248522\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/backInStockNotificationService/isRegistered",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"backInStockNotificationService",
+										"isRegistered"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "containerItemService",
+					"item": [
+						{
+							"name": "objectByType(erp_number)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"objectType\": \"ERP_NUMBER\",\n    \"value\": \"000000000100212241\",\n    \"trackedEvent\": \"QR_SCAN\"\t\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerItemService/DE/objectByType/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerItemService",
+										"DE",
+										"objectByType",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "objectByType(lidl_product_number)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"objectType\": \"LIDL_PRODUCT_NUMBER\",\n    \"value\": \"311046\",\n    \"trackedEvent\": \"QR_SCAN\"\t\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerItemService/DE/objectByType/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerItemService",
+										"DE",
+										"objectByType",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "objectByType(ean)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"objectType\": \"EAN\",\n    \"value\": \"4046664072270\",\n    \"trackedEvent\": \"EXTERNAL_LINK\"\t\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerItemService/DE/objectByType/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerItemService",
+										"DE",
+										"objectByType",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "objectByType(campaign_id)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"objectType\": \"CAMPAIGN_ID\",\n    \"value\": \"9518\",\n    \"trackedEvent\": \"EXTERNAL_LINK\"\t\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerItemService/DE/objectByType/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerItemService",
+										"DE",
+										"objectByType",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "containerService",
+					"item": [
+						{
+							"name": "root",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/root/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"root",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "onlineshop",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/onlineshop/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"onlineshop",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "virtualOnlineshopTopCampaign",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/virtualOnlineshopTopCampaign/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"virtualOnlineshopTopCampaign",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "flyer",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/flyer/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"flyer",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "teaserContainers",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/teaserContainers/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"teaserContainers",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "teaserContainer(carousel)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/teaserContainer/DE/carousel",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"teaserContainer",
+										"DE",
+										"carousel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "teaserContainer(list)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/teaserContainer/DE/list",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"teaserContainer",
+										"DE",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "appLinkContainer(more_section)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/appLinkContainer/DE/moreSection",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"appLinkContainer",
+										"DE",
+										"moreSection"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "onlineshopOffersGroupedContainer",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/onlineshopOffersGroupedContainer/DE/",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"onlineshopOffersGroupedContainer",
+										"DE",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSellingRootRecommendationContainer",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/topSellingRootRecommendationContainer/DE/",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"topSellingRootRecommendationContainer",
+										"DE",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "campaign(without_paging)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/campaign/DE/9518",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"campaign",
+										"DE",
+										"9518"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "campaign(with_paging)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/DE/campaign/DE/9518/0/50",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"DE",
+										"campaign",
+										"DE",
+										"9518",
+										"0",
+										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "searchResultCampaign(with_paging)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/nl_BE/searchResultCampaign/nl/002637/0/50",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"nl_BE",
+										"searchResultCampaign",
+										"nl",
+										"002637",
+										"0",
+										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "campaignByDataPostPayload(with_paging)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Params\": [\n\t\t{\n\t\t\t\"key\": \"search_engine\",\n\t\t\t\"value\": \"engine1\"\n\t\t},\n\t\t{\n\t\t\t\"key\": \"query\",\n\t\t\t\"value\": \"query=*&filterType=Product&filterCategoryPathROOT=Acties&filterPrice=5.00+-+9.99\"\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/nl_BE/campaignByDataPostPayload/nl/0/50",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"nl_BE",
+										"campaignByDataPostPayload",
+										"nl",
+										"0",
+										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filtersOnlyCampaignByDataPostPayload",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Params\": [\n\t\t{\n\t\t\t\"key\": \"search_engine\",\n\t\t\t\"value\": \"engine1\"\n\t\t},\n\t\t{\n\t\t\t\"key\": \"query\",\n\t\t\t\"value\": \"query=*&filterType=Product&filterCategoryPathROOT=Acties&filterPrice=5.00+-+9.99\"\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/containerService/nl_BE/filtersOnlyCampaignByDataPostPayload/nl/",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"containerService",
+										"nl_BE",
+										"filtersOnlyCampaignByDataPostPayload",
+										"nl",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "countryService",
+					"item": [
+						{
+							"name": "country(without_language_code)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/countryService/country/DE/",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"countryService",
+										"country",
+										"DE",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "country",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/countryService/country/DE/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"countryService",
+										"country",
+										"DE",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "countries",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/countryService/countries/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"countryService",
+										"countries",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "countries(with_supported_country_codes)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Country\": [{\"code\": \"DE\"}, {\"code\": \"AT\"}]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/countryService/countries/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"countryService",
+										"countries",
+										"de"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "emergencyMessageService",
+					"item": [
+						{
+							"name": "emergencyMessages",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/emergencyMessageService/DE/emergencyMessages",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"emergencyMessageService",
+										"DE",
+										"emergencyMessages"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "feedbackService",
+					"item": [
+						{
+							"name": "feedback",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"FeedbackMessage\": \"Test\",\n\t\"feedbackType\": \"COMMON\",\n\t\"language\": \"de\",\n\t\"plattform\": \"Test\",\n\t\"clientVersion\": \"1337\",\n\t\"rating\": 2\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/feedbackService/DE/feedback",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"feedbackService",
+										"DE",
+										"feedback"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "feedback(delivery)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"message\": \"Test\",\n\t\"rating\": 2,\n\t\"platform\": \"Test\",\n\t\"bundleVersion\": \"1337\",\n\t\"images\": [\n        {\n            \"content\": \"iVBORw0KGgoAAAANSUhEUgAAAwAAAAJACAIAAAC1zJYBAAAgAElEQVR4Ae3ca6gk21k/4NlhRCPoPyr4waBINImXRNSoiCKnJyARCSiIiIiak4h3hUQQRPHkiCIhgQRFTGLMgQTxQxDxi5cvmZmgIF4SUbzgjWASQcFoFBRRT/9rT828U7t39+66raq1Vj0Kx97dVWu963nr8uva27nY7Xa3pv3P3bt32wHu3LkzbaRhe5t3mNfYrTmPlRu2H+dhXmO35jxWbth+nId5jd2a81i5y/2eM2Vn+xIgQIAAAQIEShQQgErsmpoJECBAgACBSQIC0CQ+OxMgQIAAAQIlCghAJXZNzQQIECBAgMAkAQFoEp+dCRAgQIAAgRIFBKASu6ZmAgQIECBAYJLAxX6/nzSAnQkQIECAAAECpQl4AlRax9RLgAABAgQITBa48A8hDjX0D08NFRu3PedxbkP34jxUbNz2nMe5Dd2L81CxcdvX4ewJ0Lju24sAAQIECBAoWEAAKrh5SidAgAABAgTGCQhA49zsRYAAAQIECBQsIAAV3DylEyBAgAABAuMEBKBxbvYiQIAAAQIEChYQgApuntIJECBAgACBcQIC0Dg3exEgQIAAAQIFCwhABTdP6QQIECBAgMA4AQFonJu9CBAgQIAAgYIFbhdcu9IJEMhVIP6h2LMF9tnyzp07Z8exAQECBAYJCECDuGxMYNMCfcJKCqD+84pKKfyNSaBKAQGoyrZaFIFJAv0Dx6lpzgaRmOLsls0UsfGp6eL9U1v2mSUG8YIAgS0ICEBb6LI1EjgvcCo6dPdcK0b0n/fUKq6/37zTf9gugtcECNQhIADV0UerINBL4HoOOLpbucngVOVHF379zVO7H1XyJgECRQsIQEW3T/EEzghcv8ef2qHue3+sLkCad+J1mBy8E3vFBl4QIFCNgABUTSsthMClwMEt/ADl+h395u0Pdq/sx7MaBzjXt68MxHIIbEpAANpUuy22ToGD+3R3ke7ZXY2zrw+4DmC7Px5seXZkGxAgkJuAAJRbR9RDoJdA92bc3cGNuasx8fUBZte8+/pgs4mT2p0AgWUEBKBlnM1CYAaB7k23O5wbcFcj3euuc7cX3dfdbdJVYmQCBKYLCEDTDY1AIKFA9+bancaNtqux/Ouuf7dH3dfdbZav0IwECNwsIADd7ONTAusIdO+jUYEbalBk9aLbl27j4nV3g6wqVwyBLQsIQFvuvrXnKBB3zbY4984cm3S6pm6/opXx4vR+PiFAYGkBAWhpcfMROBA4enfs3kcPtvdjKQLRxG6L43V8Wspy1EmgMgEBqLKGWk4xAnEjPKjYffEApIIfm55eb3e8o+MVtNgSShQQgErsmpoLFojbXqyhvf9dfz828KImgYg70fH2Rbxf02KthUDOAgJQzt1RWz0CcbeLJbnhBcU2X8QB0B4bcYTE+9tksWoCiwkIQItRm2iLAnFX6y7eHa6r4XV7PMShEi8cJ44NAkkFBKCkvAbfrkDcxoLA/SwovLguEIdHHDnti3j/+i7eIUBgioAANEXPvgQOBeLuFR+4gQWFF30E4oBpj6U4ouL9PoPYhgCBswIC0FkiGxDoJRA3qtjaHSsovBgh0B4/cVy1LxxUIyTtQuCogAB0lMWbBPoKxP0pdnCLCgovpgvE4dQeaXG8xfvTpzACgW0KCEDb7LtVzyAQt6IYyz0pKLyYXaA9uuKoa1845GZ3NuB2BASg7fTaSmcTiJtQO6Kb0GyyBjonEAdbexCKQefAfE7gpIAAdJLGBwQOBA5yT/Np3I0OtvQjgdQC7bHXjUHNjA7I1OzGr0lAAKqpm9aSSkD0SSVr3GkC3RjUjOSB0DROe29LQADaVr+tdqjAQfTxDXsooO0XEIjDsvtAKN5coABTEChRQAAqsWtqXkJA9FlC2RyzCnQfCB0cwLPOYzACNQhc7Pf7GtZhDQQIECBAgACB3gLP6b2lDQkQIECAAAEClQhc7Ha7iUuJB60L/8rZvBMb13P3jTjHMoPF8RwUKV4EOOcUvDFmOMc7y4DHvMtMF6szb1AkfVGHsydASQ8Sgxcg0JzJcTIXUK4SCYwSiCDigB/lZ6cKBfwRdIVNtaSeAge5p71DHLzZcyibEchfoHuEt8d5pKL8i1chgdkFBKDZSQ1YgMBBynEbKKBnSpxJQAyaCdIwxQv4FVjxLbSAoQLd9NPcDNr7wdBBbE+gaIHukd89I4pelOIJDBLwBGgQl43LFuhe6OWesnup+jkE2rOgOS/aU8NJMQeqMYoR8ASomFYpdIpAXOLbQVzop2DatzKBOB0OTpPKlmk5BA4EPAE6APFjbQLtV9tYVVzr4x0vCBBoz4v2ZGn/60xxVFQv4AlQ9S3e9AK76ae5oLumb/posPhzAt1zpHvunNvP5wSKFPAEqMi2KfqsQPfyLfec5bIBgRBoz5fmDGpPIqdPyHhRmYAnQJU11HJuxYW7tXD5dkwQGCEQJ87BCTViKLsQyFNAAMqzL6oaKdB+Z213bq7gcREfOZzdCGxYoHsGdc+sDZNYelUCAlBV7dzyYg6+p4o+Wz4YrH1GgTiVDk6xGacwFIFVBASgVdhNOrNA9+tp92vrzNMYjsAmBbrnVPdc2ySGRdcj4I+g6+nlNlfSvRzHV9VtUlg1gaQC7fkVz4Gcbkm1Db6AgCdACyCbIpWA9JNK1rgETghE7okkdGJDbxPIXcAToNw7pL6jAqLPURZvElhAIB4FNXM1Z2JEogWmNgWBGQU8AZoR01ALCUg/C0GbhsBpgcg93fPx9OY+IZCdgCdA2bVEQTcIdC+1cf29YXsfESCQTiAeBbUnplMyHbWRUwh4ApRC1ZhJBKSfJKwGJTBNIHJP9wydNqS9CSwh4AnQEsrmmCjQvbDG1XbimHYnQGAuAY+C5pI0zpICngAtqW2uMQLSzxg1+xBYXCC+nHTP2cWrMCGBvgICUF8p260uEJfX1StRAAECRwWcpEdZvJmngF+B5dkXVV0RcFW9wuEHAhkLtGerh0AZt0hpDwU8AXIo5CjQvXpKPzl2SE0E+gl0z+V+e9iKwEICngAtBG2angIulz2hbEagFIH2pPZNppR+badOT4C20+sCVir9FNAkJRIYIhC5x9k9hM22SwgIQEsom6OPQPf6GBfNPjvahgCBnAXidO6e4zkXrLaNCAhAG2l07svsXhnjcpl70eojQKCfQJzU3TO93662IpBKwN8ApZI1bk+B7gUxrpI997UZAQKlCLRnd3O+t6e8k72UxlVcpydAFTe3gKW1l8K2UBfEAhqmRALTBOI0757704a0N4GRAgLQSDi7TRfoXgHjsjh9WCMQIJCzQJzs3StAzgWrrVYBAajWzua+rrj2NVfDuCDmXrT6CBCYQyBO+bgOzDGqMQgME/A3QMO8bD1doHvJi+vg9GGNQIBAQQLtud9cDdoLgktBQb2rplRPgKppZRkLaS92ba0ueWX0TJUEkgnERaB7ZUg2m4EJXBEQgK5w+CGpQPcaFxe+pDManACBzAXiUtC9PmRes/LqEBCA6uhjAavoXt3ikldA3UokQCCxQFwQuleJxHMansAtAchBsIRA97oWF7slJjYHAQIlCMRloXutKKFwNRYscLHf7wsuX+kECBAgQIAAgeECngANN7MHAQIECBAgULjAxW63m7iEeGIZzzAnDthz983Oe//+/Z5E6272xBNPRAH371/E6yJe7G7dK6LOq0Xurv5YwE/3dvcKqPKwxN3hG9n/XNzxvN8/vHpcXJRx6YjfpbgPJj0b5r3vewKUtFnbHbzo9LPdtlk5gTwELi4efs2LYJFHXaqoSkAAqqqdmSzmavop43lVJnTKIECgFYhnPzKQQyKRgACUCHa7w0o/2+29lROYVUAGmpXTYIcCAtChiJ+nCEg/U/TsS4DAgYAMdADixxkFBKAZMbc+lPSz9SPA+gkkEJCBEqAa8lJAAHIczCMg/czjaBQCBK4JyEDXSLwxg4AANAOiIaQfxwABAkkFZKCkvNscXADaZt/nXLX0M6emsQgQOCEgA52A8fZIAQFoJJzdWgHpx5FAgMBiAjLQYtRbmEgA2kKXU61R+kkla1wCBE4IyEAnYLw9WEAAGkxmh1ZA+nEkECCwioAMtAp7fZMKQPX1dIkVST9LKJuDAIETAjLQCRhvDxAQgAZg2bQVkH4cCQQIrC4gA63egtILEIBK7+DS9Us/S4ubjwCBEwIy0AkYb/cSEIB6MdmoFZB+HAkECGQlIANl1Y6yihGAyurXmtVKP2vqm5sAgRMCMtAJGG+fERCAzgD5uBWQfhwJBAhkKyADZduanAsTgHLuTi61ST+5dEIdBAicEJCBTsB4+6SAAHSSxgfXBe7fv3/9Te8QIECAAIHiBASg4lq2dMHx+Ef6WZrefAQIDBHwEGiIlm1vCUAOgpsEpJ+bdHxGgEBmAjJQZg3JuhwBKOv2rFuc9LOuv9kJEBghIAONQNvmLgLQNvt+ftXSz3kjWxAgkKWADJRlW7IrSgDKriU5FCT95NAFNRAgMFpABhpNt50dBaDt9LrvSiP99N3BdgQIEMhPQAbKryd5VSQA5dWP1avpph//b1+rt0MBBAhMEZCBpuhVv68AVH2LRy5Q+hkJZzcCBAgQKEFAACqhS0vVGI9/pJ+lyM1DgEBaAQ+B0vqWPLoAVHL3Zq1d+pmV02AECOQiIAPl0onM6hCAMmvISuVIPyvBm5YAgSUEZKAllEubQwAqrWMJ6o30k2BsQxIgQCALARkoizbkVIQAlFM31q7Fn/6s3QHzEyBAgMBCAgLQQtDZThOPf6SfbHukMAIEZhHwEGgWxmoGEYCqaeWYhUg/Y9TsQ4BAsQIyULGtm79wAWh+01JGlH5K6ZQ6CRCYUUAGmhGz6KEEoKLbN774SD/jh7AnAQIEyhSQgcrs28xVC0AzgxY3nD/9Ka5lCiZAgACB6QIX+/1++ihGWFJgemSJxz/Th+q38F2/zTLaanfrXkbV9C1l13fDbLa7t7uXTS39C9n13zSTLR3PRxsRt794IHR0sz5vxlB9NrZNJgKeAGXSiOXKWDz9LLc0MxEgQKC/QOQe8aU/Wk1b3r5z587E9dy9e7cdYfpQgyrZ7LyDlGxMgAABAqcEmgzUpp/mv5GHTm3c5333wT5Ko7eZ977vCdDoRhS5o8c/RbZN0QQIECAwt4AANLdoxuNJPxk3R2kECKwjEA9+/CJsnQasN6sAtJ79sjNLP8t6m40AgWIEZKBiWjVroQLQrJwGI0CAAAECBEoQEIBK6NLkGj3+mUxoAAIEahbwEKjm7p5YmwB0Aqait6WfipppKQQIpBKQgVLJ5jquAJRrZ9RFgAABAgQIJBMQgJLR5jGwxz959EEVBAgUIOAhUAFNmq9EAWg+y/xGkn7y64mKCBDIWkAGyro9sxYnAM3KaTACBAgQKFxABiq8gX3LF4D6ShW3ncc/xbVMwQQIECCwmIAAtBj1ohNJP4tym4wAgboEPASqq5/HVyMAHXfxLgECBAgQIFCxgABUYXM9/qmwqZZEgMCyAh4CLeu9wmwC0AroSaeUfpLyGpwAge0IyEB191oAqru/VkeAAAECBAgcERCAjqCU+5bHP+X2TuUECGQo4CFQhk2ZqyQBaC7J9ceRftbvgQoIEKhOQAaqrqUPFyQA1dpZ6yJAgAABAgROCghAJ2nK+sDjn7L6pVoCBAoS8BCooGb1L1UA6m9lSwIECBAgQKASAQGohkZ6/FNDF62BAIGMBTwEyrg5I0sTgEbC5bOb9JNPL1RCgEDFAjJQZc0VgCprqOUQIECAAAEC5wUEoPNGOW/h8U/O3VEbAQKVCXgIVFNDBaCaumktBAgQIECAQC8BAagXU54befyTZ19URYBAxQIeAlXTXAGomlZaCAECBAgQINBXQADqK5Xbdh7/5NYR9RAgsBEBD4HqaLQAVGQfpZ8i26ZoAgRqEZCBKuikAFRBEy2BAAECBAgQGCYgAA3zymFrj39y6IIaCBDYuICHQKUfAAJQ6R1UPwECBAgQIDBYQAAaTJbJDvfv38+kEmUQIEBgmwLxEGibyy991QJQ6R1UPwECBAgQIDBYQAAaTJbDDh7/5NAFNRAgQMBDoHKPAQGo3N6pnAABAgQIEBgpcLHf70fuareVBAp8/LNbiWr8tLtb98bvvNqeu9VmHjvxvd29sbuuuN9uxbnHTe14HufWfy930v5W+WzpCVA+vVAJAQIECBAgsJDA7Tt37kyc6u7du+0I04caVMmm5o3FDiKyMQECBAgsLLDkrTBuDUtO2njWMa8nQAufGqYjQIAAAQIE1hcQgNbvwdkKImuf3dIGBAgQILCugCv2uv79ZxeA+lvZkgABAgQIEKhEQADKvZG+TOTeIfURIEDgqoDr9lWPTH8SgDJtjLIIECBAgACBdAICUDrbGUaOrxEL/4X/DKUbggABAtsTiGt1XL23Z1DMigWgYlqlUAIECBAgQGAuAQFoLsn5x4kvEPGVYv45jEiAAAECswrEFTuu4bMOb7DZBASg2SgNRIAAAQIECJQiIACV0il1EiBAgAABArMJCECzUc47UDw7jaep845vNAIECBBIJBDX7biSJ5rIsFMEBKApevYlQIAAAQIEihQQgHJsW3xpiK8ROVapJgIECBA4IRBX77ien9jQ26sJCECr0ZuYAAECBAgQWEtAAFpL/uS88XUhvkCc3NQHBAgQIJCrQFzD46qea6UbrUsA2mjjLZsAAQIECGxZQADacvetnQABAgQIbFRAAMqr8fGkNJ6d5lWfaggQIECgt0BcyePa3ntXGyYXEICSE5uAAAECBAgQyE1AAMqoI/EVIb40ZFScUggQIEBguEBcz+MKP3wMeyQREICSsBqUAAECBAgQyFlAAMq5O2ojQIAAAQIEkggIQElYRwwaT0fjeemIQexCgAABArkJxFU9rvO5VbjNegSgbfbdqgkQIECAwKYFBKBNt9/iCRAgQGABAQ+BFkAeOoUANFQsyfbxXDROkiTTGJQAAQIECBB4ICAAORAIECBAgACBzQkIQOu33OOf9XugAgIECCQWiAf8cc1PPKHhzwgIQGeAfEyAAAECBAjUJyAA1ddTKyJAgAABAgTOCAhAZ4BSfxzPQuPpaOoZjU+AAAECqwjEdT6u/KuUYdJWQAByJBAgQIAAAQKbExCANtdyCyZAgAABAgQEoDWPgXgKGs9F16zG3AQIECCQWCCu9nH9Tzyh4U8KCEAnaXxAgAABAgQI1CogANXaWesiQIAAAQIETgoIQCdpUn8Qzz/jiWjqGY1PgAABAqsLxDU/7gKrl7TNAi72+/02V17uqu/fv19a8bvSCr61u3WvuJpvNVWX9j/3dvdKK7mpd1dczY7n1C1zJ00tnGJ8ASiFatoxLy4u0k5Q8ui73a7k8pPXno/PU0891a726aefTr7s3hPk49O75EU3fOKJJxadz2QEUgrcjmdxo2eJh3jThxpUQ9Hzjig+dhmkZGMCBAgQWEyg/30wLun9d7m+ilkGuT7s2XfqmPc5Z9dpAwIECBAgQIBAZQICUGUNtRwCBAgQIEDgvIAAdN7IFgQIECBAYF6B+M1X/Dpp3vGNdlZAADpLNP8GcbjHCTD/HEYkQIAAAQIETgsIQKdtfEKAAAECBAhUKiAAVdpYyyJAgAABAgROCwhAp23SfOL3X2lcjUqAAIHCBOKvIOK+UNgCCi9XACq8gconQIAAAQIEhgsIQMPN7EGAAAECBAgULiAAFd5A5RMgQIAAAQLDBQSg4WYT9ohf9MavficMZlcCBAgQKFsg7gVxdyh7PUVVLwAV1S7FEiBAgAABAnMICEBzKBqDAAECBAgQKEpAACqqXYolQIAAAQIE5hAQgOZQ7DdG/Io3funbbz9bESBAgEC1AnFHiHtEtUvNbGECUGYNUQ4BAgQIECCQXkAASm9sBgIECBAgQCAzAQEos4YohwABAgQIEEgvIAClN34wQ/xyN37du9DEpiFAgACBvAXivhB3irzrraQ6AaiSRloGAQIECBAg0F9AAOpvZUsCBAgQIECgEgEBqJJGWgYBAgQIECDQX0AA6m81fsv4tW78onf8WPYkQIAAgeoE4u4Q94vqlpjdggSg7FqiIAIECBAgQCC1gACUWtj4BAgQIECAQHYCAlB2LVEQAQIECBAgkFpAAEotbHwCBAgQIEAgOwEBKHlL4i/a4m/ckk9pAgIECBAoTSDuEXHXKG0FhdUrABXWMOUSIECAAAEC0wUEoOmGRiBAgAABAgQKExCACmuYcgkQIECAAIHpAgLQdEMjECBAgAABAoUJCECFNUy5BAgQIECAwHQBAWi64U0jxB/zx5/337S1zwgQIEBgwwJxp4h7x4Yxki9dAEpObAICBAgQIEAgNwEBKLeOqIcAAQIECBBILiAAJSc2AQECBAgQIJCbwMV+v8+tJvXcLHBxcXHzBlv+dLfbbXn5Z9eej89TTz3VVvv000+fLXuxDfLxWWzJgyZ64oknBm1vYwI5C3gClHN31EaAAAECBAgkEbgdf3M+evj4Y/XpQw2qIf95560wRhukZGMCBAgQWExglvtgXO3PjtZ/y3kF6pjXE6B5jwqjESBAgAABAgUICEAFNEmJBAgQIECAwLwCAtC8nkYjQIAAAQIEChAQgApokhIJECBAgACBeQUEoHk9jUaAAAECBAgUICAAFdAkJRIgQIAAAQLzCghA83oajQABAgQIEChAQABK1aS1/pmEVOsxLgECBAgsIhD//E/cRxaZdnOTCECba7kFEyBAgAABAgKQY4AAAQIECBDYnIAAtLmWWzABAgQIECAgADkGCBAgQIAAgc0JCECba7kFEyBAgAABAgKQY4AAAQIECBDYnIAAtLmWWzABAgQIECAgADkGCBAgQIAAgc0JCECba7kFEyBAgAABAgJQkmMg/vnO+Ac9k0xjUAIECBCoUSDuHXE3qXGVK69JAFq5AaYnQIAAAQIElhcQgJY3NyMBAgQIECCwsoAAtHIDTE+AAAECBAgsLyAALW9uRgIECBAgQGBlAQFo5QaYngABAgQIEFheQABa3tyMBAgQIECAwMoCAtDKDTA9AQIECBAgsLyAALS8uRkJECBAgACBlQUEoJUbYHoCBAgQIEBgeQEBaHlzMxIgQIAAAQIrCwhAKzfA9AQIECBAgMDyAgLQ8uZmJECAAAECBFYWEIBWboDpCRAgQIAAgeUFBKDlzc1IgAABAgQIrCwgAK3cANMTIECAAAECywsIQMubm5EAAQIECBBYWUAAWrkBpidAgAABAgSWFxCAljc3IwECBAgQILCygAC0cgNMT4AAAQIECCwvcLHf75ef1YwECBAgQIAAgRUFPAFaEd/UBAgQIECAwDoCF7vdbuLMd+/ebUe4c+fOxKEG7Z7zvClqizEHKW1t44uLi60tudD1xrNnLSuog9G1gmpeuNQZ74Nxzb9hzD7bpBCoY15PgFIcG8YkQIAAAQIEshYQgLJuj+IIECBAgACBFAICUApVYxIgQIAAAQJZCwhAWbdHcQQIECBAgEAKAQEohaoxCRAgQIAAgawFBKCs26M4AgQIECBAIIWAAJRC1ZgECBAgQIBA1gICUNbtURwBAgQIECCQQkAASqFqTAIECBAgQCBrAQEo6/YojgABAgQIEEghIAClUDUmAQIECBAgkLWAAJR1exRHgAABAgQIpBAQgFKoGpMAAQIECBDIWkAAyro9iiNAgAABAgRSCAhAKVSNSYAAAQIECGQtIABl3R7FESBAgAABAikEBKAUqsYkQIAAAQIEshYQgLJuj+IIECBAgACBFAICUApVYxIgQIAAAQJZCwhASdpz586ddty7d+8mmcCgBAgQIFCvQNw74m5S71pXW5kAtBq9iQkQIECAAIG1BASgteTNS4AAAQIECKwmIACtRm9iAgQIECBAYC0BAWgtefMSIECAAAECqwkIQKvRm5gAAQIECBBYS0AAWkvevAQIECBAgMBqAgLQavQmJkCAAAECBNYSEIDWkjcvAQIECBAgsJqAALQavYkJECBAgACBtQQEoFTy8c93xj/omWom4xIgQIBARQJx14j7SEWLy2gpAlBGzVAKAQIECBAgsIyAALSMs1kIECBAgACBjAQEoIyaoRQCBAgQIEBgGQEBaBlnsxAgQIAAAQIZCQhAGTVDKQQIECBAgMAyAgLQMs5mIUCAAAECBDISEIAyaoZSCBAgQIAAgWUELvb7/TIzmYXAAgIXFxcLzGKK6QJx5dGy6ZiLjRBdW2xGExFIJyAApbPd9MhPP/30zet/yUte8tKXvvQzP/Mzn/vc5/77v//73/3d3/3Jn/zJH/7hH77//e//m7/5m3/913/9uI/7uOc///lf+IVf+OVf/uVf9mVf1rz4jM/4jNu3b3/0ox/967/+62azZuNml7//+7//j//4j2aQz/qsz/qiL/qir/iKr3jZy172eZ/3eZ/+6Z/eFPDP//zPf/VXf/XHf/zHf/AHf/Cnf/qn//AP//Bf//Vfn/RJn/SCF7zgi7/4i5uRv/RLv/RFL3rRp37qp/7v//7vP/7jP/75n//5H/3RHzUjNy8+8pGP/M///M+nfMqnvPCFL2w2azZudvmcz/mcT/7kT24G+dCHPvRnf/ZnzbDN4H/5l3/5T//0T829oZn0xS9+cVNtM8UNy//8z//8V77ylf/3f//367/+629961t///d/vyn+O77jO5588snP/uzPbmZ/29ve9mu/9mv//d///fVf//Xf933ft9vt/uVf/uVXfuVX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\",\n            \"mimeType\": \"image/png\"\n        },\n        {\n            \"content\": \"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IIWAAJRC1ZgECBAgQIBA1gICUNbtURwBAgQIECCQQkAASqFqTAIECBAgQCBrAQEo6/YojgABAgQIEEghIAClUDUmAQIECBAgkLWAAJR1exRHgAABAgQIpBAQgFKoGpMAAQIECBDIWkAAyro9iiNAgAABAgRSCAhAKVSNSYAAAQIECGQtIABl3R7FESBAgAABAikEBKAUqsYkQIAAAQIEshYQgLJuj+IIECBAgACBFAICUApVYxIgQIAAAQJZCwhASdpz586ddty7d+8mmcCgBAgQIFCvQNw74m5S71pXW5kAtBq9iQkQIECAAIG1BASgteTNS4AAAQIECKwmIACtRm9iAgQIECBAYC0BAWgtefMSIECAAAECqwkIQKvRm5gAAQIECBBYS0AAWkvevAQIECBAgMBqAgLQavQmJkCAAAECBNYSEIDWkjcvAQIECBAgsJqAALQavYkJECBAgACBtQQEoFTy8c93xj/omWom4xIgQIBARQJx14j7SEWLy2gpAlBGzVAKAQIECBAgsIyAALSMs1kIECBAgACBjAQEoIyaoRQCBAgQIEBgGQEBaBlnsxAgQIAAAQIZCQhAGTVDKQQIECBAgMAyAgLQMs5mIUCAAAECBDISEIAyaoZSCBAgQIAAgWUELvb7/TIzmYXAAgIXFxcLzGKK6QJx5dGy6ZiLjRBdW2xGExFIJyAApbPd9MhPP/30zet/yUte8tKXvvQzP/Mzn/vc5/77v//73/3d3/3Jn/zJH/7hH77//e//m7/5m3/913/9uI/7uOc///lf+IVf+OVf/uVf9mVf1rz4jM/4jNu3b3/0ox/967/+62azZuNml7//+7//j//4j2aQz/qsz/qiL/qir/iKr3jZy172eZ/3eZ/+6Z/eFPDP//zPf/VXf/XHf/zHf/AHf/Cnf/qn//AP//Bf//Vfn/RJn/SCF7zgi7/4i5uRv/RLv/RFL3rRp37qp/7v//7vP/7jP/75n//5H/3RHzUjNy8+8pGP/M///M+nfMqnvPCFL2w2azZudvmcz/mcT/7kT24G+dCHPvRnf/ZnzbDN4H/5l3/5T//0T829oZn0xS9+cVNtM8UNy//8z//8V77ylf/3f//367/+629961t///d/vyn+O77jO5588snP/uzPbmZ/29ve9mu/9mv//d///fVf//Xf933ft9vt/uVf/uVXfuVX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\",\n            \"mimeType\": \"image/png\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/feedbackService/DE/feedback/delivery",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"feedbackService",
+										"DE",
+										"feedback",
+										"delivery"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "imageRecognitionDataService",
+					"item": [
+						{
+							"name": "productImagesCsv",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/imageRecognitionDataService/DE/productImagesCsv",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"imageRecognitionDataService",
+										"DE",
+										"productImagesCsv"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "internalUrlResolveService",
+					"item": [
+						{
+							"name": "resolve(campaign_id)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"internalUrl\": \"lidl-app://?appFunction=campaign&campaignId=9518\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/internalUrlResolveService/DE/resolve/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"internalUrlResolveService",
+										"DE",
+										"resolve",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resolve(product_id)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"internalUrl\": \"lidl-app://?appFunction=product&productId=239376\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/internalUrlResolveService/DE/resolve/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"internalUrlResolveService",
+										"DE",
+										"resolve",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resolve(product_erp)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"internalUrl\": \"lidl-app://?appFunction=product&erpNumber=000000000100212241\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/internalUrlResolveService/DE/resolve/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"internalUrlResolveService",
+										"DE",
+										"resolve",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resolve(variant_erp)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"internalUrl\": \"lidl-app://?appFunction=product&erpNumber=000000100255193001\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/internalUrlResolveService/DE/resolve/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"internalUrlResolveService",
+										"DE",
+										"resolve",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resolve(lidl_product_number)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"internalUrl\": \"lidl-app://?appFunction=product&lidlProductNumber=311034\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/internalUrlResolveService/DE/resolve/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"internalUrlResolveService",
+										"DE",
+										"resolve",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resolve(shop_campaign_url)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"internalUrl\": \"https://www.lidl.de/de/backautomaten/c9518\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/internalUrlResolveService/DE/resolve/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"internalUrlResolveService",
+										"DE",
+										"resolve",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resolve(shop_product_url)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"internalUrl\": \"https://www.lidl.de/de/silvercrest-mini-backofen-sgb-1200-a2-silber/p239376\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/internalUrlResolveService/DE/resolve/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"internalUrlResolveService",
+										"DE",
+										"resolve",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resolveSearchUrl",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"internalUrl\": \"https://www.lidl.de/de/search?query=*&filterType=Produkte&filterPrice=5.00+-+7.49&channel=mgm_de_DE&productsPerPage=36\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/internalUrlResolveService/DE/resolveSearchUrl/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"internalUrlResolveService",
+										"DE",
+										"resolveSearchUrl",
+										"de"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "parcelLabNotificationService",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"deviceToken\": \"abc\",\n\t\"countryCode\": \"DE\",\n\t\"orderId\": \"1337\",\n\t\"pushDeviceType\": \"IOS\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/parcelLabNotificationService/register",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"parcelLabNotificationService",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "productRecallService",
+					"item": [
+						{
+							"name": "productRecall(all)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productRecallService/DE/productRecall/de",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productRecallService",
+										"DE",
+										"productRecall",
+										"de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productRecall(specific_id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productRecallService/DE/productRecall/de/123",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productRecallService",
+										"DE",
+										"productRecall",
+										"de",
+										"123"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "productService",
+					"item": [
+						{
+							"name": "product",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/product/DE/239376",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"product",
+										"DE",
+										"239376"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "products",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ProductIds\": [239376, 240740]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/products/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"products",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productsForShoppingCartDisplay",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ProductIds\": [239376, 240740]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/productsForShoppingCartDisplay/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"productsForShoppingCartDisplay",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "shoppingCartContainerItemsByProductIds",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ProductIds\": [239376, 240740]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/shoppingCartContainerItemsByProductIds/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"shoppingCartContainerItemsByProductIds",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productsForOverviewDisplay",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ProductIds\": [239376, 240740]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/productsForOverviewDisplay/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"productsForOverviewDisplay",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "overviewContainerItemsByProductIds",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ProductIds\": [239376, 240740]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/overviewContainerItemsByProductIds/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"overviewContainerItemsByProductIds",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productRecommendationsForErpNumber",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/productRecommendationsForErpNumber/DE/000000000100212241",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"productRecommendationsForErpNumber",
+										"DE",
+										"000000000100212241"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productByErp",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/productByErp/DE/000000000100212241",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"productByErp",
+										"DE",
+										"000000000100212241"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productErpNumbers",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ProductErpNumbers\": [\"000000000100212241\", \"000000000100213350\"]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/productErpNumbers/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"productErpNumbers",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "storeTerminalProducts",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/productService/DE/storeTerminalProducts/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"productService",
+										"DE",
+										"storeTerminalProducts",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "pushService",
+					"item": [
+						{
+							"name": "registerIPhonePushDevice(legacy_api)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"deviceToken\": \"abc\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/pushService/DE/registerIPhonePushDevice",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"pushService",
+										"DE",
+										"registerIPhonePushDevice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "registerOrUpdatePushDevice",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"deviceToken\": \"abc\",\n\t\"pushDeviceType\": \"IOS\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/pushService/DE/registerOrUpdatePushDevice",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"pushService",
+										"DE",
+										"registerOrUpdatePushDevice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unregisterPushDevice",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"deviceToken\": \"abc\",\n\t\"pushDeviceType\": \"IOS\"\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/pushService/DE/unregisterPushDevice",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"pushService",
+										"DE",
+										"unregisterPushDevice"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "searchService",
+					"item": [
+						{
+							"name": "search",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/searchService/DE/search/DE/Kg==/0/50",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"searchService",
+										"DE",
+										"search",
+										"DE",
+										"Kg==",
+										"0",
+										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search(empty_text)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/searchService/DE/search/DE/0/50",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"searchService",
+										"DE",
+										"search",
+										"DE",
+										"0",
+										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search(within_campaign, legacy_api)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/searchService/DE/search/DE/Kg==/123/0/50",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"searchService",
+										"DE",
+										"search",
+										"DE",
+										"Kg==",
+										"123",
+										"0",
+										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "processDataPostPayload",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Params\": [\n\t\t{\n\t\t\t\"key\": \"search_engine\",\n\t\t\t\"value\": \"engine1\"\n\t\t},\n\t\t{\n\t\t\t\"key\": \"query\",\n\t\t\t\"value\": \"query=*&filterType=Produkte&filterPrice=%3C+5.00\"\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/searchService/DE/processDataPostPayload/DE/0/50",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"searchService",
+										"DE",
+										"processDataPostPayload",
+										"DE",
+										"0",
+										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "processDataPostPayloadForFiltersOnly",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Params\": [\n\t\t{\n\t\t\t\"key\": \"search_engine\",\n\t\t\t\"value\": \"engine1\"\n\t\t},\n\t\t{\n\t\t\t\"key\": \"query\",\n\t\t\t\"value\": \"query=*&filterType=Produkte&filterPrice=%3C+5.00\"\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/searchService/DE/processDataPostPayloadForFiltersOnly/DE",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"searchService",
+										"DE",
+										"processDataPostPayloadForFiltersOnly",
+										"DE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "suggest(top_search_trends)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/searchService/DE/suggest/DE/",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"searchService",
+										"DE",
+										"suggest",
+										"DE",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "suggest(for_specific_search_term)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/searchService/DE/suggest/DE/ZmVz",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"searchService",
+										"DE",
+										"suggest",
+										"DE",
+										"ZmVz"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "shoppingListService",
+					"item": [
+						{
+							"name": "nameSuggestions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/shoppingListService/DE/nameSuggestions",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"shoppingListService",
+										"DE",
+										"nameSuggestions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "items",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/shoppingListService/DE/items",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"shoppingListService",
+										"DE",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "itemsChecksum",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/shoppingListService/DE/itemsChecksum",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"shoppingListService",
+										"DE",
+										"itemsChecksum"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "staticPageService",
+					"item": [
+						{
+							"name": "staticPage",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/staticPageService/DE/staticPage/7095",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"staticPageService",
+										"DE",
+										"staticPage",
+										"7095"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "staticPages",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/staticPageService/DE/staticPages",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"staticPageService",
+										"DE",
+										"staticPages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "staticPagesByIds",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"StaticPages\": [\n\t\t{\n\t\t\t\"staticPageId\": 7095\n\t\t},\n\t\t{\n\t\t\t\"staticPageId\": 7128\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/staticPageService/DE/staticPagesByIds",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"staticPageService",
+										"DE",
+										"staticPagesByIds"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "staticPageContentByType",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/staticPageService/DE/staticPageContentByType/privacy",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"staticPageService",
+										"DE",
+										"staticPageContentByType",
+										"privacy"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "storeSearch",
+					"item": [
+						{
+							"name": "storeSearch(legacy_api)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/StoreSearch/4858192/50000/924277/50000",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"StoreSearch",
+										"4858192",
+										"50000",
+										"924277",
+										"50000"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "storeSearch",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/StoreSearch/DE/4858192/50000/924277/50000",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"StoreSearch",
+										"DE",
+										"4858192",
+										"50000",
+										"924277",
+										"50000"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "nearestStore",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/StoreSearch/nearestStore/DE/4857204.52/926664.12",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"StoreSearch",
+										"nearestStore",
+										"DE",
+										"4857204.52",
+										"926664.12"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "storeByPositionId",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/StoreSearch/storeByPositionId/DE/12a4dd40d2e286af8cdf78088f1b8e07d236bf1e33567c3089f3ee29cd255c0a",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"StoreSearch",
+										"storeByPositionId",
+										"DE",
+										"12a4dd40d2e286af8cdf78088f1b8e07d236bf1e33567c3089f3ee29cd255c0a"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "translationService",
+					"item": [
+						{
+							"name": "clientTranslation",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://mobile.lidl.de/Mobile-Server/service/1337/translationService/DE/clientTranslation/ANDROID",
+									"protocol": "https",
+									"host": [
+										"mobile",
+										"lidl",
+										"de"
+									],
+									"path": [
+										"Mobile-Server",
+										"service",
+										"1337",
+										"translationService",
+										"DE",
+										"clientTranslation",
+										"ANDROID"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "triggerService",
+					"item": [
+						{
+							"name": "triggerCountrySynchronising",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerCountrySynchronising",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerCountrySynchronising"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerGermanMgmShopImport",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerGermanMgmShopImport",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerGermanMgmShopImport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerSpanishMgmShopAndCountryCmsImport",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerSpanishMgmShopAndCountryCmsImport",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerSpanishMgmShopAndCountryCmsImport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerCountryCmsImport",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerCountryCmsImport",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerCountryCmsImport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerHybrisAndCountryCmsImport",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerHybrisAndCountryCmsImport",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerHybrisAndCountryCmsImport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerYoochooseRecommendationImport",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerYoochooseRecommendationImport",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerYoochooseRecommendationImport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerEmergencyMessageImport",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerEmergencyMessageImport",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerEmergencyMessageImport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerProductRecallImport",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerProductRecallImport",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerProductRecallImport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerDeprecatedContainerItemDeleter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerDeprecatedContainerItemDeleter",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerDeprecatedContainerItemDeleter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerRecommendationPublicationDeleter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerRecommendationPublicationDeleter",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerRecommendationPublicationDeleter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerEmergencyMessagePublicationDeleter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerEmergencyMessagePublicationDeleter",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerEmergencyMessagePublicationDeleter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "triggerStoreImport",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/triggerStoreImport",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"triggerStoreImport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "clearCaches",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://tux420.int.secrz.com:8080/Mobile-Server/service/triggerService/clearCaches",
+									"protocol": "http",
+									"host": [
+										"tux420",
+										"int",
+										"secrz",
+										"com"
+									],
+									"port": "8080",
+									"path": [
+										"Mobile-Server",
+										"service",
+										"triggerService",
+										"clearCaches"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
