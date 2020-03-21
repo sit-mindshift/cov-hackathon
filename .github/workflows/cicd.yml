@@ -21,23 +21,25 @@ jobs:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout
       uses: actions/checkout@v2
       
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-        version: '270.0.0'
+        version: '281.0.0'
         service_account_email: $GKE_EMAIL
         service_account_key: $GKE_KEY
-        
+        export_default_credentials: true
     # Configure docker to use the gcloud command-line tool as a credential helper
     - run: |
         # Set up docker to authenticate
         # via gcloud command-line tool.
         gcloud auth configure-docker
-
+    # Debug gcloud CLI
+    - name: Debug GCP
+    - run: gcloud info
+    # Build Server
     - name: Build Server
       run: |
         docker build \
