@@ -14,7 +14,7 @@ env:
   VIEW_IMAGE: shopsafe-view
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-  GKE_KEY: ${{ secrets.GCLOUD_AUTH }}
+  GKE_KEY: ${{ secrets.GCLOUD_AUTH_BASE64 }}
   
 jobs:
   setup-build-publish-deploy:
