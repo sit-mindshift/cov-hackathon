@@ -8,7 +8,8 @@
         <b-collapse is-nav id="nav_collapse">
 
             <b-navbar-nav>
-                <b-nav-item href="/">Stores</b-nav-item>
+                <b-nav-item to="/">Stores</b-nav-item>
+                <b-nav-item to="/profile">My Profile</b-nav-item>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
