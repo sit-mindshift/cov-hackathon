@@ -17,31 +17,37 @@ env:
   GKE_KEY: ${{ secrets.GCLOUD_AUTH_BASE64 }}
   
 jobs:
+  debug-gcp:
+    steps:
+    - uses: actions/checkout@v2
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+    with:
+      version: '281.0.0'
+      service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+      service_account_key: ${{ secrets.GCP_SA_KEY }}
+      export_default_credentials: true
+    - run: gcloud info
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
+
     - name: Checkout
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
       
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-    with:
-        version: '281.0.0'
-        service_account_email: ${{ secrets.GKE_EMAIL }}
-        service_account_key: ${{ secrets.GCLOUD_AUTH_BASE64 }}
-        export_default_credentials: true
-    - run: gcloud info    
+      with:
+        version: '270.0.0'
+        service_account_email: $GKE_EMAIL
+        service_account_key: $GKE_KEY
+        
     # Configure docker to use the gcloud command-line tool as a credential helper
-    - name: Configure docker
     - run: |
         # Set up docker to authenticate
         # via gcloud command-line tool.
         gcloud auth configure-docker
-    # Debug gcloud CLI
-    - name: Debug GCP
-    - run: gcloud info
-    # Build Server
+
     - name: Build Server
       run: |
         docker build \
