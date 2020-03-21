@@ -23,7 +23,7 @@ public class StoreService {
 
     public ResponseEntity<Store> getNearestStore(String latitude, String longitude) {
         latitude = latitude.replace(".", "").substring(0,7);
-        longitude = latitude.replace(".", "").substring(0,7);
+        longitude = longitude.replace(".", "").substring(0,7);
         return ResponseEntity.ok().body(webClient.get().uri(buildURI(latitude, longitude))
                 .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(Store.class).block());
     }
@@ -34,7 +34,7 @@ public class StoreService {
 
     public ResponseEntity<StoreList> getStores(String latitude, String longitude, String span) {
         latitude = latitude.replace(".", "").substring(0,7);
-        longitude = latitude.replace(".", "").substring(0,7);
+        longitude = longitude.replace(".", "").substring(0,7);
         return ResponseEntity.ok().body(webClient.get().uri(buildStoresURI(latitude, longitude, span))
                 .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(StoreList.class).block());
     }
