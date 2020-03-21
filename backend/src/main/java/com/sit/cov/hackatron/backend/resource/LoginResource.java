@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(LoginResource.LOGIN_ENDPOINT)
 public class LoginResource {
 
-    public static final String LOGIN_ENDPOINT = "/login-api/";
+    public static final String LOGIN_ENDPOINT = "/login-api";
     private final LoginService loginService;
 
     @PostMapping
