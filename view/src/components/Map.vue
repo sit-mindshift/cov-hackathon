@@ -1,10 +1,17 @@
 <script>
 import { createMapkit } from 'vue-mapkit'
+<<<<<<< HEAD
 import user from "../store/models/user";
+=======
+import shops, {Shop} from '../store/models/shop';
+import user from '../store/models/user';
+>>>>>>> c3b1bd01bd9082c61397bc7b2646aeadbd8c4024
 
 export default {
   data(){
-    return { map: null }
+    return {
+        map: null
+    }
   },
   computed: {
       map_id() {
@@ -21,10 +28,16 @@ export default {
            self.map.cameraDistance = 10000
 
             // @Hase @Alex, hier stores auf map anzeigen siehe Beispie ldas ich geklaut habe
-           var MarkerAnnotation = mapkit.MarkerAnnotation;
-           var lidBFH = new mapkit.Coordinate(user.state.latitude, user.state.longitude)
-           var lidlAnnotation = new MarkerAnnotation(lidBFH, { color: "#f4a56d", title: "SFO", glyphText: "✈️" });
-           map.showItems([lidlAnnotation]);
+            let markers = [];
+            shops.allShops.forEach(element => {
+                var MarkerAnnotation = mapkit.MarkerAnnotation;
+                var marker = new mapkit.Coordinate(element.longitude / 100000, element.latitude / 100000);
+                var lidlAnnotation = new MarkerAnnotation(marker, { color: "#f4a56d", title: "Store", glyphText: "🏬" });
+                markers.push(lidlAnnotation);
+            });
+
+            map.showItems(markers);
+
 
            window.mapkit.removeEventListener('configuration-change', configurationChanged)
         })
