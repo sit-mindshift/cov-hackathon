@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
 public class TimeSlotController {
 
@@ -24,10 +25,18 @@ public class TimeSlotController {
     private ReservedTimeslotRepository reservedTimeslotRepository;
 
     @GetMapping(value = "/timeslots")
-    public List<TimeSlot> getAllTimeslots() {
+    public List<TimeSlot> getAllTimeslots() {gi
         List<TimeSlot> timeSlots = timeslotRepository.findAll();
         return timeSlots;
     }
+
+    @GetMapping(value = "/timeslots/{id}")
+    public List<TimeSlot> getAllTimeslotsOfStore() {
+        // TODO query slots from store
+        List<TimeSlot> timeSlots = timeslotRepository.findAll();
+        return timeSlots;
+    }
+
 
     @GetMapping(value = "/timeslot/{id}")
     public Optional<TimeSlot> findTimeSlotById(@PathVariable String id) {

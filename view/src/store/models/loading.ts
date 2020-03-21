@@ -1,6 +1,5 @@
 import store, {RootState} from '../store';
 import {BareActionContext, getStoreBuilder} from 'vuex-typex';
-import shopRepository from '@/repositories/shopRepository';
 
 export interface LoadingState {
   loading: boolean;
