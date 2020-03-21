@@ -20,5 +20,4 @@ public class TimeSlot {
     public LocalDate date;
     public LocalTime from;
     public LocalTime til;
-
 }
