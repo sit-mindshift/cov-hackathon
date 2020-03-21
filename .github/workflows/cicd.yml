@@ -1,0 +1,75 @@
+name: CI/CD
+on:
+  push:
+    branches:
+    - setup-ci
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GITHUB_SHA: ${{ github.sha }}
+  GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}  
+  GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  SERVER_DB: shopsafe-db
+  SERVER_IMAGE: shopsafe-server
+  VIEW_IMAGE: shopsafe-view
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+  
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@setup-ci
+      
+    # Setup gcloud CLI
+    - name: Setup Google Cloud
+      uses: actions/gcloud/auth@setup-ci
+      env:
+        GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }} 
+        
+    # Configure docker to use the gcloud command-line tool as a credential helper
+    - run: |
+        # Set up docker to authenticate
+        # via gcloud command-line tool.
+        gcloud auth configure-docker
+
+    - name: Build Server
+      run: |
+        docker build \
+          -t "eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA" \
+          --build-arg JAR_FILE=build/libs/*.jar
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          https://github.com/Rotfuks/unnamedFruitScanProject.git#master:backend
+    
+    # Docker login
+    - name: Docker Login
+      run: |
+        echo "$GCLOUD_AUTH" | base64 --decode > keyfile.json
+        gcloud auth activate-service-account --key-file keyfile.json
+        cat keyfile.json | docker login -u _json_key --password-stdin https://eu.gcr.io
+        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
+    
+    
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |
+        gcloud docker -- push "eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
+    
+    # Deploy the Docker image to the GKE cluster
+    # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
+    - name: Deploy Server
+      run: |
+        gcloud container clusters get-credentials "$GKE_SERVER_CLUSTER" --zone="$GKE_ZONE" --project="$GKE_PROJECT"
+        kubectl expose deployment/"$IMAGE" --type=LoadBalancer --port 8080 --target-port 8080
+    # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
+        
+        
+    # Deploy the Docker image to the GKE cluster
+    - name: Validate Services
+      run: | 
+        kubectl get service
+        
