@@ -9,6 +9,7 @@
             <b-navbar-nav>
                 <b-nav-item to="/">Stores</b-nav-item>
                 <b-nav-item to="/profile">My Profile</b-nav-item>
+                <b-nav-item to="/codes">My Codes</b-nav-item>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
