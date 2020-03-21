@@ -1,11 +1,11 @@
 package com.sit.cov.hackatron.backend.controller;
 
-import com.mongodb.internal.connection.Time;
 import com.sit.cov.hackatron.backend.model.ReservedTimeSlots;
 import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.repository.ReservedTimeslotRepository;
 import com.sit.cov.hackatron.backend.repository.TimeslotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -43,7 +43,17 @@ public class TimeSlotController {
         return savedTimeSlot;
     }
 
-    @PostMapping(value = "/timeslot/inavlidate/{userID}/{timeSlotID}")
+    @GetMapping(value = "/timeslot/{userID}")
+    public ResponseEntity<ReservedTimeSlots> getTimeslotsForUser(@PathVariable String userID,
+            @PathVariable String timeSlotID) {
+        if (reservedTimeslotRepository.findById(userID).isPresent()) {
+            return ResponseEntity.ok().body(reservedTimeslotRepository.findById(userID).get());
+        } else {
+            return ResponseEntity.ok().body(new ReservedTimeSlots());
+        }
+    }
+
+    @PostMapping(value = "/timeslot/invalidate/{userID}/{timeSlotID}")
     public ReservedTimeSlots invalidateTimeslot(@PathVariable String userID, @PathVariable String timeSlotID) {
 
         Optional<ReservedTimeSlots> reservedTimeSlotsOptional = reservedTimeslotRepository.findById(userID);
@@ -54,7 +64,7 @@ public class TimeSlotController {
                     reservedTimeSlotsOptional.get().getInvalidTimeSlots().add(timeslot);
                 }
             });
-            
+
             List<TimeSlot> timeSlots = reservedTimeSlotsOptional.get().getTimeSlots().stream()
                     .filter(timeslot -> !timeSlotID.equals(timeslot.getId())).collect(Collectors.toList());
             reservedTimeSlotsOptional.get().setTimeSlots(timeSlots);
