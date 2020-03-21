@@ -22,8 +22,6 @@ public class StoreService {
     public static final String STORES_SEARCH_ENDPOINT = "https://mobile.lidl.de/Mobile-Server/service/1337/StoreSearch/DE/";
 
     public ResponseEntity<Store> getNearestStore(String latitude, String longitude) {
-        latitude = latitude.replace(".", "").substring(0,7);
-        longitude = longitude.replace(".", "").substring(0,7);
         return ResponseEntity.ok().body(webClient.get().uri(buildURI(latitude, longitude))
                 .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(Store.class).block());
     }
@@ -33,8 +31,8 @@ public class StoreService {
     }
 
     public ResponseEntity<StoreList> getStores(String latitude, String longitude, String span) {
-        latitude = latitude.replace(".", "").substring(0,7);
-        longitude = longitude.replace(".", "").substring(0,7);
+        latitude = latitude.replace(".", "").substring(0, Math.min(latitude.length(), 7));
+        longitude = longitude.replace(".", "").substring(0, Math.min(longitude.length(), 5 + longitude.indexOf(".")));
         return ResponseEntity.ok().body(webClient.get().uri(buildStoresURI(latitude, longitude, span))
                 .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(StoreList.class).block());
     }
