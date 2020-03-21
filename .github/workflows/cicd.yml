@@ -64,12 +64,7 @@ jobs:
     
     # Deploy the Docker image to the GKE cluster
     # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
-    - name: Deploy Backend
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '270.0.0'
-        service_account_email: ${{ secrets.GKE_EMAIL }}
-        service_account_key: ${{ secrets.GKE_AUTH_BASE64 }} 
+    - name: Deploy Backend      
       run: |
         gcloud container clusters get-credentials "$GKE_SERVER_CLUSTER" --zone="$GKE_ZONE" --project="$GKE_PROJECT"
         kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="$REGISTRY_HOSTNAME"/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
