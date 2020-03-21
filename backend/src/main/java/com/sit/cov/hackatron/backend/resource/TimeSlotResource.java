@@ -35,11 +35,6 @@ public class TimeSlotResource {
         return timeslotRepository.findAll();
     }
 
-    @GetMapping(value = "/timeslot/{id}")
-    public ResponseEntity<TimeSlot> findTimeSlotById(@PathVariable String id) {
-        return ResponseUtil.wrapOrNotFound(timeslotRepository.findById(id));
-    }
-
     @PostMapping(value = "/timeslot")
     public TimeSlot saveTimeslot(@RequestBody TimeSlot timeslot) {
         return timeslotRepository.save(timeslot);

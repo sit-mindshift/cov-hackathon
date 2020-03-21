@@ -6,9 +6,13 @@ export interface UserState {
   longitude: number;
   latitude: number;
   qrcodeData: any;
+  fakedlong: string;
+  fakedlat: string;
 }
 
 const initialUserState: UserState = {
+  fakedlong: "4857204",
+  fakedlat: "926664",
   longitude: 4857204,
   latitude: 926664,
   qrcodeData: null,
@@ -17,9 +21,10 @@ const initialUserState: UserState = {
 const b = getStoreBuilder<RootState>().module('user', initialUserState);
 
 // mutations
-function changePosition(state: UserState, payload: {longitude: number, latitude: number}) {
-  state.longitude = payload.longitude;
-  state.latitude = payload.latitude;
+function changePosition(state: UserState, payload: {longitude: number, latitude: number,
+  fakedlong: string, fakedlat: string}) {
+  state.fakedlat = payload.fakedlat;
+  state.fakedlong = payload.fakedlong;
 }
 
 function setQRCodeData(state: UserState, payload: {data: any}) {
