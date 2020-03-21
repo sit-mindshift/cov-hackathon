@@ -1,17 +1,17 @@
 package com.sit.cov.hackatron.backend.controller;
 
+import com.mongodb.internal.connection.Time;
 import com.sit.cov.hackatron.backend.model.ReservedTimeSlots;
 import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.repository.ReservedTimeslotRepository;
 import com.sit.cov.hackatron.backend.repository.TimeslotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -47,12 +47,21 @@ public class TimeSlotController {
     public ReservedTimeSlots invalidateTimeslot(@PathVariable String userID, @PathVariable String timeSlotID) {
 
         Optional<ReservedTimeSlots> reservedTimeSlotsOptional = reservedTimeslotRepository.findById(userID);
-        reservedTimeSlotsOptional.get().getTimeSlots().stream().forEach(timeslot -> {
-            if(timeslot.getId().equals(timeSlotID)) {
-                reservedTimeSlotsOptional.get().getInvalidTimeslSlots().add(timeslot);
-            }
-        });
-        return reservedTimeslotRepository.save(reservedTimeSlotsOptional.get());
+
+        if (reservedTimeSlotsOptional.isPresent() && reservedTimeSlotsOptional.get().getTimeSlots() != null) {
+            reservedTimeSlotsOptional.get().getTimeSlots().stream().forEach(timeslot -> {
+                if (timeslot.getId().equals(timeSlotID)) {
+                    reservedTimeSlotsOptional.get().getInvalidTimeSlots().add(timeslot);
+                }
+            });
+            
+            List<TimeSlot> timeSlots = reservedTimeSlotsOptional.get().getTimeSlots().stream()
+                    .filter(timeslot -> !timeSlotID.equals(timeslot.getId())).collect(Collectors.toList());
+            reservedTimeSlotsOptional.get().setTimeSlots(timeSlots);
+            return reservedTimeslotRepository.save(reservedTimeSlotsOptional.get());
+        } else {
+            return null;
+        }
     }
 
     @PostMapping(value = "/timeslot/reserve/{userID}/{timeSlotID}")
