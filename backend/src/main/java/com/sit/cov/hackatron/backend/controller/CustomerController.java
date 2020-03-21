@@ -7,12 +7,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -48,7 +50,8 @@ public class CustomerController {
 
     @PostMapping(value = "/customer")
     public Map<String, Object> saveUser(@RequestBody Customer customer) {
-
+        log.info("save: " + customer.getPassword());
+        log.info("save hashed: " + passwordEncoder.encode(customer.getPassword()));
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
 
         Customer savedCustomer = customerRepository.save(customer);
@@ -58,6 +61,11 @@ public class CustomerController {
         responseMap.put("status", 200);
         responseMap.put("message", "Success");
         return responseMap;
+    }
+
+    @DeleteMapping(value= "/customer")
+    public void deleteAllUsers() {
+        customerRepository.deleteAll();
     }
 
 }
