@@ -29,16 +29,16 @@ jobs:
           java-version: 11
         # Gradle Build
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-        working-directory: $BACKEND_WORKING_DIRECTORY
+        run: "chmod +x gradlew"
+        working-directory: ./backend
       - name: Build with Gradle
         run: "./gradlew build"
-        working-directory: $BACKEND_WORKING_DIRECTORY
+        working-directory: ./backend
      - name: Docker
         run: "docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg JAR_FILE=build/libs/*.jar ."
-        working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }} 
+        working-directory: ./backend
       - name: Authenticate into Google Cloud Platform
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
