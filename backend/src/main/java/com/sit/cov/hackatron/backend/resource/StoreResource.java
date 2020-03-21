@@ -1,6 +1,7 @@
 package com.sit.cov.hackatron.backend.resource;
 
 import com.sit.cov.hackatron.backend.model.Store;
+import com.sit.cov.hackatron.backend.model.StoreList;
 import com.sit.cov.hackatron.backend.service.StoreService;
 
 import org.springframework.http.ResponseEntity;
@@ -24,10 +25,17 @@ public class StoreResource {
     public static final String STORE_ENDPOINT = "/store-api/";
     private final StoreService storeService;
 
-    @GetMapping
+    @GetMapping(value="/nearestStore")
     @ResponseBody
-    public ResponseEntity<Store> getStores(@RequestParam("longitude") String longitude,
+    public ResponseEntity<Store> getNearestStore(@RequestParam("longitude") String longitude,
             @RequestParam("latitude") String latitude) {
-        return storeService.getStores(longitude, latitude);
+        return storeService.getNearestStore(longitude, latitude);
+    }
+
+    @GetMapping(value="/stores")
+    @ResponseBody
+    public ResponseEntity<StoreList> getStores(@RequestParam("longitude") String longitude,
+            @RequestParam("latitude") String latitude, @RequestParam String span) {
+        return storeService.getStores(longitude, latitude, span);
     }
 }
