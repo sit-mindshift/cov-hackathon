@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.MediaType;
+import reactor.core.publisher.Mono;
 
-import com.sit.cov.hackatron.backend.service.StoreService;
-import com.sit.cov.hackatron.backend.model.Store;
+import com.sit.cov.hackatron.backend.service.QRCodeGeneratorService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,15 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping(StoreResource.STORE_ENDPOINT)
-public class StoreResource {
+public class QRCodeResource {
 
-    public static final String STORE_ENDPOINT = "/store-api/";
-    private final StoreService storeService;
+    public static final String QR_ENDPOINT = "/qr-api/";
+    private final QRCodeGeneratorService qrCodeGeneratorService;
 
-    @GetMapping
+	@GetMapping(value = QR_ENDPOINT, produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
-    public ResponseEntity<Store> getStores(@RequestParam("longitude") String longitude, @RequestParam("latitude") String latitude) {
-        return storeService.getStores(longitude, latitude);
+    public Mono<ResponseEntity<byte[]>> getQRCode(@RequestParam(value = "text", required = true) String text) {
+		return qrCodeGeneratorService.generateQRCode(text, 256, 256).map(imageBuff ->  
+			ResponseEntity.ok().body(imageBuff));
     }
 }
