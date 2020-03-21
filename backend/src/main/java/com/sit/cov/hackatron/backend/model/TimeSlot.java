@@ -17,8 +17,8 @@ public class TimeSlot {
     @Id
     private String id;
     public boolean reserved;
+    public boolean redeemed;
     public LocalDate date;
     public LocalTime from;
     public LocalTime til;
-
 }

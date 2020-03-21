@@ -2,7 +2,6 @@ package com.sit.cov.hackatron.backend.resource;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,10 +23,10 @@ public class QRCodeResource {
     public static final String QR_ENDPOINT = "/qr-api/";
     private final QRCodeGeneratorService qrCodeGeneratorService;
 
-	@GetMapping(value = QR_ENDPOINT, produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = QR_ENDPOINT, produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
-    public Mono<ResponseEntity<byte[]>> getQRCode(@RequestParam(value = "text", required = true) String text) {
-		return qrCodeGeneratorService.generateQRCode(text, 256, 256).map(imageBuff ->  
-			ResponseEntity.ok().body(imageBuff));
+    public Mono<ResponseEntity<byte[]>> getQRCode(@RequestParam(value = "value", required = true) String value) {
+        return qrCodeGeneratorService.generateQRCode(value, 256, 256)
+                .map(imageBuff -> ResponseEntity.ok().body(imageBuff));
     }
 }
