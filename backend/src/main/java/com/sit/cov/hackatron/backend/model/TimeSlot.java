@@ -13,7 +13,7 @@ import java.time.LocalTime;
 @Setter
 @AllArgsConstructor
 @Document(collection = "timeslot")
-public class Timeslot {
+public class TimeSlot {
     @Id
     private String id;
     public boolean reserved;
