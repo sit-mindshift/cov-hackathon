@@ -9,9 +9,9 @@ async function getShops() {
     const response =
       await httpClient.get('http://localhost:8080/store-api/stores', {
         params: {
-          longitude: user.state.longitude,
-          latitude: user.state.latitude,
-          span: 10000,
+          longitude: user.state.fakedlong,
+          latitude: user.state.fakedlat,
+          span: 5000,
         }});
 
     let shops: Shop[] = [];
