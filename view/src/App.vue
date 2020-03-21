@@ -30,6 +30,7 @@
     public getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
+          // Necessary for the API Call because of weird initial-data-set
           let lat: string = position.coords.latitude.toString().replace(".", "").slice(0,7);
           let long: string = position.coords.longitude.toString().replace(".", "").slice(0,7);
             user.changePosition({
