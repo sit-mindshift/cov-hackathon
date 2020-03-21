@@ -20,11 +20,11 @@ public class LoginService {
     private final PasswordEncoder passwordEncoder;
     private final CustomerRepository customerRepository;
 
-	public boolean login(LoginDTO dto) {
-        Optional<Customer> customer = customerRepository.findByUsername(dto.getUsername());
+    public boolean login(LoginDTO dto) {
+        return customerRepository.findByUsername(dto.getUsername())
+                .map(c -> passwordEncoder.matches(dto.getPassword(), c.getPassword()))
+                .orElse(false);
 
-        return customer.map(c -> passwordEncoder.matches(dto.getPassword(), c.getPassword())).orElse(false);
-
-	}
+    }
 
 }
