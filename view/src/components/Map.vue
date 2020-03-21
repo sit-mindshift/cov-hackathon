@@ -1,11 +1,7 @@
 <script>
 import { createMapkit } from 'vue-mapkit'
-<<<<<<< HEAD
-import user from "../store/models/user";
-=======
 import shops, {Shop} from '../store/models/shop';
 import user from '../store/models/user';
->>>>>>> c3b1bd01bd9082c61397bc7b2646aeadbd8c4024
 
 export default {
   data(){
