@@ -26,7 +26,7 @@ export default {
             let markers = [];
             shops.allShops.forEach(element => {
                 var MarkerAnnotation = mapkit.MarkerAnnotation;
-                var marker = new mapkit.Coordinate(element.longitude / 100000, element.latitude / 1000000);
+                var marker = new mapkit.Coordinate(element.longitude / 100000, element.latitude / 100000);
                 var lidlAnnotation = new MarkerAnnotation(marker, { color: "#f4a56d", title: "Store", glyphText: "🏬" });
                 markers.push(lidlAnnotation);
             });
