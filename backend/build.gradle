@@ -26,20 +26,20 @@ repositories {
 }
 
 dependencies {
-	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-jersey'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
-	compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.0.RELEASE'	//implementation 'org.springframework.boot:spring-boot-starter-web'
-	//implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.0.RELEASE'
+
+	// Reactor
+	implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
+	
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
-	//runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
-	//runtimeOnly 'com.oracle.ojdbc:ojdbc8'
-	//runtimeOnly 'mysql:mysql-connector-java'
-	//runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
