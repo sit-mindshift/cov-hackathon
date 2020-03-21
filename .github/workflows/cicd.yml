@@ -2,11 +2,11 @@ name: CI/CD
 on:
   push:
     branches:
-    - Rotfuks-patch-1
+    - master
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_PROJECT: shopsave
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
   SERVER_DB: shopsafe-db
@@ -14,74 +14,65 @@ env:
   VIEW_IMAGE: shopsafe-view
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-  GKE_KEY: ${{ secrets.GCLOUD_AUTH_BASE64 }}
+  GKE_KEY: ${{ secrets.GKE_AUTH_BASE64 }}
+  BACKEND_WORKING_DIRECTORY: ./backend
+  REGISTRY_HOSTNAME: gcr.io
   
 jobs:
-  debug-gcp:
-    steps:
-    - uses: actions/checkout@v2
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-    with:
-      version: '281.0.0'
-      service_account_email: ${{ secrets.GCP_SA_EMAIL }}
-      service_account_key: ${{ secrets.GCP_SA_KEY }}
-      export_default_credentials: true
-    - run: gcloud info
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v2
-      
+      uses: actions/checkout@master
+
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
         version: '270.0.0'
-        service_account_email: $GKE_EMAIL
-        service_account_key: $GKE_KEY
-        
+        service_account_email: ${{ secrets.GKE_EMAIL }}
+        service_account_key: ${{ secrets.GKE_AUTH_BASE64 }} 
     # Configure docker to use the gcloud command-line tool as a credential helper
-    - run: |
-        # Set up docker to authenticate
-        # via gcloud command-line tool.
-        gcloud auth configure-docker
-
-    - name: Build Server
-      run: |
-        docker build \
-          -t "eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA" \
-          --build-arg JAR_FILE=build/libs/*.jar
+    - run: gcloud auth configure-docker
+    - run: gcloud info
+     # Gradle Build
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
+    # Setup JDK  
+    - name: Set up JDK 1.11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    # Build
+    - name: Build with Gradle
+      run: ./gradlew build
+      working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }} 
+    - name: Docker
+      run: |        
+        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$SERVER_IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
-          https://github.com/Rotfuks/unnamedFruitScanProject.git#master:backend
-    
-    # Docker login
-    - name: Docker Login
-      run: |
-        echo "$GKE_KEY" | base64 --decode > keyfile.json
-        gcloud auth activate-service-account --key-file keyfile.json
-        cat keyfile.json | docker login -u _json_key --password-stdin https://eu.gcr.io
-        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
-    
-    
-    # Push the Docker image to Google Container Registry
+          --build-arg JAR_FILE=build/libs/*.jar .
+      working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
+        
+     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |
-        gcloud docker -- push "eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
+        docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA
     
     # Deploy the Docker image to the GKE cluster
     # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
-    - name: Deploy Server
-      run: |
-        gcloud container clusters get-credentials "$GKE_SERVER_CLUSTER" --zone="$GKE_ZONE" --project="$GKE_PROJECT"
-        kubectl expose deployment/"$IMAGE" --type=LoadBalancer --port 8080 --target-port 8080
+    #- name: Deploy Server
+    #  run: |
+    #    gcloud container clusters get-credentials "$GKE_SERVER_CLUSTER" --zone="$GKE_ZONE" --project="$GKE_PROJECT"
+    #    kubectl expose deployment/"$IMAGE" --type=LoadBalancer --port 8080 --target-port 8080
     # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
         
         
     # Deploy the Docker image to the GKE cluster
-    - name: Validate Services
-      run: | 
-        kubectl get service
+    #- name: Validate Services
+    #  run: | 
+    #    kubectl get service
         
