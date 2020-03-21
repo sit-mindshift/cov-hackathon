@@ -1,10 +1,11 @@
-package com.sit.cov.hackatron.backend.controller;
+package com.sit.cov.hackatron.backend.resource;
 
 import com.sit.cov.hackatron.backend.model.ReservedTimeSlots;
 import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.repository.ReservedTimeslotRepository;
 import com.sit.cov.hackatron.backend.repository.TimeslotRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sit.cov.hackatron.backend.resource.util.ResponseUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,33 +17,32 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
-public class TimeSlotController {
+@RequiredArgsConstructor
+public class TimeSlotResource {
 
-    @Autowired
-    private TimeslotRepository timeslotRepository;
+    private final TimeslotRepository timeslotRepository;
 
-    @Autowired
-    private ReservedTimeslotRepository reservedTimeslotRepository;
+    private final ReservedTimeslotRepository reservedTimeslotRepository;
 
     @GetMapping(value = "/timeslots")
     public List<TimeSlot> getAllTimeslots() {
-        List<TimeSlot> timeSlots = timeslotRepository.findAll();
-        return timeSlots;
+        return timeslotRepository.findAll();
     }
 
     @GetMapping(value = "/timeslots/{id}")
     public List<TimeSlot> getAllTimeslotsOfStore() {
         // TODO query slots from store
-        List<TimeSlot> timeSlots = timeslotRepository.findAll();
-        return timeSlots;
+        return timeslotRepository.findAll();
     }
 
+    @GetMapping(value = "/timeslot/{id}")
+    public ResponseEntity<TimeSlot> findTimeSlotById(@PathVariable String id) {
+        return ResponseUtil.wrapOrNotFound(timeslotRepository.findById(id));
+    }
 
     @PostMapping(value = "/timeslot")
     public TimeSlot saveTimeslot(@RequestBody TimeSlot timeslot) {
-
-        TimeSlot savedTimeSlot = timeslotRepository.save(timeslot);
-        return savedTimeSlot;
+        return timeslotRepository.save(timeslot);
     }
 
     @GetMapping(value = "/timeslot/{userID}")
@@ -60,7 +60,7 @@ public class TimeSlotController {
         Optional<ReservedTimeSlots> reservedTimeSlotsOptional = reservedTimeslotRepository.findById(userID);
 
         if (reservedTimeSlotsOptional.isPresent() && reservedTimeSlotsOptional.get().getTimeSlots() != null) {
-            reservedTimeSlotsOptional.get().getTimeSlots().stream().forEach(timeslot -> {
+            reservedTimeSlotsOptional.get().getTimeSlots().forEach(timeslot -> {
                 if (timeslot.getId().equals(timeSlotID)) {
                     reservedTimeSlotsOptional.get().getInvalidTimeSlots().add(timeslot);
                 }
@@ -69,6 +69,7 @@ public class TimeSlotController {
             List<TimeSlot> timeSlots = reservedTimeSlotsOptional.get().getTimeSlots().stream()
                     .filter(timeslot -> !timeSlotID.equals(timeslot.getId())).collect(Collectors.toList());
             reservedTimeSlotsOptional.get().setTimeSlots(timeSlots);
+
             return reservedTimeslotRepository.save(reservedTimeSlotsOptional.get());
         } else {
             return null;
@@ -77,7 +78,9 @@ public class TimeSlotController {
 
     @PostMapping(value = "/timeslot/reserve/{userID}/{timeSlotID}")
     public ReservedTimeSlots reserveTimeslot(@PathVariable String userID, @PathVariable String timeSlotID) {
+
         Optional<TimeSlot> timeSlot = timeslotRepository.findById(timeSlotID);
+
         if (timeSlot.isPresent()) {
             Optional<ReservedTimeSlots> reservedTimeSlotsOptional = reservedTimeslotRepository.findById(userID);
             if (reservedTimeSlotsOptional.isPresent()) {
