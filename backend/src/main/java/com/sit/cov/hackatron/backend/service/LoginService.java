@@ -21,7 +21,6 @@ public class LoginService {
     private final CustomerRepository customerRepository;
 
 	public boolean login(LoginDTO dto) {
-        log.info(dto.toString());
         Optional<Customer> customer = customerRepository.findByUsername(dto.getUsername());
         boolean isValid = false;
         if(customer.isPresent()) {
