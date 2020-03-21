@@ -7,19 +7,19 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import HeadLine from '@/components/HeadLine.vue'
-  import shops, {Shop} from '../store/models/shop';
-  import Map from './Map.vue';
+import { Component, Vue } from 'vue-property-decorator';
+import HeadLine from '@/components/HeadLine.vue';
+import shops, {Shop} from '../store/models/shop';
+import Map from './Map.vue';
 
-@Component({ 
+@Component({
   components: {
     HeadLine,
-    Map
-  } 
+    Map,
+  },
 })
   export default class extends Vue {
-    fields: String[] =
+    public fields: string[] =
       ['type', 'zipcode', 'city', 'street', 'openinghours'];
 
     get shopList() {
