@@ -37,6 +37,17 @@ public class TimeSlotResource {
     @PostMapping(value = "/timeslot")
     public TimeSlot saveTimeslot(@RequestBody TimeSlot timeslot) {
 
+    TimeSlot savedTimeSlot = timeslotRepository.save(timeslot);
+    return savedTimeSlot;
+    }
+
+    @GetMapping(value = "/timeslot/{userID}")
+    public ResponseEntity<ReservedTimeSlots> getTimeslotsForUser(@PathVariable String userID) {
+        if (reservedTimeslotRepository.findById(userID).isPresent()) {
+            return ResponseEntity.ok().body(reservedTimeslotRepository.findById(userID).get());
+        } else {
+            return ResponseEntity.ok().body(new ReservedTimeSlots());
+        }
         return timeslotRepository.save(timeslot);
     }
 
