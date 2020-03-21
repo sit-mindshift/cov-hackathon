@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class TimeSlotResource {
@@ -28,17 +29,15 @@ public class TimeSlotResource {
         return timeslotRepository.findAll();
     }
 
-    @GetMapping(value = "/timeslot/{id}")
-    public ResponseEntity<TimeSlot> findTimeSlotById(@PathVariable String id) {
-
-        return ResponseUtil.wrapOrNotFound(timeslotRepository.findById(id));
+    @GetMapping(value = "/timeslots/{id}")
+    public List<TimeSlot> getAllTimeslotsOfStore() {
+        // TODO query slots from store
+        return timeslotRepository.findAll();
     }
 
     @PostMapping(value = "/timeslot")
     public TimeSlot saveTimeslot(@RequestBody TimeSlot timeslot) {
-
-    TimeSlot savedTimeSlot = timeslotRepository.save(timeslot);
-    return savedTimeSlot;
+        return timeslotRepository.save(timeslot);
     }
 
     @GetMapping(value = "/timeslot/{userID}")
@@ -48,7 +47,6 @@ public class TimeSlotResource {
         } else {
             return ResponseEntity.ok().body(new ReservedTimeSlots());
         }
-        return timeslotRepository.save(timeslot);
     }
 
     @PostMapping(value = "/timeslot/invalidate/{userID}/{timeSlotID}")
@@ -81,6 +79,7 @@ public class TimeSlotResource {
         if (timeSlot.isPresent()) {
             Optional<ReservedTimeSlots> reservedTimeSlotsOptional = reservedTimeslotRepository.findById(userID);
             if (reservedTimeSlotsOptional.isPresent()) {
+                // TODO check if user already has the timeslot assigned to prevent adding it twice
                 reservedTimeSlotsOptional.get().getTimeSlots().add(timeSlot.get());
                 return reservedTimeslotRepository.save(reservedTimeSlotsOptional.get());
             } else {
