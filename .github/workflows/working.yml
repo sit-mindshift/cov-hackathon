@@ -1,9 +1,8 @@
-name: Deploy the application to Google Cloud Run
+﻿name: Deploy the application to Google Cloud Run
 on:
   push:
     branches:
     - Rotfuks-patch-1
-    
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
@@ -31,28 +30,19 @@ jobs:
         # Gradle Build
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-        working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
+        working-directory: $BACKEND_WORKING_DIRECTORY
       - name: Build with Gradle
-        run: ./gradlew build
-        working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }} 
+        run: "./gradlew build"
+        working-directory: $BACKEND_WORKING_DIRECTORY
      - name: Docker
-        run: docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
+        run: "docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg JAR_FILE=build/libs/*.jar .
+          --build-arg JAR_FILE=build/libs/*.jar ."
         working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }} 
       - name: Authenticate into Google Cloud Platform
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           service_account_email: ${{ secrets.GCLOUD_EMAIL }}
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
-
       - name: Configure Docker to use Google Cloud Platform
-        run: "gcloud auth configure-docker --quiet"
-
-      #- name: Push image to Google Cloud Container Registry
-      #  run: docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
-
-      #- name: Install beta commands and deploy on cloud run
-      #  run: |
-      #    gcloud components install beta --quiet
-      #    gcloud beta run deploy ${{ secrets.GCLOUD_APP_NAME }} --quiet --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }} --project ${{ secrets.GCLOUD_PROJECT }} --region europe-west1 --platform managed
+        run: "gcloud auth configure-docker"
