@@ -1,15 +1,29 @@
-import {RootState} from '../store';
-import {getStoreBuilder} from 'vuex-typex';
+/* tslint:disable:no-console */
+import store, {RootState} from '../store';
+import {BareActionContext, getStoreBuilder} from 'vuex-typex';
+import shopRepository from '@/repositories/shopRepository';
 
 export class Shop {
   public id: number;
+  public type: string;
   public latitude: number;
   public longitude: number;
+  public zipcode: string;
+  public city: string;
+  public street: string;
+  public openinghours: string;
 
-  public constructor(id: number, latitude: number, longitude: number) {
+  public constructor(id: number, latitude: number, longitude: number,
+                     zipcode: string, city: string, street: string,
+                     openinghours: string) {
     this.id = id;
+    this.type = "Lidl";
     this.latitude = latitude;
     this.longitude = longitude;
+    this.zipcode = zipcode;
+    this.city = city;
+    this.street = street;
+    this.openinghours = openinghours;
   }
 }
 
@@ -18,23 +32,7 @@ export interface ShopState {
 }
 
 const initialShopState: ShopState = {
-  shops: [
-    new Shop(
-      1,
-      13,
-      15,
-    ),
-    new Shop(
-      2,
-      345,
-      5676,
-    ),
-    new Shop(
-      3,
-      3424,
-      1234,
-    ),
-  ],
+  shops: [],
 };
 const b = getStoreBuilder<RootState>().module('shops', initialShopState);
 
@@ -46,6 +44,22 @@ const shopByIdGetter = b.read(
       return s.id === i;
     }), 'shopsFilter');
 
+// mutations
+function setShopList(state: ShopState, payload: { shops: Shop[] }) {
+  state.shops = payload.shops;
+}
+
+// action
+async function readShopList(context: BareActionContext<ShopState, RootState>) {
+  const newShops: Shop[] = await shopRepository.getShops()
+    || initialShopState.shops;
+  // @ts-ignore
+  console.log(newShops);
+  shops.setShopList({shops: newShops});
+}
+
+
+
 // state
 const stateGetter = b.state();
 
@@ -55,12 +69,19 @@ const shops = {
   get state() {
     return stateGetter();
   },
+  // getters
   get allShops() {
     return shopsGetter();
   },
   getShopById(i: number) {
     return shopByIdGetter()(i);
   },
+  // mutations
+  setShopList: b.commit(setShopList),
+
+  // actions
+  dispatchReadShopList: b.dispatch(readShopList),
+
 };
 
 export default shops;
