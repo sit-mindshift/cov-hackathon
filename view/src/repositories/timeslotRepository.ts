@@ -23,9 +23,32 @@ async function getTimeslots() {
   }
 }
 
+async function reserveTimelot(userId: string, timeslotId: string) {
+  try {
+    const response =
+        await httpClient.post(`http://localhost:8080/api/timeslot/reserve/${userId}/${timeslotId}`);
+
+    let timeslots: Timeslot[] = [];
+
+    // @ts-ignore
+    for(let data of response) {
+      // @ts-ignore
+      timeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
+    }
+
+    return timeslots;
+  } catch (error) {
+    // @ts-ignore
+    console.error(error);
+  }
+}
+
 const timeslotsRepository = {
   async getTimeslots() {
     return await getTimeslots();
+  },
+  async reserveTimelot(userId: string, timeslotId: string ) {
+    return await reserveTimelot(userId,timeslotId);
   },
 };
 

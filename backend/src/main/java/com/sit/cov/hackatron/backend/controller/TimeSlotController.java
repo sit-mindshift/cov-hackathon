@@ -25,7 +25,7 @@ public class TimeSlotController {
     private ReservedTimeslotRepository reservedTimeslotRepository;
 
     @GetMapping(value = "/timeslots")
-    public List<TimeSlot> getAllTimeslots() {gi
+    public List<TimeSlot> getAllTimeslots() {
         List<TimeSlot> timeSlots = timeslotRepository.findAll();
         return timeSlots;
     }
@@ -38,13 +38,6 @@ public class TimeSlotController {
     }
 
 
-    @GetMapping(value = "/timeslot/{id}")
-    public Optional<TimeSlot> findTimeSlotById(@PathVariable String id) {
-
-        Optional<TimeSlot> timeslot = timeslotRepository.findById(id);
-        return timeslot;
-    }
-
     @PostMapping(value = "/timeslot")
     public TimeSlot saveTimeslot(@RequestBody TimeSlot timeslot) {
 
@@ -53,8 +46,7 @@ public class TimeSlotController {
     }
 
     @GetMapping(value = "/timeslot/{userID}")
-    public ResponseEntity<ReservedTimeSlots> getTimeslotsForUser(@PathVariable String userID,
-            @PathVariable String timeSlotID) {
+    public ResponseEntity<ReservedTimeSlots> getTimeslotsForUser(@PathVariable String userID) {
         if (reservedTimeslotRepository.findById(userID).isPresent()) {
             return ResponseEntity.ok().body(reservedTimeslotRepository.findById(userID).get());
         } else {
@@ -89,6 +81,7 @@ public class TimeSlotController {
         if (timeSlot.isPresent()) {
             Optional<ReservedTimeSlots> reservedTimeSlotsOptional = reservedTimeslotRepository.findById(userID);
             if (reservedTimeSlotsOptional.isPresent()) {
+                // TODO check if user already has the timeslot assigned to prevent adding it twice
                 reservedTimeSlotsOptional.get().getTimeSlots().add(timeSlot.get());
                 return reservedTimeslotRepository.save(reservedTimeSlotsOptional.get());
             } else {

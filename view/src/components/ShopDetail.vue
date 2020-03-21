@@ -1,17 +1,23 @@
 <template>
   <div>
     <head-line>Shop Detail </head-line>
-    <b-table striped hover :items="shopDetail" :fields="fields" >
+    <b-table striped hover :items="shopDetail" :fields="shopFields" >
     </b-table>
 
+    <head-line>Time Slot</head-line>
     <b-container>
       <b-row>
         <b-col><label>Choose a date</label></b-col>
         <b-col cols="8"><b-form-datepicker today-button v-model="selectedDate" onclick="timeslotList" class="mb-2"></b-form-datepicker></b-col>
       </b-row>
+
+      <b-row>
+        <b-col><label>Choose a timeslot</label></b-col>
+        <b-col cols="8"><b-table class="timeslotlist-table" striped hover :items="timeslotList" :fields="timeslotFields" @row-clicked="reserveTimeslot"></b-table></b-col>
+      </b-row>
     </b-container>
 
-    <b-table class="timeslotlist-table" striped hover :items="timeslotList" :fields="timeslotFields" @row-clicked="reserveTimeslot"></b-table>
+
   </div>
 </template>
 
@@ -31,7 +37,7 @@
     id: string = router.currentRoute.params.id;
     selectedDate: string = "";
 
-    fields: String[] =
+    shopFields: String[] =
       ['type', 'zipcode', 'city', 'street', 'openinghours'];
 
     timeslotFields: String[] =
@@ -42,16 +48,19 @@
     }
 
     get timeslotList() {
-      // TODO fix below
+      // TODO call dispatcher instead of repository / or pre-load more timeslots
       // return timeslots.allTimeslots;
+      // return timeslots.dispatchReadTimeslotList;
 
       return timeslotsRepository.getTimeslots;
     }
 
     public reserveTimeslot(record: any, index: any){
-      // TODO call server endpoint to reserve timeslot
-      console.log('reserve timeslot id: '+ record.id);
-      // return timeslots.reserveTimeslot(this.shopId);
+      // TODO get pass real userId to backend
+      let customerId = "1";
+      let timeslotId = record.id;
+
+      return timeslotsRepository.reserveTimelot(customerId, timeslotId);
     }
   }
 </script>
