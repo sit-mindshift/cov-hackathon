@@ -2,7 +2,7 @@ name: CI/CD
 on:
   push:
     branches:
-    - setup-ci
+    - Rotfuks-patch-1
 
 # Environment variables available to all jobs and steps in this workflow
 env:
@@ -22,11 +22,11 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@setup-ci
+      uses: actions/checkout@Rotfuks-patch-1
       
     # Setup gcloud CLI
     - name: Setup Google Cloud
-      uses: actions/gcloud/auth@setup-ci
+      uses: actions/gcloud/auth@Rotfuks-patch-1
       env:
         GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }} 
         
