@@ -15,14 +15,11 @@ public class TimeSlotController {
     @Autowired
     private TimeslotRepository timeslotRepository;
 
-
     @GetMapping(value = "/timeslots")
     public List<TimeSlot> getAllTimeslots() {
-
         List<TimeSlot> timeSlots = timeslotRepository.findAll();
         return timeSlots;
     }
-
 
     @GetMapping(value = "/timeslot/{id}")
     public Optional<TimeSlot> findTimeSlotById(@PathVariable String id) {
