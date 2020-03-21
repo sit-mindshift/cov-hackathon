@@ -22,11 +22,11 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@Rotfuks-patch-1
+      uses: actions/checkout@master
       
     # Setup gcloud CLI
     - name: Setup Google Cloud
-      uses: actions/gcloud/auth@Rotfuks-patch-1
+      uses: actions/gcloud/auth@master
       env:
         GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }} 
         
