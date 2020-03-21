@@ -3,20 +3,27 @@ import {BareActionContext, getStoreBuilder} from 'vuex-typex';
 import shopRepository from '@/repositories/shopRepository';
 
 export interface UserState {
-  longitude: string;
-  latitude: string;
+  longitude: number;
+  latitude: number;
+  fakedlong: string;
+  fakedlat: string;
 }
 
 const initialUserState: UserState = {
-  longitude: "4857204",
-  latitude: "926664",
+  fakedlong: "4857204",
+  fakedlat: "926664",
+  longitude: 213123,
+  latitude: 1233213,
 };
 const b = getStoreBuilder<RootState>().module('user', initialUserState);
 
 // mutations
-function changePosition(state: UserState, payload: {longitude: string, latitude: string}) {
+function changePosition(state: UserState, payload: {longitude: number, latitude: number,
+  fakedlong: string, fakedlat: string}) {
   state.longitude = payload.longitude;
   state.latitude = payload.latitude;
+  state.fakedlat = payload.fakedlat;
+  state.fakedlong = payload.fakedlong;
 }
 
 // state
