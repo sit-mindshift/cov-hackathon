@@ -2,17 +2,17 @@ name: CI/CD
 on:
   push:
     branches:
-    - master
+    - Rotfuks-patch-1
 
 # Environment variables available to all jobs and steps in this workflow
 env:
   GKE_PROJECT: shopsave
   GITHUB_SHA: ${{ github.sha }}
-  GKE_ZONE: ${{ secrets.GKE_ZONE }}
   SERVER_DB: shopsafe-db
   SERVER_IMAGE: shopsafe-server
   VIEW_IMAGE: shopsafe-view
-  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+  GKE_SERVER_CLUSTER: shopsave-k8s-cluster
+  GKE_ZONE: us-central1-c
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GKE_KEY: ${{ secrets.GKE_AUTH_BASE64 }}
   BACKEND_WORKING_DIRECTORY: ./backend
@@ -58,9 +58,21 @@ jobs:
       working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
         
      # Push the Docker image to Google Container Registry
-    - name: Publish
+    - name: Publish Backend
       run: |
         docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA
+    
+    # Deploy the Docker image to the GKE cluster
+    # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
+    - name: Deploy Backend
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_email: ${{ secrets.GKE_EMAIL }}
+        service_account_key: ${{ secrets.GKE_AUTH_BASE64 }} 
+      run: |
+        gcloud container clusters get-credentials "$GKE_SERVER_CLUSTER" --zone="$GKE_ZONE" --project="$GKE_PROJECT"
+        kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="$REGISTRY_HOSTNAME"/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
     
     # Deploy the Docker image to the GKE cluster
     # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
