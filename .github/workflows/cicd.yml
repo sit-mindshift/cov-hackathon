@@ -65,9 +65,9 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
     - name: Deploy Backend          
-        run: |
-          gcloud components install beta --quiet
-          gcloud beta run deploy $SERVER_IMAGE --quiet --image $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA --project $GKE_PROJECT --region $GKE_ZONE --platform managed
+      run: |
+        gcloud components install beta --quiet
+        gcloud beta run deploy $SERVER_IMAGE --quiet --image $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA --project $GKE_PROJECT --region $GKE_ZONE --platform managed
     #  run: |
     #    gcloud container clusters get-credentials "$GKE_SERVER_CLUSTER" --zone="$GKE_ZONE" --project="$GKE_PROJECT"
     #    kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="$REGISTRY_HOSTNAME"/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
