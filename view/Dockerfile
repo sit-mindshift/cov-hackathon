@@ -1,25 +1,16 @@
-FROM node:lts-alpine
-
-# install simple http server for serving static content
-RUN npm install -g http-server
-
-# make the 'app' folder the current working directory
-WORKDIR /app
-
-# copy both 'package.json' and 'package-lock.json' (if available)
-COPY package*.json ./
-
-# install project dependencies leaving out dev dependencies
-RUN npm install npm
-RUN npm install -g vue
+FROM node:10.15.0 as ui-builder
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+COPY package.json /usr/src/app/package.json
+RUN npm install
 RUN npm install -g @vue/cli
-RUN npm install --production
-
-# copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . .
-
-# build app for production with minification
+COPY . /usr/src/app
+ARG API_URL
+ENV API_URL $API_URL
 RUN npm run build
 
+FROM nginx
+COPY  --from=ui-builder /usr/src/app/dist /usr/share/nginx/html
 EXPOSE 8081
-CMD [ "http-server", "dist" ]
+CMD ["nginx", "-g", "daemon off;"]
