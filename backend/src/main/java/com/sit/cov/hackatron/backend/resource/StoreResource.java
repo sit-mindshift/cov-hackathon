@@ -25,17 +25,17 @@ public class StoreResource {
     public static final String STORE_ENDPOINT = "/store-api/";
     private final StoreService storeService;
 
-    @GetMapping(value="/nearestStore")
+    @GetMapping(value = "/nearestStore")
     @ResponseBody
-    public ResponseEntity<Store> getNearestStore(@RequestParam("longitude") String longitude,
-            @RequestParam("latitude") String latitude) {
-        return storeService.getNearestStore(longitude, latitude);
+    public ResponseEntity<Store> getNearestStore(@RequestParam("latitude") String latitude,
+            @RequestParam("longitude") String longitude) {
+        return storeService.getNearestStore(latitude, longitude);
     }
 
-    @GetMapping(value="/stores")
+    @GetMapping(value = "/stores")
     @ResponseBody
-    public ResponseEntity<StoreList> getStores(@RequestParam("longitude") String longitude,
-            @RequestParam("latitude") String latitude, @RequestParam String span) {
-        return storeService.getStores(longitude, latitude, span);
+    public ResponseEntity<StoreList> getStores(@RequestParam("latitude") String latitude,
+            @RequestParam("longitude") String longitude, @RequestParam String span) {
+        return storeService.getStores(latitude, longitude, span);
     }
 }
