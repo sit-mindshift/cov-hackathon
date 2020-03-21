@@ -3,20 +3,21 @@ import {BareActionContext, getStoreBuilder} from 'vuex-typex';
 import qrcodeRepository from '@/repositories/qrcodeRepository';
 
 export interface UserState {
-  longitude: string;
-  latitude: string;
+  longitude: number;
+  latitude: number;
   qrcodeData: any;
 }
 
 const initialUserState: UserState = {
-  longitude: "4857204",
-  latitude: "926664",
+  longitude: 4857204,
+  latitude: 926664,
   qrcodeData: null,
-};
+}
+
 const b = getStoreBuilder<RootState>().module('user', initialUserState);
 
 // mutations
-function changePosition(state: UserState, payload: {longitude: string, latitude: string}) {
+function changePosition(state: UserState, payload: {longitude: number, latitude: number}) {
   state.longitude = payload.longitude;
   state.latitude = payload.latitude;
 }

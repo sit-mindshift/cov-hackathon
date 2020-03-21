@@ -5,7 +5,7 @@ import user from '../store/models/user';
 
 export default {
   data(){
-    return { 
+    return {
         map: null
     }
   },
@@ -20,20 +20,18 @@ export default {
         this.map = map
         const self = this
         window.mapkit.addEventListener('configuration-change', function configurationChanged() {
-            self.map.center = new window.mapkit.Coordinate(+user.state.latitude, +user.state.longitude);
-            self.map.cameraDistance = 40000;
+           self.map.center = new window.mapkit.Coordinate(user.state.latitude, user.state.longitude)
+           self.map.cameraDistance = 10000
 
             // @Hase @Alex, hier stores auf map anzeigen siehe Beispie ldas ich geklaut habe
             let markers = [];
             shops.allShops.forEach(element => {
-                console.log(element, "lalalal");
                 var MarkerAnnotation = mapkit.MarkerAnnotation;
                 var marker = new mapkit.Coordinate(element.longitude / 100000, element.latitude / 100000);
                 var lidlAnnotation = new MarkerAnnotation(marker, { color: "#f4a56d", title: "Store", glyphText: "🏬" });
                 markers.push(lidlAnnotation);
             });
 
-            console.log(markers, "heyhey");
             map.showItems(markers);
 
 
