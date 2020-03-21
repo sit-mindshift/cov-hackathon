@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import Detail from "@/views/Detail.vue";
 const Profile = () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue');
 
 Vue.use(VueRouter);
@@ -15,11 +16,17 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/shop/:id',
+    name: 'Detail',
+    component: Detail,
   }
 ];
 
 const router = new VueRouter({
   routes,
+  mode: 'history',
 });
 
 export default router;

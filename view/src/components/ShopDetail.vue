@@ -1,7 +1,7 @@
 <template>
   <div>
-    <head-line>All Shops</head-line>
-    <b-table striped hover :items="shopList" :fields="fields" @row-clicked="openDetailView">
+    <head-line>Shop Detail </head-line>
+    <b-table striped hover :items="shopDetail" :fields="fields" >
     </b-table>
   </div>
 </template>
@@ -16,17 +16,12 @@
     components: { HeadLine }
   })
   export default class extends Vue {
-    shopId: number = 0;
+    id: string = router.currentRoute.params.id;
     fields: String[] =
       ['type', 'zipcode', 'city', 'street', 'openinghours'];
 
-    get shopList() {
-      return shops.allShops;
-    }
-
-    public openDetailView(record: any, index: any){
-      this.shopId = shops.allShops[index].id;
-      router.push({ name: "Detail", params: { id: this.shopId } })
+    get shopDetail() {
+      return shops.getShopById(this.id);
     }
   }
 </script>
