@@ -5,6 +5,7 @@ import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.repository.ReservedTimeslotRepository;
 import com.sit.cov.hackatron.backend.repository.TimeslotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -40,6 +41,16 @@ public class TimeSlotController {
 
         TimeSlot savedTimeSlot = timeslotRepository.save(timeslot);
         return savedTimeSlot;
+    }
+
+    @GetMapping(value = "/timeslot/{userID}")
+    public ResponseEntity<ReservedTimeSlots> getTimeslotsForUser(@PathVariable String userID,
+            @PathVariable String timeSlotID) {
+        if (reservedTimeslotRepository.findById(userID).isPresent()) {
+            return ResponseEntity.ok().body(reservedTimeslotRepository.findById(userID).get());
+        } else {
+            return ResponseEntity.ok().body(new ReservedTimeSlots());
+        }
     }
 
     @PostMapping(value = "/timeslot/invalidate/{userID}/{timeSlotID}")
