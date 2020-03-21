@@ -6,8 +6,6 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}  
-  GKE_KEY: ${{ secrets.GCLOUD_AUTH }}    
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
@@ -15,6 +13,8 @@ env:
   SERVER_IMAGE: shopsafe-server
   VIEW_IMAGE: shopsafe-view
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+  GKE_KEY: ${{ secrets.GCLOUD_AUTH }}
   
 jobs:
   setup-build-publish-deploy:
