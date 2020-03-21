@@ -3,7 +3,7 @@
         <b-container>
             <b-row class="mb-5">
                 <b-col>
-                    <h2>Personal Details</h2>
+                    <head-line>Your personal details</head-line>
                 </b-col>
             </b-row>
             <b-row>
@@ -53,8 +53,9 @@
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
+  import HeadLine from '@/components/HeadLine.vue'
 
-  @Component
+  @Component({ components: {HeadLine} })
   export default class Profile extends Vue {
 
       created() {

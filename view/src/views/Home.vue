@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <ShopList/>
+    <b-container>
+      <ShopList/>
+    </b-container>
   </div>
 </template>
 
