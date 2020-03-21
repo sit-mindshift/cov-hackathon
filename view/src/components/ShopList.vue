@@ -2,7 +2,7 @@
   <div>
     <head-line>All Shops</head-line>
     <Map/>
-    <b-table striped hover :items="shopList" :fields="fields" @row-clicked="openDetailView"></b-table>
+    <b-table class="shoplist-table" striped hover :items="shopList" :fields="fields" @row-clicked="openDetailView"></b-table>
   </div>
 </template>
 
@@ -36,4 +36,7 @@
 </script>
 
 <style scoped>
+  .shoplist-table {
+    cursor: pointer;
+  }
 </style>
