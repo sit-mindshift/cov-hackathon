@@ -44,10 +44,8 @@ jobs:
         service_account_key: ${{ secrets.GCLOUD_AUTH_BASE64 }}
 
     # Configure docker to use the gcloud command-line tool as a credential helper
-    - run: |
-        # Set up docker to authenticate
-        # via gcloud command-line tool.
-        gcloud auth configure-docker
+    - run: gcloud info
+    - run: gcloud auth configure-docker
     # Setup JDK  
     - name: Set up JDK 1.11
       uses: actions/setup-java@v1
@@ -75,16 +73,16 @@ jobs:
         docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
         
     # Set up kustomize
-    - name: Set up Kustomize
-      run: |
-        curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-        chmod u+x ./kustomize
+    #- name: Set up Kustomize
+    #  run: |
+    #    curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+    #    chmod u+x ./kustomize
 
     # Deploy the Docker image to the GKE cluster
-    - name: Deploy
-      run: |
-        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-        ./kustomize edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
-        ./kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/$DEPLOYMENT_NAME
-        kubectl get services -o wide
+    #- name: Deploy
+    #  run: |
+    #    gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+    #    ./kustomize edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
+    #    ./kustomize build . | kubectl apply -f -
+    #    kubectl rollout status deployment/$DEPLOYMENT_NAME
+    #    kubectl get services -o wide
