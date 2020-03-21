@@ -39,7 +39,7 @@ public class TimeSlotController {
     }
 
     @PostMapping(value = "/timeslot/{id}")
-    public Timeslot submitTimeslot(@PathVariable String id) {
+    public Timeslot reserveTimeslot(@PathVariable String id) {
         Timeslot timeslot;
         Optional<Timeslot> ret = timeslotRepository.findById(id);
         if (ret.isPresent()) {
@@ -47,7 +47,7 @@ public class TimeSlotController {
             timeslot.reserved = true;
             return timeslotRepository.save(timeslot);
         } else {
-            return new Timeslot();
+            return null;
         }
     }
 }
