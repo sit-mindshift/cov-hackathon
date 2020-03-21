@@ -40,3 +40,9 @@ backend/build
 !backend/gradle/wrapper/gradle-wrapper.jar
 
 .vscode
+
+*/.idea/*
+
+view/node_modules/*
+view/node_modules
+view/src/jwt-signing/**
