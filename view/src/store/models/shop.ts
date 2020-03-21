@@ -53,11 +53,8 @@ function setShopList(state: ShopState, payload: { shops: Shop[] }) {
 async function readShopList(context: BareActionContext<ShopState, RootState>) {
   const newShops: Shop[] = await shopRepository.getShops()
     || initialShopState.shops;
-  // @ts-ignore
-  console.log(newShops);
   shops.setShopList({shops: newShops});
 }
-
 
 
 // state
