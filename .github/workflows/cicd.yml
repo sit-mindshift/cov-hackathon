@@ -14,26 +14,16 @@ env:
   VIEW_IMAGE: shopsafe-view
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-  GKE_KEY: ${{ secrets.GCLOUD_AUTH_BASE64 }}
+  GKE_KEY: ${{ secrets.GKE_AUTH_BASE64 }}
   
 jobs:
-  debug-gcp:
-    steps:
-    - uses: actions/checkout@v2
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-    with:
-      version: '281.0.0'
-      service_account_email: ${{ secrets.GCP_SA_EMAIL }}
-      service_account_key: ${{ secrets.GCP_SA_KEY }}
-      export_default_credentials: true
-    - run: gcloud info
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@master
       
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
