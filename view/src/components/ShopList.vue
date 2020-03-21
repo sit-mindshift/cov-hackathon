@@ -1,8 +1,8 @@
 <template>
   <div>
     <head-line>All Shops</head-line>
-    <b-table striped hover :items="shopList" :fields="fields" @row-clicked="openDetailView">
-    </b-table>
+    <Map/>
+    <b-table striped hover :items="shopList" :fields="fields" @row-clicked="openDetailView"></b-table>
   </div>
 </template>
 
@@ -11,10 +11,14 @@
   import HeadLine from '@/components/HeadLine.vue'
   import shops, {Shop} from '../store/models/shop';
   import router from '@/router';
+  import Map from './Map.vue';
 
-  @Component({
-    components: { HeadLine }
-  })
+@Component({ 
+  components: {
+    HeadLine,
+    Map
+  } 
+})
   export default class extends Vue {
     shopId: number = 0;
     fields: String[] =
