@@ -22,6 +22,24 @@ async function getShops() {
   }
 }
 
+async function getAvaillableShopTimeSlots() {
+  try {
+    const response =
+        await httpClient.get('http://localhost:8080/api/timeslots/', {
+          params: {
+            storeId: 1,
+          }});
+
+    // @ts-ignore
+    return [new Shop(response.storeId, response.x, response.y, response.zipcode,
+        // @ts-ignore
+        response.city, response.street, response.oh)];
+  } catch (error) {
+    // @ts-ignore
+    console.error(error);
+  }
+}
+
 const shopRepository = {
   async getShops() {
     return await getShops();
