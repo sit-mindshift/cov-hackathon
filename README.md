@@ -16,6 +16,10 @@ Goals:
 
 First and foremost the goal should be to evaluate the reasonableness of possible solutions, including those mentioned in this proposal. A progressive web app (PWA) might pull supermarket information from google maps and assign app users to a store and date. It will then generate a certificate that is stored on the users app instance. There will be a more detailed google doc on this specific idea at the beginning of the hackathon.This raises specific questions:- Would this have a reasonable effect if a good amount of people would use this app?- Scalable?- How to engage sufficient people to use the appThis project would require different skills:Front-End-Developers, Back-End-Developers, Data Scientists, Statisticians, Coordinators, Stakeholder Intelligence, Progressive Thinkers, Political and medical stakeholdersA minimum solution could also be a website that provides visitors with guidelines on how to behave during grocery shopping.
 
+# Modules
+#### Frontend
+see special [Frontend-ReadMe](view/README.md)
+
 # team 
 [Calieston](https://github.com/Calieston)
 [Manuel](https://github.com/un-listed)
