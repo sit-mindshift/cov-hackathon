@@ -29,16 +29,7 @@
 
     public getLocation() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          let lat: string = position.coords.latitude.toString().replace(".", "").slice(0,7);
-          let long: string = position.coords.longitude.toString().replace(".", "").slice(0,7);
-            user.changePosition({
-              latitude: long,
-              longitude: lat,
-            });
-          shops.dispatchReadShopList()
-        }
-        );
+          shops.dispatchReadShopList();
       } else {
         console.log("Geolocation is not supported by this browser.");
       }
