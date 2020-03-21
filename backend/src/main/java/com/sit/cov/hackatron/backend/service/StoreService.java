@@ -21,21 +21,25 @@ public class StoreService {
     public static final String STORE_SEARCH_ENDPOINT = "https://mobile.lidl.de/Mobile-Server/service/1337/StoreSearch/nearestStore/DE/";
     public static final String STORES_SEARCH_ENDPOINT = "https://mobile.lidl.de/Mobile-Server/service/1337/StoreSearch/DE/";
 
-    public ResponseEntity<Store> getNearestStore(String longitude, String latitude) {
-        return ResponseEntity.ok().body(webClient.get().uri(buildURI(longitude, latitude))
+    public ResponseEntity<Store> getNearestStore(String latitude, String longitude) {
+        latitude = latitude.replace(".", "").substring(0,7);
+        longitude = latitude.replace(".", "").substring(0,7);
+        return ResponseEntity.ok().body(webClient.get().uri(buildURI(latitude, longitude))
                 .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(Store.class).block());
     }
 
-    private String buildURI(String longitude, String latitude) {
-        return STORE_SEARCH_ENDPOINT + "/" + longitude + "/" + latitude + "/";
+    private String buildURI(String latitude, String longitude) {
+        return STORE_SEARCH_ENDPOINT + "/" + latitude + "/" + longitude + "/";
     }
 
-    public ResponseEntity<StoreList> getStores(String longitude, String latitude, String span) {
-        return ResponseEntity.ok().body(webClient.get().uri(buildStoresURI(longitude, latitude, span))
+    public ResponseEntity<StoreList> getStores(String latitude, String longitude, String span) {
+        latitude = latitude.replace(".", "").substring(0,7);
+        longitude = latitude.replace(".", "").substring(0,7);
+        return ResponseEntity.ok().body(webClient.get().uri(buildStoresURI(latitude, longitude, span))
                 .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(StoreList.class).block());
     }
 
-    private String buildStoresURI(String longitude, String latitude, String span) {
-        return STORES_SEARCH_ENDPOINT + "/" + longitude + "/" + span + "/" + latitude + "/" + span;
+    private String buildStoresURI(String latitude, String longitude, String span) {
+        return STORES_SEARCH_ENDPOINT + "/" + latitude  + "/" + span + "/" + longitude + "/" + span;
     }
 }
