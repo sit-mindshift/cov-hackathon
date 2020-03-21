@@ -2,20 +2,29 @@
 import {Shop} from '@/store/models/shop';
 
 import httpClient from '@/utils/HttpClient';
+import user from "@/store/models/user";
 
 async function getShops() {
   try {
     const response =
-      await httpClient.get('http://localhost:8080/store-api/', {
+      await httpClient.get('http://localhost:8080/store-api/stores', {
         params: {
-          longitude: 4857204.52,
-          latitude: 926664.12,
+          longitude: user.state.longitude,
+          latitude: user.state.latitude,
+          span: 5000,
         }});
 
+    let shops: Shop[] = [];
+
     // @ts-ignore
-    return [new Shop(response.storeId, response.x, response.y, response.zipcode,
+    for(let data of response.Store) {
       // @ts-ignore
-      response.city, response.street, response.oh)];
+      shops.push(new Shop(data.storeId, data.x, data.y,
+        // @ts-ignore
+        data.zipcode, data.city, data.street, data.oh))
+    }
+
+    return shops;
   } catch (error) {
     // @ts-ignore
     console.error(error);
