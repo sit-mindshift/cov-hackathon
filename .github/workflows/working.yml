@@ -14,7 +14,7 @@ env:
   VIEW_IMAGE: shopsafe-view
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-  GKE_KEY: ${{ secrets.GCLOUD_AUTH_BASE64 }}
+  GKE_KEY: ${{ secrets.GKE_AUTH_BASE64 }}
   BACKEND_WORKING_DIRECTORY: ./backend
   REGISTRY_HOSTNAME: gcr.io
   
