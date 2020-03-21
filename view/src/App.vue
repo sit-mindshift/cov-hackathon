@@ -30,8 +30,8 @@
     public getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          let lat: String = position.coords.latitude.toString().replace(".", "").slice(0,7);
-          let long: String = position.coords.longitude.toString().replace(".", "").slice(0,7);
+          let lat: string = position.coords.latitude.toString().replace(".", "").slice(0,7);
+          let long: string = position.coords.longitude.toString().replace(".", "").slice(0,7);
             user.changePosition({
               latitude: long,
               longitude: lat,
