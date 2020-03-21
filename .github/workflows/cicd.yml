@@ -57,11 +57,10 @@ jobs:
         service_account_email: ${{ secrets.GKE_EMAIL }}
         service_account_key: ${{ secrets.GKE_AUTH_BASE64 }} 
     # Configure docker to use the gcloud command-line tool as a credential helper
-    - run: gcloud auth configure-docker
-    - run: gcloud info         
+    - run: gcloud auth configure-docker       
     - run: docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA    
-    - run: gcloud components install beta
-    - run: gcloud beta run deploy $SERVER_IMAGE --quiet --image $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA --project $GKE_PROJECT --region $GKE_ZONE --platform managed
+    - run: gcloud container clusters get-credentials $GKE_SERVER_CLUSTER --zone $GKE_ZONE --project=$GKE_PROJECT"
+    - run: kubectl apply --filename backen/backend-service-deployment.yml
     #  run: |
     #    gcloud container clusters get-credentials "$GKE_SERVER_CLUSTER" --zone="$GKE_ZONE" --project="$GKE_PROJECT"
     #    kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="$REGISTRY_HOSTNAME"/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
