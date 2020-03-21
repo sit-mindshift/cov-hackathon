@@ -1,5 +1,6 @@
 <script>
 import { createMapkit } from 'vue-mapkit'
+import user from "../store/models/user";
 
 export default {
   data(){
@@ -16,12 +17,12 @@ export default {
         this.map = map
         const self = this
         window.mapkit.addEventListener('configuration-change', function configurationChanged() {
-           self.map.center = new window.mapkit.Coordinate(49.230901, 9.211884)
+           self.map.center = new window.mapkit.Coordinate(user.state.latitude, user.state.longitude)
            self.map.cameraDistance = 10000
 
             // @Hase @Alex, hier stores auf map anzeigen siehe Beispie ldas ich geklaut habe
            var MarkerAnnotation = mapkit.MarkerAnnotation;
-           var lidBFH = new mapkit.Coordinate(49.230901, 9.211884)
+           var lidBFH = new mapkit.Coordinate(user.state.latitude, user.state.longitude)
            var lidlAnnotation = new MarkerAnnotation(lidBFH, { color: "#f4a56d", title: "SFO", glyphText: "✈️" });
            map.showItems([lidlAnnotation]);
 
