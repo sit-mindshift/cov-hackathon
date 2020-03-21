@@ -23,7 +23,7 @@ public class TimeSlotController {
         return timeSlots;
     }
 
-    @GetMapping(value = "/timeslots")
+    @GetMapping(value = "/activeTimeslots")
     public List<TimeSlot> getActiveTimeslots() {
 
         List<TimeSlot> timeSlots = timeslotRepository.findAll().stream().filter(timeslot -> !timeslot.redeemed)
