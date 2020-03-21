@@ -3,10 +3,12 @@ package com.sit.cov.hackatron.backend.controller;
 import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.repository.TimeslotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -15,11 +17,17 @@ public class TimeSlotController {
     @Autowired
     private TimeslotRepository timeslotRepository;
 
-
     @GetMapping(value = "/timeslots")
     public List<TimeSlot> getAllTimeslots() {
-
         List<TimeSlot> timeSlots = timeslotRepository.findAll();
+        return timeSlots;
+    }
+
+    @GetMapping(value = "/timeslots")
+    public List<TimeSlot> getActiveTimeslots() {
+
+        List<TimeSlot> timeSlots = timeslotRepository.findAll().stream().filter(timeslot -> !timeslot.redeemed)
+                .collect(Collectors.toList());
         return timeSlots;
     }
 
@@ -36,6 +44,12 @@ public class TimeSlotController {
 
         TimeSlot savedTimeSlot = timeslotRepository.save(timeslot);
         return savedTimeSlot;
+    }
+
+    @PostMapping(value = "/timeslot/invalidate")
+    public ResponseEntity<String> invalidateTimeslot(@PathVariable String id) {
+        timeslotRepository.deleteById(id);
+        return ResponseEntity.ok().body("invalidated");
     }
 
     @PostMapping(value = "/timeslot/reserve/{id}")
