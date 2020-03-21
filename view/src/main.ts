@@ -7,6 +7,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import store from '@/store/store';
 import {setupInterceptors} from '@/utils/HttpInterceptor';
+import VueMapkit from 'vue-mapkit'
+
+Vue.use(VueMapkit, {
+    authorizationCallback(done: any) {
+        // provide mapkit jwt here
+        done("REQUEST TOKEN FROM KEVIN")
+    },
+    // you can use options from mapkit documentation as well
+    language: 'de',
+})
 
 Vue.use(BootstrapVue);
 Vue.use(Vuex);
