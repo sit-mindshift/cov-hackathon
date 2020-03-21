@@ -1,7 +1,9 @@
 <template>
   <div id="app">
       <navbar></navbar>
-      <router-view/>
+      <main id="app-main-content">
+        <router-view/>
+      </main>
   </div>
 </template>
 
@@ -19,11 +21,20 @@
 </script>
 
 <style>
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+}
+#app-main-content {
+  padding: 1rem;
+  width: 100%;
+  margin: 0 auto;
 }
 </style>
