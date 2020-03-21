@@ -15,5 +15,6 @@
       ShopList,
     },
   })
-  export default class Home extends Vue {}
+  export default class Home extends Vue {
+  }
 </script>

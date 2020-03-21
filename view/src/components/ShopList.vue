@@ -1,7 +1,7 @@
 <template>
   <div>
     <head-line>All Shops</head-line>
-    <b-table striped hover :items="allShops"></b-table>
+    <b-table striped hover :items="shopList" :fields="fields"></b-table>
   </div>
 </template>
 
@@ -14,7 +14,12 @@
     components: { HeadLine }
   })
   export default class extends Vue {
-    private allShops: Shop[] = shops.allShops;
+    fields: String[] =
+      ['type', 'zipcode', 'city', 'street', 'openinghours'];
+
+    get shopList() {
+      return shops.allShops;
+    }
   }
 </script>
 
