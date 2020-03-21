@@ -1,10 +1,12 @@
 <template>
   <div class="home">
-    <ShopList/>
+    <b-container>
+      <ShopList/>
+    </b-container>
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
   import ShopList from '../components/ShopList.vue';
 
@@ -13,5 +15,6 @@
       ShopList,
     },
   })
-  export default class Home extends Vue {}
+  export default class Home extends Vue {
+  }
 </script>

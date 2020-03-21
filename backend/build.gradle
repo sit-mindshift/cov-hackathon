@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'org.springframework.boot' version '2.1.13.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 	id("com.palantir.docker") version "0.22.1"
@@ -30,6 +30,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-jersey'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+	//Security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.0.RELEASE'
 
@@ -37,6 +39,12 @@ dependencies {
 	implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
 	
 	// Lombok
+    implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	compile group: 'com.google.zxing', name: 'core', version: '3.4.0'
+	compile group: 'com.google.zxing', name: 'javase', version: '3.4.0'
+	//implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
