@@ -1,12 +1,23 @@
-﻿name: Deploy the application to Google Cloud Run
+﻿# This workflow will build a docker container, publish it to Google Container Registry, and deploy it to GKE when a release is created
+#
+# To configure this workflow:
+#
+# 1. Ensure that your repository contains the necessary configuration for your Google Kubernetes Engine cluster, including deployment.yml, kustomization.yml, service.yml, etc.
+#
+# 2. Set up secrets in your workspace: GKE_PROJECT with the name of the project, GKE_EMAIL with the service account email, GKE_KEY with the Base64 encoded JSON service account key (https://github.com/GoogleCloudPlatform/github-actions/tree/docs/service-account-key/setup-gcloud#inputs).
+#
+# 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, REGISTRY_HOSTNAME and DEPLOYMENT_NAME environment variables (below).
+name: Build and Deploy to GKE
+
 on:
   push:
     branches:
     - Rotfuks-patch-1
+
+# Environment variables available to all jobs and steps in this workflow
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-  GKE_SECRET: ${{ secrets.GCLOUD_AUTH_BASE64 }}
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: us-west1-a
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
@@ -15,34 +26,48 @@ env:
   DEPLOYMENT_NAME: gke-test
   BACKEND_WORKING_DIRECTORY: ./backend
 
-jobs:
-  deploy:
-    name: Deploy job
+jobs: 
+  setup-build-publish-deploy:
+    name: Build, Create docker image and deploy to GCP
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v1
-      # Setup JDK  
-      - name: Set up JDK 1.11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-        # Gradle Build
-      - name: Grant execute permission for gradlew
-        run: "chmod +x gradlew"
-        working-directory: ./backend
-      - name: Build with Gradle
-        run: "./gradlew build"
-        working-directory: ./backend
-     - name: Docker
-        run: "docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg JAR_FILE=build/libs/*.jar ."
-        working-directory: ./backend
-      - name: Authenticate into Google Cloud Platform
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          service_account_email: ${{ secrets.GCLOUD_EMAIL }}
-          service_account_key: ${{ secrets.GCLOUD_AUTH }}
-      - name: Configure Docker to use Google Cloud Platform
-        run: "gcloud auth configure-docker"
+    - name: Checkout
+      uses: actions/checkout@v1
+    # Setup JDK  
+    - name: Set up JDK 1.11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    # Gradle Build
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
+    - name: Build with Gradle
+      run: ./gradlew build
+      working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }} 
+     # Setup gcloud CLI
+    - name: Authenticate into Google Cloud Platform
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_email: ${{ secrets.GKE_EMAIL }}
+        service_account_key: ${{ secrets.GCLOUD_AUTH_BASE64 }}
+    - run: gcloud auth configure-docker | gcloud info
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |
+        docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+    # Set up kustomize
+    #- name: Set up Kustomize
+    #  run: |
+    #    curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+    #    chmod u+x ./kustomize
+
+    # Deploy the Docker image to the GKE cluster
+    #- name: Deploy
+    #  run: |
+    #    gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+    #    ./kustomize edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
+    #    ./kustomize build . | kubectl apply -f -
+    #    kubectl rollout status deployment/$DEPLOYMENT_NAME
+    #    kubectl get services -o wide
