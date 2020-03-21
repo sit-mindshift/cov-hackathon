@@ -50,8 +50,6 @@ public class CustomerController {
 
     @PostMapping(value = "/customer")
     public Map<String, Object> saveUser(@RequestBody Customer customer) {
-        log.info("save: " + customer.getPassword());
-        log.info("save hashed: " + passwordEncoder.encode(customer.getPassword()));
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
 
         Customer savedCustomer = customerRepository.save(customer);
