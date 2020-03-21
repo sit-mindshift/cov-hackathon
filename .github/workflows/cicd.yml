@@ -7,7 +7,7 @@ on:
 # Environment variables available to all jobs and steps in this workflow
 env:
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}  
-  GCLOUD_KEY: ${{ secrets.GCLOUD_AUTH }}    
+  GKE_KEY: ${{ secrets.GCLOUD_AUTH }}    
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
@@ -50,7 +50,7 @@ jobs:
     # Docker login
     - name: Docker Login
       run: |
-        echo "$GCLOUD_AUTH" | base64 --decode > keyfile.json
+        echo "$GKE_KEY" | base64 --decode > keyfile.json
         gcloud auth activate-service-account --key-file keyfile.json
         cat keyfile.json | docker login -u _json_key --password-stdin https://eu.gcr.io
         gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
