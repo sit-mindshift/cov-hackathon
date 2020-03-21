@@ -1,6 +1,5 @@
 package com.sit.cov.hackatron.backend.controller;
 
-import com.mongodb.internal.connection.Time;
 import com.sit.cov.hackatron.backend.model.ReservedTimeSlots;
 import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.repository.ReservedTimeslotRepository;
@@ -43,7 +42,7 @@ public class TimeSlotController {
         return savedTimeSlot;
     }
 
-    @PostMapping(value = "/timeslot/inavlidate/{userID}/{timeSlotID}")
+    @PostMapping(value = "/timeslot/invalidate/{userID}/{timeSlotID}")
     public ReservedTimeSlots invalidateTimeslot(@PathVariable String userID, @PathVariable String timeSlotID) {
 
         Optional<ReservedTimeSlots> reservedTimeSlotsOptional = reservedTimeslotRepository.findById(userID);
@@ -54,7 +53,7 @@ public class TimeSlotController {
                     reservedTimeSlotsOptional.get().getInvalidTimeSlots().add(timeslot);
                 }
             });
-            
+
             List<TimeSlot> timeSlots = reservedTimeSlotsOptional.get().getTimeSlots().stream()
                     .filter(timeslot -> !timeSlotID.equals(timeslot.getId())).collect(Collectors.toList());
             reservedTimeSlotsOptional.get().setTimeSlots(timeSlots);
