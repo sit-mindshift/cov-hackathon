@@ -2,9 +2,11 @@ import Vue from 'vue';
 import Vuex, { Store } from 'vuex';
 import {getStoreBuilder} from 'vuex-typex';
 import {ShopState} from '@/store/models/shop';
+import {LoadingState} from '@/store/models/loading';
 
 export interface RootState {
-    stores: ShopState;
+    store: ShopState;
+    loading: LoadingState;
 }
 
 Vue.use(Vuex);
