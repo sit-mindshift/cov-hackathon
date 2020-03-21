@@ -7,7 +7,6 @@
 # 2. Set up secrets in your workspace: GKE_PROJECT with the name of the project, GKE_EMAIL with the service account email, GKE_KEY with the Base64 encoded JSON service account key (https://github.com/GoogleCloudPlatform/github-actions/tree/docs/service-account-key/setup-gcloud#inputs).
 #
 # 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, REGISTRY_HOSTNAME and DEPLOYMENT_NAME environment variables (below).
-
 name: Build and Deploy to GKE
 
 on:
@@ -32,10 +31,8 @@ jobs:
     name: Build, Create docker image and deploy to GCP
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout
-      uses: actions/checkout@v2
-
+      uses: actions/checkout@v1
     # Setup JDK  
     - name: Set up JDK 1.11
       uses: actions/setup-java@v1
@@ -55,7 +52,6 @@ jobs:
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg JAR_FILE=build/libs/*.jar .
       working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
-
     # Setup gcloud CLI
     - name: Authenticate into Google Cloud Platform
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
@@ -67,14 +63,11 @@ jobs:
     # Configure docker to use the gcloud command-line tool as a credential helper
     - name: Configure Docker to use Google Cloud Platform
     - run: gcloud auth configure-docker
-    - run: gcloud info      
-      
-      
+    - run: gcloud info           
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |
         docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
-        
     # Set up kustomize
     #- name: Set up Kustomize
     #  run: |
