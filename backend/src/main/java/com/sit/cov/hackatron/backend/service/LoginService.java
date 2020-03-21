@@ -22,12 +22,9 @@ public class LoginService {
 
 	public boolean login(LoginDTO dto) {
         Optional<Customer> customer = customerRepository.findByUsername(dto.getUsername());
-        boolean isValid = false;
-        if(customer.isPresent()) {
-            // scuffed
-            isValid = passwordEncoder.matches(dto.getPassword(), customer.get().getPassword());
-        }
-        return isValid;
+
+        return customer.map(c -> passwordEncoder.matches(dto.getPassword(), c.getPassword())).orElse(false);
+
 	}
 
 }
