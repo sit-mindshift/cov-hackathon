@@ -1,4 +1,4 @@
-package com.sit.cov.hackatron.backend.controller;
+package com.sit.cov.hackatron.backend.resource;
 
 import com.sit.cov.hackatron.backend.model.Customer;
 import com.sit.cov.hackatron.backend.repository.CustomerRepository;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class CustomerController {
+public class CustomerResource {
 
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
