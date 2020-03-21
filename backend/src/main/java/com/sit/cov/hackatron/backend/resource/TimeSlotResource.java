@@ -36,9 +36,7 @@ public class TimeSlotResource {
 
     @PostMapping(value = "/timeslot")
     public TimeSlot saveTimeslot(@RequestBody TimeSlot timeslot) {
-
-    TimeSlot savedTimeSlot = timeslotRepository.save(timeslot);
-    return savedTimeSlot;
+        return timeslotRepository.save(timeslot);
     }
 
     @GetMapping(value = "/timeslot/{userID}")
@@ -48,7 +46,6 @@ public class TimeSlotResource {
         } else {
             return ResponseEntity.ok().body(new ReservedTimeSlots());
         }
-        return timeslotRepository.save(timeslot);
     }
 
     @PostMapping(value = "/timeslot/invalidate/{userID}/{timeSlotID}")
