@@ -36,16 +36,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # Setup gcloud CLI
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '270.0.0'
-        service_account_email: ${{ secrets.GKE_EMAIL }}
-        service_account_key: ${{ secrets.GCLOUD_AUTH_BASE64 }}
-
-    # Configure docker to use the gcloud command-line tool as a credential helper
-    - run: gcloud info
-    - run: gcloud auth configure-docker
     # Setup JDK  
     - name: Set up JDK 1.11
       uses: actions/setup-java@v1
@@ -63,10 +53,23 @@ jobs:
       run: |        
         docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" \
           --build-arg JAR_FILE=build/libs/*.jar .
       working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
 
+    # Setup gcloud CLI
+    - name: Authenticate into Google Cloud Platform
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        #version: '270.0.0'
+        service_account_email: ${{ secrets.GKE_EMAIL }}
+        service_account_key: ${{ secrets.GCLOUD_AUTH_BASE64 }}
+    
+    # Configure docker to use the gcloud command-line tool as a credential helper
+    - name: Configure Docker to use Google Cloud Platform
+    - run: gcloud auth configure-docker
+    - run: gcloud info      
+      
+      
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |
