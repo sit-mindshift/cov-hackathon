@@ -1,6 +1,6 @@
 package com.sit.cov.hackatron.backend.controller;
 
-import com.sit.cov.hackatron.backend.model.Timeslot;
+import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.repository.TimeslotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,31 +17,31 @@ public class TimeSlotController {
 
 
     @GetMapping(value = "/timeslots")
-    public List<Timeslot> getAllTimeslots() {
+    public List<TimeSlot> getAllTimeslots() {
 
-        List<Timeslot> timeslots = timeslotRepository.findAll();
-        return timeslots;
+        List<TimeSlot> timeSlots = timeslotRepository.findAll();
+        return timeSlots;
     }
 
 
     @GetMapping(value = "/timeslot/{id}")
-    public Optional<Timeslot> findTimeSlotById(@PathVariable String id) {
+    public Optional<TimeSlot> findTimeSlotById(@PathVariable String id) {
 
-        Optional<Timeslot> timeslot = timeslotRepository.findById(id);
+        Optional<TimeSlot> timeslot = timeslotRepository.findById(id);
         return timeslot;
     }
 
     @PostMapping(value = "/timeslot")
-    public Timeslot saveTimeslot(@RequestBody Timeslot timeslot) {
+    public TimeSlot saveTimeslot(@RequestBody TimeSlot timeslot) {
 
-        Timeslot savedTimeslot = timeslotRepository.save(timeslot);
-        return savedTimeslot;
+        TimeSlot savedTimeSlot = timeslotRepository.save(timeslot);
+        return savedTimeSlot;
     }
 
-    @PostMapping(value = "/timeslot/{id}")
-    public Timeslot reserveTimeslot(@PathVariable String id) {
-        Timeslot timeslot;
-        Optional<Timeslot> ret = timeslotRepository.findById(id);
+    @PostMapping(value = "/timeslot/reserve/{id}")
+    public TimeSlot reserveTimeslot(@PathVariable String id) {
+        TimeSlot timeslot;
+        Optional<TimeSlot> ret = timeslotRepository.findById(id);
         if (ret.isPresent()) {
             timeslot = ret.get();
             timeslot.reserved = true;
