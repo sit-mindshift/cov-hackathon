@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(exclude = {"id", "timeSlot"})
+@EqualsAndHashCode(exclude = {"id"})
 @Document
 public class ReservedTimeSlotItem {
     private String userID;
