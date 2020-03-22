@@ -16,6 +16,7 @@ import java.util.Optional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sit.cov.hackatron.backend.model.ReservedTimeSlots;
+import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.service.QRCodeGeneratorService;
 import com.sit.cov.hackatron.backend.repository.ReservedTimeslotRepository;
 
@@ -45,15 +46,18 @@ public class QRCodeResource {
 
         final Optional<ReservedTimeSlots> reservedTimeSlots = reservedTimeslotRepository.findById(userId);
         final List<String> qrCodes = new ArrayList<String>();
+        if(reservedTimeSlots.isPresent()){
         reservedTimeSlots.get().getTimeSlots().forEach(timeslot -> {
             final ObjectMapper mapper = new ObjectMapper();
             try {
+                // should include more then just timeslot
                 String timeSlotJson = mapper.writeValueAsString(timeslot);
                 qrCodes.add(qrCodeGeneratorService.generateQRCode(timeSlotJson, 256, 256).block());
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
         });
+        }
         return ResponseEntity.ok().body(qrCodes.stream().map(String::new).toArray(String[]::new));
     }
 }
