@@ -19,7 +19,7 @@
     <b-card-text>
       Happy Shopping ad Lidl!
     </b-card-text>
-    <b-button v-on:click="invalidateSlot(index)" href="#" variant="primary">Cancel Slot</b-button>
+    <b-button v-on:click="invalidateSlot(index)" variant="primary">Cancel Slot</b-button>
   </b-card>   
 
 
