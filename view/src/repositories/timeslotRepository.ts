@@ -3,17 +3,17 @@ import { store } from '@/store/store';
 
 import httpClient from '@/utils/HttpClient';
 import {Timeslot} from '@/store/models/timeslot';
-import user from "../store/models/user";
+import user from '../store/models/user';
 
 async function getTimeslots() {
   try {
     const response =
       await httpClient.get('/api/timeslots/1');
 
-    let timeslots: Timeslot[] = [];
+    const timeslots: Timeslot[] = [];
 
     // @ts-ignore
-    for(let data of response) {
+    for(const data of response) {
       // @ts-ignore
       timeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
     }
@@ -27,14 +27,14 @@ async function getTimeslots() {
 
 async function getUserTimeslots() {
   try {
-    let userId = user.state.personalData.id;
+    const userId = user.state.personalData.id;
     const response =
         await httpClient.get(`/api/timeslot/${userId}`);
 
-    let userTimeslots: Timeslot[] = [];
+    const userTimeslots: Timeslot[] = [];
 
     // @ts-ignore
-    for(let data of response.timeSlots) {
+    for(const data of response.timeSlots) {
       // @ts-ignore
       userTimeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
     }
@@ -45,7 +45,7 @@ async function getUserTimeslots() {
     console.error(error);
   }
 }
-  
+
 
 
 async function reserveTimeslot(userId: string, storeId: string, timeslotId: string) {
@@ -53,10 +53,10 @@ async function reserveTimeslot(userId: string, storeId: string, timeslotId: stri
     const response =
         await httpClient.post(`/api/timeslot/reserve/${userId}/${storeId}/${timeslotId}`);
 
-    let timeslots: Timeslot[] = [];
+    const timeslots: Timeslot[] = [];
 
     // @ts-ignore
-    for(let data of response.timeSlots) {
+    for(const data of response.timeSlots) {
       // @ts-ignore
       timeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
     }
@@ -73,10 +73,10 @@ async function removeUserTimeslot(userId: string, timeslotId: string) {
     const response =
         await httpClient.post(`/api/timeslot/invalidate/${userId}/${timeslotId}`);
 
-    let timeslots: Timeslot[] = [];
+    const timeslots: Timeslot[] = [];
 
     // @ts-ignore
-    for(let data of response.timeSlots) {
+    for(const data of response.timeSlots) {
       // @ts-ignore
       timeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
     }
@@ -97,7 +97,7 @@ const timeslotsRepository = {
     return await reserveTimeslot(userId, storeId, timeslotId);
   },
   async getUserTimeslots() {
-    return await getUserTimeslots();    
+    return await getUserTimeslots();
   },
   async removeUserTimeslot(userId: string, timeslotId: string) {
     return await removeUserTimeslot(userId, timeslotId);

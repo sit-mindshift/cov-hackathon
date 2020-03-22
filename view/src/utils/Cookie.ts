@@ -1,5 +1,5 @@
 function findCookieByName (name: string) {
-    let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     return match ? JSON.parse(match[2]) : null;
 }
 

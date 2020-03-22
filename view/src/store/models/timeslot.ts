@@ -2,7 +2,7 @@
 import store, {RootState} from '../store';
 import {BareActionContext, getStoreBuilder} from 'vuex-typex';
 import timeslotRepository from '@/repositories/timeslotRepository';
-import user from "./user";
+import user from './user';
 
 export class Timeslot {
   public id: number;
@@ -22,7 +22,7 @@ export class Timeslot {
 export interface TimeslotState {
   timeslots: Timeslot[];
   userTimeslots: Timeslot[];
-  
+
 }
 
 const initialTimeslotState: TimeslotState = {
@@ -106,7 +106,6 @@ const timeslots = {
   // actions
   dispatchReadTimeslotList: b.dispatch(readTimeslotList),
   dispatchReadUserTimeslotData: b.dispatch(readUserTimeslotList),
-  
 
 };
 
