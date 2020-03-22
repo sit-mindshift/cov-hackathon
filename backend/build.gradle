@@ -37,6 +37,7 @@ dependencies {
 
 	// Reactor
 	implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
+	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
 	
 	// Lombok
     implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
