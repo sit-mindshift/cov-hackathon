@@ -1,15 +1,15 @@
 /* tslint:disable:no-console */
 import httpClient from '@/utils/HttpClient';
-import user from "@/store/models/user";
+import user from '@/store/models/user';
 
 async function getQRCodes() {
   try {
-    let userId = user.state.personalData.id;
+    const userId = user.state.personalData.id;
 
     const response =
       await httpClient.get('/qr-api/', {
         params: {
-          userId: userId
+          userId
         }});
     return response;
   } catch (error) {
