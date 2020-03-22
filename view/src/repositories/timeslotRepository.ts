@@ -35,7 +35,7 @@ async function getUserTimeslots() {
     // @ts-ignore
     for(const data of response.timeSlots) {
       // @ts-ignore
-      userTimeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
+      userTimeslots.push(new Timeslot(data.timeSlot.id, data.timeSlot.date, data.timeSlot.from, data.timeSlot.til))
     }
 
     return userTimeslots;
@@ -53,6 +53,7 @@ async function reserveTimeslot(userId: string, storeId: string, timeslotId: stri
         await httpClient.post(`/api/timeslot/reserve/${userId}/${storeId}/${timeslotId}`);
 
     const timeslots: Timeslot[] = [];
+
 
     // @ts-ignore
     for(const data of response.timeSlots) {
@@ -73,6 +74,7 @@ async function removeUserTimeslot(userId: string, timeslotId: string) {
         await httpClient.post(`/api/timeslot/invalidate/${userId}/${timeslotId}`);
 
     const timeslots: Timeslot[] = [];
+
 
     // @ts-ignore
     for(const data of response.timeSlots) {

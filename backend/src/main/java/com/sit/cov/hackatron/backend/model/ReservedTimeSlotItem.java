@@ -14,10 +14,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(exclude = {"id", "timeSlot"})
-@Document(collection = "reservedTimeslot")
+@Document
 public class ReservedTimeSlotItem {
-    @Id
-    private String id;
     private String userID;
     private String storeID;
     private TimeSlot timeSlot;
