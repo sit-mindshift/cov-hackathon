@@ -53,7 +53,6 @@ async function readTimeslotList(context: BareActionContext<TimeslotState, RootSt
 
 // action
 async function readUserTimeslotList(context: BareActionContext<TimeslotState, RootState>) {
-  console.log('CALLING readusertimeslotlist');
   const newUserTimeslot: Timeslot[] = await timeslotRepository.getUserTimeslots("5e77678014aff82a4c6318aa")
     || initialTimeslotState.userTimeslots;
   timeslots.setTimeslotList({timeslots: newUserTimeslot});

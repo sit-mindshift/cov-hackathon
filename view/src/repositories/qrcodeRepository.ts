@@ -1,7 +1,6 @@
 /* tslint:disable:no-console */
 import httpClient from '@/utils/HttpClient';
 import user from "@/store/models/user";
-import timeslot from "@/store/models/timeslot";
 
 async function getQRCodes() {
   try {
