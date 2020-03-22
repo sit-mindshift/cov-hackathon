@@ -11,9 +11,14 @@
         <b-col cols="8"><b-form-datepicker today-button v-model="selectedDate" onclick="timeslotList" class="mb-2"></b-form-datepicker></b-col>
       </b-row>
 
-      <b-row>
-        <b-col><label>Choose a timeslot</label></b-col>
-        <b-col cols="8"><b-table class="timeslotlist-table" striped hover :items="timeslotList" :fields="timeslotFields" @row-clicked="reserveTimeslot"></b-table></b-col>
+      <b-row class="justify-content-md-center" align-h="center">
+        <b-button-group class="btn-group-vertical">
+          <b-col cols="12">
+            <b-button squared size="lg" v-for="slot in timeslotList" :key="slot.id" style="margin: 5px; width: 400px;">
+              {{slot.from}} - {{slot.til}}
+            </b-button>
+          </b-col>
+        </b-button-group>
       </b-row>
     </b-container>
 
