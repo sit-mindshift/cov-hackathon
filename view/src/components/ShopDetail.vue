@@ -69,11 +69,6 @@
     public reserveTimeslot(timeslotId: any){
       let userId = user.state.personalData.id;
       let storeId = this.id;
-      // TODO remove for PR
-      console.log('reserving timeslot');
-      console.log('slotID: '+ timeslotId);
-      console.log('userID: '+ userId);
-      console.log('storeID: '+ storeId);
       return timeslotsRepository.reserveTimelot(userId, storeId, timeslotId); 
     }
   }
