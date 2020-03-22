@@ -1,0 +1,20 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "backend"
+  namespace: "default"
+  labels:
+    app: "backend"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "backend"
+  template:
+    metadata:
+      labels:
+        app: "backend"
+    spec:
+      containers:
+        - name: "shopsafe-server"
+          image: "gcr.io/shopsave/shopsafe-server@sha256:0adff3b98e153d5c4fcf2fed66919c862f60130b"

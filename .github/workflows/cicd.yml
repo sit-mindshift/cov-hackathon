@@ -2,21 +2,26 @@ name: CI/CD
 on:
   push:
     branches:
-    - master
+    master
+    #- Rotfuks-patch-1
 
 # Environment variables available to all jobs and steps in this workflow
 env:
   GKE_PROJECT: shopsave
-  GITHUB_SHA: ${{ github.sha }}
-  GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  GITHUB_SHA: ${{ github.sha }}  
   SERVER_DB: shopsafe-db
   SERVER_IMAGE: shopsafe-server
-  VIEW_IMAGE: shopsafe-view
-  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+  SERVER_DEPLOYMENT_NAME: backend
+  GKE_SERVER_CLUSTER: shopsave-k8s-cluster
+  GKE_ZONE: us-central1-c
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GKE_KEY: ${{ secrets.GKE_AUTH_BASE64 }}
   BACKEND_WORKING_DIRECTORY: ./backend
+  VIEW_IMAGE: shopsafe-view
+  VIEW_WORKING_DIRECTORY: ./view
+  VIEW_DEPLOYMENT_NAME: view
   REGISTRY_HOSTNAME: gcr.io
+  API-URL: http://35.232.171.127:8080
   
 jobs:
   setup-build-publish-deploy:
@@ -27,15 +32,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    # Setup gcloud CLI
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '270.0.0'
-        service_account_email: ${{ secrets.GKE_EMAIL }}
-        service_account_key: ${{ secrets.GKE_AUTH_BASE64 }} 
-    # Configure docker to use the gcloud command-line tool as a credential helper
-    - run: gcloud auth configure-docker
-    - run: gcloud info
+    
      # Gradle Build
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -46,21 +43,41 @@ jobs:
       with:
         java-version: 11
     # Build
-    - name: Build with Gradle
+    - name: Build Backend with Gradle
       run: ./gradlew build
       working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }} 
-    - name: Docker
+    - name: Docker Backend
       run: |        
         docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$SERVER_IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           --build-arg JAR_FILE=build/libs/*.jar .
       working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
-        
-     # Push the Docker image to Google Container Registry
-    - name: Publish
-      run: |
-        docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA
+    - name: Docker View
+      run: |        
+        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$VIEW_IMAGE":"$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          --build-arg API_URL="$API-URL" .
+      working-directory: ${{ env.VIEW_WORKING_DIRECTORY }}
+
+    # Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_email: ${{ secrets.GKE_EMAIL }}
+        service_account_key: ${{ secrets.GKE_AUTH_BASE64 }} 
+    # Configure docker to use the gcloud command-line tool as a credential helper
+    - run: gcloud auth configure-docker       
+    - run: docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA    
+    - run: docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$VIEW_IMAGE:$GITHUB_SHA    
+    - run: gcloud container clusters get-credentials $GKE_SERVER_CLUSTER --zone $GKE_ZONE --project=$GKE_PROJECT
+    - run: kubectl set image deployment/$SERVER_DEPLOYMENT_NAME $SERVER_IMAGE=$REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA
+    - run: kubectl set image deployment/$VIEW_DEPLOYMENT_NAME $VIEW_IMAGE=$REGISTRY_HOSTNAME/$GKE_PROJECT/$VIEW_IMAGE:$GITHUB_SHA
+    
+    #  run: |
+    #    gcloud container clusters get-credentials "$GKE_SERVER_CLUSTER" --zone="$GKE_ZONE" --project="$GKE_PROJECT"
+    #    kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="$REGISTRY_HOSTNAME"/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
     
     # Deploy the Docker image to the GKE cluster
     # kubectl set image deployment/"$SERVER_IMAGE" "$SERVER_IMAGE"="eu.gcr.io/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA"
