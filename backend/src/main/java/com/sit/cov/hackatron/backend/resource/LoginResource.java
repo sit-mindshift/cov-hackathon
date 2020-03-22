@@ -4,6 +4,7 @@ import com.sit.cov.hackatron.backend.dto.LoginDTO;
 import com.sit.cov.hackatron.backend.service.LoginService;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(LoginResource.LOGIN_ENDPOINT)
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LoginResource {
 
     public static final String LOGIN_ENDPOINT = "/login-api";

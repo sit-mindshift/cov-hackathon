@@ -36,12 +36,14 @@ const Login = () => import('./views/Login.vue');
   },
 })
 export default class App extends Vue {
+
   public created() {
     this.getLocation();
   }
 
+  // super scuffed
   get userIsLoggedIn(): boolean {
-    return true
+    return user.state.isLoggedIn;
   }
 
   public getLocation() {

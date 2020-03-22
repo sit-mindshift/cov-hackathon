@@ -18,6 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomerResource {
 
     private final CustomerRepository customerRepository;
