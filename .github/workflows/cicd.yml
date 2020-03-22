@@ -2,7 +2,7 @@ name: CI/CD
 on:
   push:
     branches:
-    master
+      master
 env:
   GKE_PROJECT: shopsave
   GITHUB_SHA: ${{ github.sha }}  
