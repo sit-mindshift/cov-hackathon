@@ -6,7 +6,7 @@ import {Timeslot} from '@/store/models/timeslot';
 async function getTimeslots() {
   try {
     const response =
-      await httpClient.get('http://localhost:8080/api/timeslots/1');
+      await httpClient.get('/api/timeslots/1');
 
     let timeslots: Timeslot[] = [];
 
@@ -23,15 +23,15 @@ async function getTimeslots() {
   }
 }
 
-async function reserveTimelot(userId: string, timeslotId: string) {
+async function reserveTimelot(userId: string, storeId: string, timeslotId: string) {
   try {
     const response =
-        await httpClient.post(`http://localhost:8080/api/timeslot/reserve/${userId}/${timeslotId}`);
+        await httpClient.post(`/api/timeslot/reserve/${userId}/${storeId}/${timeslotId}`);
 
     let timeslots: Timeslot[] = [];
 
     // @ts-ignore
-    for(let data of response) {
+    for(let data of response.timeSlots) {
       // @ts-ignore
       timeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
     }
@@ -47,8 +47,8 @@ const timeslotsRepository = {
   async getTimeslots() {
     return await getTimeslots();
   },
-  async reserveTimelot(userId: string, timeslotId: string ) {
-    return await reserveTimelot(userId,timeslotId);
+  async reserveTimelot(userId: string, storeId: string, timeslotId: string ) {
+    return await reserveTimelot(userId, storeId, timeslotId);
   },
 };
 

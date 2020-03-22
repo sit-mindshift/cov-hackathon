@@ -40,6 +40,12 @@ public class TimeSlotResource {
         return timeslotRepository.save(timeslot);
     }
 
+    @PostMapping(value = "/timeslots")
+    public List<TimeSlot> saveAllTimeslots(@RequestBody List<TimeSlot> timeslots) {
+        return timeslotRepository.saveAll(timeslots);
+    }
+
+
     @GetMapping(value = "/timeslot/{userID}")
     public ResponseEntity<ReservedTimeSlots> getTimeslotsForUser(@PathVariable String userID) {
         if (reservedTimeslotRepository.findById(userID).isPresent()) {
@@ -71,8 +77,8 @@ public class TimeSlotResource {
         }
     }
 
-    @PostMapping(value = "/timeslot/reserve/{userID}/{timeSlotID}")
-    public ReservedTimeSlots reserveTimeslot(@PathVariable String userID, @PathVariable String timeSlotID) {
+    @PostMapping(value = "/timeslot/reserve/{userID}/{storeID}/{timeSlotID}")
+    public ReservedTimeSlots reserveTimeslot(@PathVariable String userID, @PathVariable String storeID, @PathVariable String timeSlotID) {
 
         Optional<TimeSlot> timeSlot = timeslotRepository.findById(timeSlotID);
 
@@ -85,7 +91,7 @@ public class TimeSlotResource {
             } else {
                 List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
                 timeSlots.add(timeSlot.get());
-                ReservedTimeSlots reservedTimeSlots = new ReservedTimeSlots(userID, timeSlots);
+                ReservedTimeSlots reservedTimeSlots = new ReservedTimeSlots(userID, storeID, timeSlots);
                 return reservedTimeslotRepository.save(reservedTimeSlots);
             }
         } else {
