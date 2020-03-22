@@ -3,7 +3,6 @@ on:
   push:
     branches:
     master
-# Environment variables available to all jobs and steps in this workflow
 env:
   GKE_PROJECT: shopsave
   GITHUB_SHA: ${{ github.sha }}  
