@@ -1,10 +1,20 @@
 <template>
   <div id="app">
       <navbar></navbar>
-    <main id="app-main-content">
-      <Loader :visible="loading"/>
-      <router-view/>
-    </main>
+      <main id="app-main-content">
+        <Loader :visible="loading"/>
+
+        <!-- normal router view for logged in users -->
+        <template v-if="userIsLoggedIn">
+          <router-view/>
+        </template>
+
+        <!-- login screen -->
+        <template v-else>
+          <Login/>
+        </template>
+
+      </main>
   </div>
 </template>
 
@@ -15,16 +25,23 @@ import Loader from './components/Loader.vue';
 import shops from './store/models/shop';
 import loading from './store/models/loading';
 import user from './store/models/user';
+const Login = () => import('./views/Login.vue');
+
 
 @Component({
   components: {
     Navbar,
     Loader,
+    Login,
   },
 })
 export default class App extends Vue {
   public created() {
     this.getLocation();
+  }
+
+  get userIsLoggedIn(): boolean {
+    return true
   }
 
   public getLocation() {
