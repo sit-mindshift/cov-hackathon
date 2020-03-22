@@ -1,7 +1,7 @@
 <template>
     <b-navbar class="navbar" toggleable="sm" type="dark" variant="success">
         <b-navbar-brand href="#">
-            <img class="brand-logo" src="img/placeholder.png" alt="Shop Safe Logo">
+            <img class="brand-logo" src="img/logo.png" alt="Shop Safe Logo">
             <span class="brand-name">Shop Safe</span>
         </b-navbar-brand>
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
