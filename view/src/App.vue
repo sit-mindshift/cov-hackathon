@@ -9,43 +9,43 @@
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator';
-  import Navbar from './components/Navbar.vue';
-  import Loader from './components/Loader.vue';
-  import shops from './store/models/shop';
-  import loading from './store/models/loading';
-  import user from "./store/models/user";
+import {Component, Vue} from 'vue-property-decorator';
+import Navbar from './components/Navbar.vue';
+import Loader from './components/Loader.vue';
+import shops from './store/models/shop';
+import loading from './store/models/loading';
+import user from './store/models/user';
 
-  @Component({
-    components: {
-      Navbar,
-      Loader,
-    },
-  })
-  export default class App extends Vue {
-    public created() {
-      this.getLocation();
-    }
+@Component({
+  components: {
+    Navbar,
+    Loader,
+  },
+})
+export default class App extends Vue {
+  public created() {
+    this.getLocation();
+  }
 
-    public getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          user.changePosition({
+  public getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat: string = position.coords.latitude.toString();
+        const long: string = position.coords.longitude.toString();
+        user.changePosition({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
-          shops.dispatchReadShopList()
-        }
-        );
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
-    }
-
-    get loading() {
-      return loading.state.loading;
+        shops.dispatchReadShopList();
+      },
+      );
     }
   }
+
+  get loading() {
+    return loading.state.loading;
+  }
+}
 </script>
 
 <style>

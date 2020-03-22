@@ -40,6 +40,16 @@ npm run test
 npm run lint
 ```
 
+### Run with Docker
+```
+$ docker build
+--build-arg API_URL=http://35.232.171.127:8080  
+-t frontend .
+```
+```
+$ docker build --build-arg API_URL=http://localhost:8080 -t frontend .
+```
+
 ## Special Dev Hints and Tweaks
 #### Shop Naming workaround
 The Shops are named **Shop** in the view, but **Store** in the Backend. 
@@ -47,8 +57,3 @@ This is due to Vue using the *vuex-global-store* holding the naming pattern of s
 But our big Example Data Set in the Backend all Shop Instances are called Store, mapping this would be a lot of unnecessary effort.
 
 Therefore we are using **Shop** in the Frontend and **Store** in the Backend.
-
-#### Shop Longitude-Latitude Mapping
-In [App.vue](src/App.vue) get Location we are mapping the Browsers Longitude and Latitude to 
-so called **fakedLong** and **fakedLat** in order to match the weird initial Dataset we used. 
-For cleaned up data please change to use only longitute and laditute everywhere.
