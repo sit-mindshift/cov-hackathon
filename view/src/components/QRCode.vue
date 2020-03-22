@@ -19,8 +19,7 @@
     <b-card-text>
       Happy Shopping ad Lidl!
     </b-card-text>
-    <span>{{ index }} </span>
-    <b-button v-on:click="invalidate()" href="#" variant="primary">Cancel Slot</b-button>
+    <b-button v-on:click="invalidateSlot(index)" href="#" variant="primary">Cancel Slot</b-button>
   </b-card>   
 
 
@@ -32,6 +31,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import user from "../store/models/user";
+import timeslot from "../store/models/timeslot";
+import timeslotsRepository from "@/repositories/timeslotRepository";
 
 @Component({})
 export default class extends Vue {
@@ -41,11 +42,14 @@ export default class extends Vue {
     }
 
     public created() {
-        user.dispatchReadQRCodeData();
+        timeslot.dispatchReadUserTimeslotData();
     }
 
-    public invalidate() {
-        user.dispatchReadQRCodeData();
+    public invalidateSlot(index: any) {
+        let timeslotId = timeslot.state.userTimeslots[index].id;
+        let userId = user.state.personalData.id;
+        timeslotsRepository.removeUserTimeslot(userId, timeslotId);
+        this.qrCodesList.splice(index, 1);
     }
 
 

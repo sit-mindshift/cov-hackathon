@@ -29,6 +29,7 @@ const initialTimeslotState: TimeslotState = {
   timeslots: [],
   userTimeslots: [],
 };
+
 const b = getStoreBuilder<RootState>().module('timeslots', initialTimeslotState);
 
 // getters
@@ -39,9 +40,21 @@ const timeslotByIdGetter = b.read(
       return s.id === i;
     }), 'timeslotsFilter');
 
+const userTimeslotsGetter = b.read((state) => state.userTimeslots, 'userTimeSlotsGetter');
+const userTimeslotByIdGetter = b.read(
+  (state) => (i: number) =>
+    state.userTimeslots.filter((s) => {
+      return s.id === i;
+    }), 'userTimeslotsFilter');
+
+
 // mutations
 function setTimeslotList(state: TimeslotState, payload: { timeslots: Timeslot[] }) {
   state.timeslots = payload.timeslots;
+}
+
+function setUserTimeslotList(state: TimeslotState, payload: { timeslots: Timeslot[] }) {
+  state.userTimeslots = payload.timeslots;
 }
 
 // action
@@ -53,10 +66,10 @@ async function readTimeslotList(context: BareActionContext<TimeslotState, RootSt
 
 // action
 async function readUserTimeslotList(context: BareActionContext<TimeslotState, RootState>) {
-  const newUserTimeslot: Timeslot[] = await timeslotRepository.getUserTimeslots("5e77678014aff82a4c6318aa")
+  const newUserTimeslot: Timeslot[] = await timeslotRepository.getUserTimeslots()
     || initialTimeslotState.userTimeslots;
-  timeslots.setTimeslotList({timeslots: newUserTimeslot});
-  // user.dispatchReadQRCodeData();
+  timeslots.setUserTimeslotList({timeslots: newUserTimeslot});
+  user.dispatchReadQRCodeData();
 }
 
 
@@ -79,13 +92,21 @@ const timeslots = {
     return timeslotByIdGetter()(i);
   },
 
+  get allUserTimeslots() {
+    return userTimeslotsGetter();
+  },
+  getUserTimeslotById(i: number) {
+    return userTimeslotByIdGetter()(i);
+  },
+
   // mutations
   setTimeslotList: b.commit(setTimeslotList),
-  
+  setUserTimeslotList: b.commit(setUserTimeslotList),
 
   // actions
   dispatchReadTimeslotList: b.dispatch(readTimeslotList),
   dispatchReadUserTimeslotData: b.dispatch(readUserTimeslotList),
+  
 
 };
 

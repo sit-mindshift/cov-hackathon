@@ -1,7 +1,9 @@
+import { store } from '@/store/store';
 /* tslint:disable:no-console */
 
 import httpClient from '@/utils/HttpClient';
 import {Timeslot} from '@/store/models/timeslot';
+import user from "../store/models/user";
 
 async function getTimeslots() {
   try {
@@ -23,8 +25,9 @@ async function getTimeslots() {
   }
 }
 
-async function getUserTimelots(userId: string) {
+async function getUserTimeslots() {
   try {
+    let userId = user.state.personalData.id;
     const response =
         await httpClient.get(`/api/timeslot/${userId}`);
 
@@ -45,7 +48,7 @@ async function getUserTimelots(userId: string) {
   
 
 
-async function reserveTimelot(userId: string, storeId: string, timeslotId: string) {
+async function reserveTimeslot(userId: string, storeId: string, timeslotId: string) {
   try {
     const response =
         await httpClient.post(`/api/timeslot/reserve/${userId}/${storeId}/${timeslotId}`);
@@ -65,16 +68,41 @@ async function reserveTimelot(userId: string, storeId: string, timeslotId: strin
   }
 }
 
+async function removeUserTimeslot(userId: string, timeslotId: string) {
+  try {
+    const response =
+        await httpClient.post(`/api/timeslot/invalidate/${userId}/${timeslotId}`);
+
+    let timeslots: Timeslot[] = [];
+
+    // @ts-ignore
+    for(let data of response.timeSlots) {
+      // @ts-ignore
+      timeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
+    }
+
+    return timeslots;
+  } catch (error) {
+    // @ts-ignore
+    console.error(error);
+  }
+}
+
+
 const timeslotsRepository = {
   async getTimeslots() {
     return await getTimeslots();
   },
-  async reserveTimelot(userId: string, storeId: string, timeslotId: string ) {
-    return await reserveTimelot(userId, storeId, timeslotId);
+  async reserveTimeslot(userId: string, storeId: string, timeslotId: string ) {
+    return await reserveTimeslot(userId, storeId, timeslotId);
   },
-  async getUserTimeslots(userId: string) {
-    return await getUserTimelots(userId);    
-  }
+  async getUserTimeslots() {
+    return await getUserTimeslots();    
+  },
+  async removeUserTimeslot(userId: string, timeslotId: string) {
+    return await removeUserTimeslot(userId, timeslotId);
+  },
+
 };
 
 export default timeslotsRepository;
