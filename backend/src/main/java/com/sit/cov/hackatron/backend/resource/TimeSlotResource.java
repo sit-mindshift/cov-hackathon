@@ -61,15 +61,13 @@ public class TimeSlotResource {
 
         if (reservedTimeSlotsOptional.isPresent() && reservedTimeSlotsOptional.get().getTimeSlots() != null) {
             reservedTimeSlotsOptional.get().getTimeSlots().forEach(timeslot -> {
-                System.out.println(timeSlotID);
-                System.out.println(timeslot.getId());
-                if (timeslot.getId().equals(timeSlotID)) {
+                if (timeslot.getTimeSlot().getId().equals(timeSlotID)) {
                     reservedTimeSlotsOptional.get().getInvalidTimeSlots().add(timeslot);
                 }
             });
 
             List<ReservedTimeSlotItem> timeSlots = reservedTimeSlotsOptional.get().getTimeSlots().stream()
-                    .filter(timeslot -> !timeSlotID.equals(timeslot.getId()))
+                    .filter(timeslot -> !timeSlotID.equals(timeslot.getTimeSlot().getId()))
                     .collect(Collectors.toList());
             reservedTimeSlotsOptional.get().setTimeSlots(timeSlots);
 

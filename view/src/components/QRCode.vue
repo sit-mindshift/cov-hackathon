@@ -46,6 +46,7 @@ export default class extends Vue {
     }
 
     public invalidateSlot(index: any) {
+
         let timeslotId = timeslot.state.userTimeslots[index].id.toString();
         let userId = user.state.personalData.id;
 
