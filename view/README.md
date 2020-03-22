@@ -42,9 +42,6 @@ npm run lint
 
 ### Run with Docker
 ```
-$ docker build --build-arg API_URL=http://35.232.171.127:8080 --build-arg APPLE_MAPS_TOKEN=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjhKOFZBNVU4OTYifQ.eyJpc3MiOiJNUzVCOUxRVExEIiwiaWF0IjoxNTg0ODA1Nzg2LjI4NSwiZXhwIjoxNjAwNTg0NTg2LjI4NSwib3JpZ2luIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxIn0.HsLp1QojMOSzv9ymCq7p8MDxQGcbhcuBoHynAA7Xgudvb09tCHwOJB1qWFiKjktXiU-tbNToYGz91odXxyDLBw -t frontend .
-```
-```
 $ docker build --build-arg API_URL=http://localhost:8080 -t frontend .
 ```
 
