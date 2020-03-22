@@ -18,7 +18,7 @@
               size="lg" 
               v-for="(slot, index) in timeslotList" 
               :key="slot.id" style="margin: 5px; width: 400px;" 
-              @click="highlightButton(`button${index}`)"
+              @click="highlightButtonAndReserveTimeslot(`button${index}`, slot.id)"
               :ref="`button${index}`">
               {{slot.from}} - {{slot.til}}
             </b-button>
@@ -36,6 +36,7 @@
   import HeadLine from '@/components/HeadLine.vue'
   import shops, {Shop} from '../store/models/shop';
   import timeslots, {Timeslot} from '../store/models/timeslot';
+  import user, {User} from '../store/models/user';  
   import timeslotsRepository from "@/repositories/timeslotRepository";
 
   import router from '@/router';
@@ -63,7 +64,6 @@
     }
 
     get timeslotList() {
-      // TODO call dispatcher instead of repository / or pre-load more timeslots
       return timeslots.state.timeslots;
     }
 
@@ -71,21 +71,15 @@
       timeslots.dispatchReadTimeslotList();
     }
 
-    private highlightButton(buttonRef: string) {
+    private highlightButtonAndReserveTimeslot(buttonRef: string, timeslotId: any) {
       let button: any = this.$refs[buttonRef];
       button[0].style.backgroundColor = "green"
-    }
-
-    public reserveTimeslot(record: any, index: any){
-      // TODO pass real userId to backend
-      let userId = "1";
+      let userId = user.state.personalData.id;
       let storeId = this.id;
-      let timeslotId = record.id;
-
-      console.log('reserving timeslot '+ timeslotId + ' of store '+ storeId + ' for user ' + userId);
-      return timeslotsRepository.reserveTimelot(userId, storeId, timeslotId); 
+      return timeslotsRepository.reserveTimelot(userId, storeId, timeslotId);       
     }
-  }
+
+}
 </script>
 
 <style scoped>
