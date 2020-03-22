@@ -19,6 +19,7 @@ env:
   VIEW_DEPLOYMENT_NAME: view
   REGISTRY_HOSTNAME: gcr.io
   API-URL: http://35.232.171.127:8080
+  APPLE_MAPS_TOKEN: ${{ secrets.APPLE_MAPS_TOKEN }}
   
 jobs:
   setup-build-publish-deploy:
@@ -55,7 +56,9 @@ jobs:
         docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$VIEW_IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
+          --build-arg APPLE_MAPS_TOKEN="$APPLE_MAPS_TOKEN"
           --build-arg API_URL="$API-URL" .
+
       working-directory: ${{ env.VIEW_WORKING_DIRECTORY }}
 
     # Setup gcloud CLI

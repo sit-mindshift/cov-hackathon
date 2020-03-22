@@ -30,11 +30,11 @@ export default class App extends Vue {
   public getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        const lat: string = position.coords.latitude.toString();
-        const long: string = position.coords.longitude.toString();
+        const lat: string = position.coords.latitude.toString().replace(".", "").slice(0,7);
+        const long: string = position.coords.longitude.toString().replace(".", "").slice(0,7);
         user.changePosition({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            latitude: long,
+            longitude: lat,
           });
         shops.dispatchReadShopList();
       },
