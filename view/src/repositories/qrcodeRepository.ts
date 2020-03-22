@@ -4,7 +4,6 @@ import user from "@/store/models/user";
 
 async function getQRCodes() {
   try {
-    console.log("repo");
     const response =
       await httpClient.get('http://localhost:8080/qr-api/', {
         params: {
