@@ -4,7 +4,7 @@
             <b-col>
                 <b-tabs pills fill content-class="mt-3">
 
-                    <!-- sign in form -->
+                    <!-- log in form -->
                     <b-tab title="I already have an account" active>
                         <b-form @submit.prevent="onSubmitLogin">
 
@@ -18,6 +18,7 @@
                                 <b-form-input
                                     id="input-login-username"
                                     type="text"
+                                    v-model="user.state.loginForm.username"
                                     required
                                     placeholder="Enter your username"
                                 ></b-form-input>
@@ -33,6 +34,7 @@
                                 <b-form-input
                                     id="input-login-password"
                                     type="password"
+                                    v-model="user.state.loginForm.password"
                                     required
                                     placeholder="Enter your password"
                                 ></b-form-input>
@@ -63,6 +65,7 @@
                                     id="input-register-username"
                                     type="text"
                                     required
+                                    v-model="user.state.registerForm.username"
                                     placeholder="Enter your username"
                                 ></b-form-input>
                             </b-form-group>
@@ -80,6 +83,7 @@
                                             id="input-register-first-name"
                                             type="text"
                                             required
+                                            v-model="user.state.registerForm.firstName"
                                             placeholder="Enter your first name"
                                         ></b-form-input>
                                     </b-form-group>
@@ -97,11 +101,28 @@
                                             id="input-register-last-name"
                                             type="text"
                                             required
+                                            v-model="user.state.registerForm.lastName"
                                             placeholder="Enter your last name"
                                         ></b-form-input>
                                     </b-form-group>
                                 </b-col>
                             </b-row>
+
+                            <!-- email -->
+                            <b-form-group
+                                id="input-group-register-email"
+                                label="Email"
+                                label-for="input-register-email"
+                            >
+                            <!-- tood: add v-model -->
+                                <b-form-input
+                                    id="input-register-email"
+                                    type="email"
+                                    required
+                                    v-model="user.state.registerForm.email"
+                                    placeholder="Enter your email"
+                                ></b-form-input>
+                            </b-form-group>
 
                             <!-- password -->
                             <b-form-group
@@ -114,22 +135,8 @@
                                     id="input-register-password"
                                     type="password"
                                     required
+                                    v-model="user.state.registerForm.password"
                                     placeholder="Enter your password"
-                                ></b-form-input>
-                            </b-form-group>
-
-                            <!-- confirm password -->
-                            <b-form-group
-                                id="input-group-register-confirm-password"
-                                label="Password"
-                                label-for="input-register-confirm-password"
-                            >
-                            <!-- tood: add v-model -->
-                                <b-form-input
-                                    id="input-register-confirm-password"
-                                    type="password"
-                                    required
-                                    placeholder="Confirm your password"
                                 ></b-form-input>
                             </b-form-group>
 
@@ -149,14 +156,48 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
+    import user from '../store/models/user';
+    import httpClient from '@/utils/HttpClient';
 
     @Component
     export default class Login extends Vue {
-        public onSubmitLogin(): void {
-            console.log("do login")
+        get user(): any{
+            return user;
         }
-        public onSubmitRegister(): void {
-            console.log("do register")
+
+        public async onSubmitLogin() {
+            console.log('--- do login ---')
+            try {
+                const response = await httpClient.post('/login-api', {
+                        username: user.state.loginForm.username,
+                        password: user.state.loginForm.password,
+                    }
+                );
+                user.state.isLoggedIn = true;
+                console.debug(response);
+            } catch (error) {
+                user.state.isLoggedIn = false;
+                console.debug(error)
+            }
+        }
+        public async onSubmitRegister() {
+            console.log('--- do register ---')
+            try {
+                const response: any = await httpClient.post('/api/customer', {
+                    username: user.state.registerForm.username,
+                    password: user.state.registerForm.password,
+                    firstName: user.state.registerForm.firstName,
+                    lastName: user.state.registerForm.lastName,
+                    email: user.state.registerForm.email,
+                })
+                
+                console.debug(response)
+                // tslint-disable
+                user.setUser(response.customer)
+                user.state.isLoggedIn = true;
+            } catch (error) {
+                console.debug(error)
+            }
         }
     }
 </script>
