@@ -2,7 +2,9 @@
   <div>
     <head-line>All Shops</head-line>
     <Map/>
-    <b-table class="shoplist-table" striped hover :items="shopList" :fields="fields" @row-clicked="openDetailView"></b-table>
+    <div class="tablespace">
+      <b-table class="shoplist-table" striped hover :items="shopList" :fields="fields" @row-clicked="openDetailView"></b-table>
+    </div>
   </div>
 </template>
 
@@ -38,5 +40,9 @@
 <style scoped>
   .shoplist-table {
     cursor: pointer;
+  }
+  .tablespace {
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
 </style>
