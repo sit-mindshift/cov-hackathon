@@ -20,7 +20,7 @@
   },
 })
   export default class extends Vue {
-    shopId: number = 0;
+    shopId: string = "0";
     fields: String[] =
       ['type', 'zipcode', 'city', 'street', 'openinghours'];
 
@@ -28,7 +28,7 @@
       return shops.allShops;
     }
 
-    public openDetailView(record: any, index: any){
+    public openDetailView(record: any, index: number){
       this.shopId = shops.allShops[index].id;
       router.push({ name: "Detail", params: { id: this.shopId } })
     }
