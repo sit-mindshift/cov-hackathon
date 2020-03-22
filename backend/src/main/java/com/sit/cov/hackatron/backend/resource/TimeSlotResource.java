@@ -4,7 +4,6 @@ import com.sit.cov.hackatron.backend.model.ReservedTimeSlots;
 import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.repository.ReservedTimeslotRepository;
 import com.sit.cov.hackatron.backend.repository.TimeslotRepository;
-import com.sit.cov.hackatron.backend.resource.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
