@@ -74,7 +74,6 @@
     private highlightButton(buttonRef: string) {
       let button: any = this.$refs[buttonRef];
       button[0].style.backgroundColor = "green"
-      console.log(button);
     }
 
     public reserveTimeslot(record: any, index: any){
