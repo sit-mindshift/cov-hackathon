@@ -17,7 +17,7 @@ export class Shop {
                      zipcode: string, city: string, street: string,
                      openinghours: string) {
     this.id = id;
-    this.type = "Lidl";
+    this.type = 'Lidl';
     this.latitude = latitude;
     this.longitude = longitude;
     this.zipcode = zipcode;

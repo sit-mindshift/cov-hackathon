@@ -13,11 +13,11 @@
   import router from '@/router';
   import Map from './Map.vue';
 
-@Component({ 
+@Component({
   components: {
     HeadLine,
-    Map
-  } 
+    Map,
+  },
 })
   export default class extends Vue {
     shopId: number = 0;
