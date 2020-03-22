@@ -36,13 +36,11 @@ public class StoreService {
         // Fill up to needed length
         if (latitude.length() < 8) {
             latitude = StringUtils.rightPad(latitude, 8, "0");
-            System.out.println(latitude);
         }
 
         // Fill up to needed length
         if (longitude.length() <= (5 + longitude.indexOf("."))) {
             longitude = StringUtils.rightPad(longitude, 6 + longitude.indexOf("."), "0");
-            System.out.println(longitude);
         }
 
         // Trim down to needed length
