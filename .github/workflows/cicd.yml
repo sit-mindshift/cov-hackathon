@@ -56,7 +56,7 @@ jobs:
         docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$VIEW_IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
-          --build-arg APPLE_MAPS_TOKEN="$APPLE_MAPS_TOKEN"
+          --build-arg APPLE_MAPS_TOKEN="$APPLE_MAPS_TOKEN" \
           --build-arg API_URL="$API-URL" .
 
       working-directory: ${{ env.VIEW_WORKING_DIRECTORY }}
