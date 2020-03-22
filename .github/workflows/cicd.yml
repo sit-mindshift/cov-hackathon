@@ -2,7 +2,7 @@ name: CI/CD
 on:
   push:
     branches:
-    - Rotfuks-patch-1
+    - master
 
 # Environment variables available to all jobs and steps in this workflow
 env:
