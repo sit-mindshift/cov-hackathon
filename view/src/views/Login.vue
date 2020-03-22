@@ -158,9 +158,18 @@
     import {Component, Vue} from 'vue-property-decorator';
     import user from '../store/models/user';
     import httpClient from '@/utils/HttpClient';
+import { setLoginCookie, getLoginCookie } from '../utils/Cookie';
 
     @Component
     export default class Login extends Vue {
+
+        created() {
+            const sessionCookieFound = getLoginCookie() != null;
+            if (sessionCookieFound) {
+                this.doLoginAction(getLoginCookie());
+            }
+        }
+
         get user(): any{
             return user;
         }
@@ -168,12 +177,12 @@
         public async onSubmitLogin() {
             console.log('--- do login ---')
             try {
-                const response = await httpClient.post('/login-api', {
+                const response: any = await httpClient.post('/login-api', {
                         username: user.state.loginForm.username,
                         password: user.state.loginForm.password,
                     }
                 );
-                user.state.isLoggedIn = true;
+                this.doLoginAction(response.customer);
                 console.debug(response);
             } catch (error) {
                 user.state.isLoggedIn = false;
@@ -183,21 +192,26 @@
         public async onSubmitRegister() {
             console.log('--- do register ---')
             try {
-                const response: any = await httpClient.post('/api/customer', {
+                const response: any = await httpClient.post('/api/customer', 
+                {
                     username: user.state.registerForm.username,
                     password: user.state.registerForm.password,
                     firstName: user.state.registerForm.firstName,
                     lastName: user.state.registerForm.lastName,
                     email: user.state.registerForm.email,
-                })
-                
+                }
+                )
                 console.debug(response)
-                // tslint-disable
-                user.setUser(response.customer)
-                user.state.isLoggedIn = true;
+                this.doLoginAction(response.customer);
             } catch (error) {
                 console.debug(error)
             }
+        }
+
+        private doLoginAction(customerData: any) {
+            user.setUser(customerData)
+            user.state.isLoggedIn = true;
+            setLoginCookie(customerData);
         }
     }
 </script>
