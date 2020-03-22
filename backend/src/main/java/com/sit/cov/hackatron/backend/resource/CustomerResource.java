@@ -2,7 +2,6 @@ package com.sit.cov.hackatron.backend.resource;
 
 import com.sit.cov.hackatron.backend.model.Customer;
 import com.sit.cov.hackatron.backend.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
