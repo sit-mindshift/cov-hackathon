@@ -16,5 +16,5 @@ spec:
         app: "backend"
     spec:
       containers:
-        - name: "shopsafe-server-sha256-1"
-          image: "gcr.io/shopsave/shopsafe-server@sha256:latest"
+        - name: "shopsafe-server"
+          image: "gcr.io/shopsave/shopsafe-server@sha256:0adff3b98e153d5c4fcf2fed66919c862f60130b"
