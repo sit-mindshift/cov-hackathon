@@ -41,9 +41,17 @@ npm run lint
 ```
 
 ### Run with Docker
+You can also run the Application within the docker container. For this run: 
+
 ```
-$ docker build --build-arg API_URL=http://localhost:8080 -t frontend .
+$ docker build 
+--build-arg API_URL=<URL> 
+--build-arg APPLE_MAPS_TOKEN=<TOKEN> 
+-t frontend .
 ```
+
+With API_URL being the reference to the backend and APPLE_MAPS_TOKEN 
+is the Token to pull data from apple mapkit.
 
 ## Special Dev Hints and Tweaks
 #### Shop Naming workaround
