@@ -1,7 +1,7 @@
 <template>
     <b-navbar class="navbar" toggleable="sm" type="dark" variant="success">
         <b-navbar-brand href="#">
-            <img class="brand-logo" src="img/logo.png" alt="Shop Safe / Save Lifes">
+            <img class="brand-logo" src="../../public/img/logo.png" alt="Shop Safe / Save Lifes">
             <span class="brand-name">Shop Safe / Save Lifes</span>
         </b-navbar-brand>
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -26,7 +26,7 @@
 <style scoped>
     .navbar {
         margin-bottom: 1rem;
-        padding-left: 5rem;
+        padding-left: 6rem;
     }
     .brand-logo {
         position: absolute;
@@ -36,22 +36,22 @@
         border-width: thick;
         border-color: #28a745 !important;
         z-index: 5;
-        height: 5rem;
+        height: 6rem;
     }
 
     @media (min-width: 800px) {
         .navbar {
-            padding-left: 11rem;
+            padding-left: 9rem;
         }
 
         .brand-logo {
-            height: 11rem;
+            height: 7rem;
         }
     }
 
 
     .brand-name {
-        font-weight: bold;
-        margin-left: 1rem;
+      font-weight: bold;
+      margin-left: 1rem;
     }
 </style>
