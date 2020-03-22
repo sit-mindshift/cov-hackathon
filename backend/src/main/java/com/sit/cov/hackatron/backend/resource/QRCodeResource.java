@@ -25,7 +25,7 @@ public class QRCodeResource {
 
     @GetMapping(value = QR_ENDPOINT, produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
-    public Mono<ResponseEntity<byte[]>> getQRCode(@RequestParam(value = "value", required = true) String value) {
+    public Mono<ResponseEntity<String>> getQRCode(@RequestParam(value = "value", required = true) String value) {
         return qrCodeGeneratorService.generateQRCode(value, 256, 256)
                 .map(imageBuff -> ResponseEntity.ok().body(imageBuff));
     }

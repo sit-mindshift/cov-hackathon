@@ -1,3 +1,6 @@
+<template>
+  <div class="shop-map" :id="map_id"></div>
+</template>
 <script>
 import { createMapkit } from 'vue-mapkit'
 import shops, {Shop} from '../store/models/shop';
@@ -42,6 +45,11 @@ export default {
     }
   }
 </script>
-<template>
-    <div :id="map_id" style="height: 300px;"></div>
-</template>
+<style scoped>
+ .shop-map {
+   height: 300px;
+ }
+ .mk-annotations {
+   cursor: pointer;
+ }
+</style>

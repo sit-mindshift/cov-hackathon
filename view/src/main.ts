@@ -11,8 +11,7 @@ import VueMapkit from 'vue-mapkit'
 
 Vue.use(VueMapkit, {
     authorizationCallback(done: any) {
-        // provide mapkit jwt here
-        done("REQUEST TOKEN FROM KEVIN")
+      done()
     },
     // you can use options from mapkit documentation as well
     language: 'de',

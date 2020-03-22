@@ -11,7 +11,7 @@ async function getShops() {
         params: {
           longitude: user.state.fakedlong,
           latitude: user.state.fakedlat,
-          span: 5000,
+          span: 30000,
         }});
 
     let shops: Shop[] = [];
