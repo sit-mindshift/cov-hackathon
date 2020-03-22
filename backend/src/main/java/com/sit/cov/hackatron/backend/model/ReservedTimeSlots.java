@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "timeslot")
+@Document(collection = "reservedTimeSlots")
 public class ReservedTimeSlots {
     @Id
     private String userId;

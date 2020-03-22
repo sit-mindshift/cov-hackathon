@@ -4,10 +4,12 @@ import user from "@/store/models/user";
 
 async function getQRCodes() {
   try {
+    let userId = user.state.personalData.id;
+
     const response =
-      await httpClient.get('http://localhost:8080/qr-api/', {
+      await httpClient.get('/qr-api/', {
         params: {
-          value: "hehexd"
+          userId: userId
         }});
     return response;
   } catch (error) {

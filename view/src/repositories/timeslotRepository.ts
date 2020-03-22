@@ -23,6 +23,28 @@ async function getTimeslots() {
   }
 }
 
+async function getUserTimelots(userId: string) {
+  try {
+    const response =
+        await httpClient.get(`/api/timeslot/${userId}`);
+
+    let userTimeslots: Timeslot[] = [];
+
+    // @ts-ignore
+    for(let data of response.timeSlots) {
+      // @ts-ignore
+      userTimeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
+    }
+
+    return userTimeslots;
+  } catch (error) {
+    // @ts-ignore
+    console.error(error);
+  }
+}
+  
+
+
 async function reserveTimelot(userId: string, storeId: string, timeslotId: string) {
   try {
     const response =
@@ -50,6 +72,9 @@ const timeslotsRepository = {
   async reserveTimelot(userId: string, storeId: string, timeslotId: string ) {
     return await reserveTimelot(userId, storeId, timeslotId);
   },
+  async getUserTimeslots(userId: string) {
+    return await getUserTimelots(userId);    
+  }
 };
 
 export default timeslotsRepository;
