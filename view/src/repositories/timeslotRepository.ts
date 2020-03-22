@@ -1,4 +1,3 @@
-import { store } from '@/store/store';
 /* tslint:disable:no-console */
 
 import httpClient from '@/utils/HttpClient';
