@@ -1,6 +1,6 @@
 <template>
   <div>
-    <head-line>All Shops</head-line>
+    <head-line>All Shops within 5km radius</head-line>
     <Map/>
     <div class="tablespace">
       <b-table class="shoplist-table" striped hover :items="shopList" :fields="fields" @row-clicked="openDetailView"></b-table>
