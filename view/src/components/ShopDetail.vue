@@ -76,7 +76,7 @@
       button[0].style.backgroundColor = "green"
       let userId = user.state.personalData.id;
       let storeId = this.id;
-      return timeslotsRepository.reserveTimelot(userId, storeId, timeslotId);       
+      return timeslotsRepository.reserveTimeslot(userId, storeId, timeslotId);       
     }
 
 }
