@@ -52,39 +52,34 @@
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator';
-  import HeadLine from '@/components/HeadLine.vue'
+import {Component, Vue} from 'vue-property-decorator';
+import HeadLine from '@/components/HeadLine.vue';
 
-  @Component({ components: {HeadLine} })
-  export default class Profile extends Vue {
+@Component({ components: {HeadLine} })
+export default class Profile extends Vue {
 
-      created() {
-          console.debug("--- created ---")
-          console.debug("--- do api request, set to store ---")
-      }
+    // todo wire correct attributes
+    get email(): string {
+        return 'heiko@mail.de';
+    }
 
-      // todo wire correct attributes
-      get email(): string {
-          return "heiko@mail.de"
-      }
+    get userName(): string {
+        return 'xxxShoppingLover_69xxx';
+    }
 
-      get userName(): string {
-          return "xxxShoppingLover_69xxx"
-      }
+    get firstName(): string {
+        return 'Heiko';
+    }
 
-      get firstName(): string {
-          return "Heiko"
-      }
+    get lastName(): string {
+        return 'Heikomann';
+    }
 
-      get lastName(): string {
-          return "Heikomann"
-      }
+    get createdOn(): string {
+        return '19.19.1919';
+    }
 
-      get createdOn(): string {
-          return "19.19.1919"
-      }
-
-  }
+}
 </script>
 
 <style scoped>
