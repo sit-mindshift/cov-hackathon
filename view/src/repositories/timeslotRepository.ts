@@ -6,7 +6,7 @@ import {Timeslot} from '@/store/models/timeslot';
 async function getTimeslots() {
   try {
     const response =
-      await httpClient.get('http://localhost:8080/api/timeslots/1');
+      await httpClient.get('/api/timeslots/1');
 
     let timeslots: Timeslot[] = [];
 
@@ -26,7 +26,7 @@ async function getTimeslots() {
 async function reserveTimelot(userId: string, storeId: string, timeslotId: string) {
   try {
     const response =
-        await httpClient.post(`http://localhost:8080/api/timeslot/reserve/${userId}/${storeId}/${timeslotId}`);
+        await httpClient.post(`/api/timeslot/reserve/${userId}/${storeId}/${timeslotId}`);
 
     let timeslots: Timeslot[] = [];
 
