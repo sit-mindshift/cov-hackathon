@@ -4,7 +4,7 @@ import {BareActionContext, getStoreBuilder} from 'vuex-typex';
 import shopRepository from '@/repositories/shopRepository';
 
 export class Shop {
-  public id: number;
+  public id: string;
   public type: string;
   public latitude: number;
   public longitude: number;
@@ -13,7 +13,7 @@ export class Shop {
   public street: string;
   public openinghours: string;
 
-  public constructor(id: number, latitude: number, longitude: number,
+  public constructor(id: string, latitude: number, longitude: number,
                      zipcode: string, city: string, street: string,
                      openinghours: string) {
     this.id = id;
@@ -39,7 +39,7 @@ const b = getStoreBuilder<RootState>().module('shops', initialShopState);
 // getters
 const shopsGetter = b.read((state) => state.shops, 'productGetter');
 const shopByIdGetter = b.read(
-  (state) => (i: number) =>
+  (state) => (i: string) =>
     state.shops.filter((s) => {
       return s.id === i;
     }), 'shopsFilter');
@@ -70,7 +70,7 @@ const shops = {
   get allShops() {
     return shopsGetter();
   },
-  getShopById(i: number) {
+  getShopById(i: string) {
     return shopByIdGetter()(i);
   },
   // mutations
