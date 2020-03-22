@@ -52,8 +52,8 @@ jobs:
     - name: Docker View
       run: |        
         docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$VIEW_IMAGE":"$GITHUB_SHA" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" \
+          --build-arg GITHUB_SHA=$GITHUB_SHA \
+          --build-arg GITHUB_REF=$GITHUB_REF \
           --build-arg API_URL=http://35.232.171.127:8080 \
           --build-arg APPLE_MAPS_TOKEN=${{ secrets.APPLE_MAPS_TOKEN }} .
       working-directory: ${{ env.VIEW_WORKING_DIRECTORY }}
