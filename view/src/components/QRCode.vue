@@ -1,8 +1,9 @@
 <template>
 <div id="qrcode">
+<b-card-group deck v-for="qrCode in qrCodesList" :key="qrCode" >
   <b-card
     title="Your Code"
-    :img-src="getQRCodeData"
+    :img-src="getQRCodeData(qrCode)"
     img-alt="Image"
     img-top
     tag="article"
@@ -15,21 +16,31 @@
 
     <b-button href="#" variant="primary">Cancel Slot</b-button>
   </b-card>
+
+
+</b-card-group>
+
 </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import user from "../store/models/user";
+
 @Component({})
 export default class extends Vue {
 
-    get getQRCodeData() {
-        return "data:image/png;base64," + user.state.qrcodeData;
+    public getQRCodeData(qrCode: string){
+      return  "data:image/png;base64," + qrCode;
     }
 
     public created() {
         user.dispatchReadQRCodeData();
+        console.log(this.qrCodesList);
+    }
+
+    get qrCodesList() {
+      return user.state.qrcodeData;
     }
 
 }
