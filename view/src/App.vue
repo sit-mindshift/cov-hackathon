@@ -49,8 +49,6 @@ export default class App extends Vue {
   public getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        const lat: string = position.coords.latitude.toString();
-        const long: string = position.coords.longitude.toString();
         user.changePosition({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
