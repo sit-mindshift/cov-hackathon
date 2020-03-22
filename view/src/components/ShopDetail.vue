@@ -22,9 +22,10 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
+  import { Component, Vue, Watch } from 'vue-property-decorator';
   import HeadLine from '@/components/HeadLine.vue'
   import shops, {Shop} from '../store/models/shop';
+  import timeslots, {Timeslot} from '../store/models/timeslot';
   import timeslotsRepository from "@/repositories/timeslotRepository";
 
   import router from '@/router';
@@ -34,7 +35,7 @@
   })
   export default class extends Vue {
     id: string = router.currentRoute.params.id;
-    selectedDate: string = "";
+    selectedDate: string = "2020-03-22";
 
     shopFields: String[] =
       ['type', 'zipcode', 'city', 'street', 'openinghours'];
@@ -42,13 +43,22 @@
     timeslotFields: String[] =
             ['date', 'from', 'til'];
 
+    @Watch('selectedDate')
+    onChildChanged(val: string) {
+      timeslots.dispatchReadTimeslotList();
+    }
+
     get shopDetail() {
       return shops.getShopById(this.id);
     }
 
     get timeslotList() {
       // TODO call dispatcher instead of repository / or pre-load more timeslots
-      return timeslotsRepository.getTimeslots();
+      return timeslots.state.timeslots;
+    }
+
+    public created() {
+      timeslots.dispatchReadTimeslotList();
     }
 
     public reserveTimeslot(record: any, index: any){
