@@ -46,8 +46,9 @@ export default class extends Vue {
     }
 
     public invalidateSlot(index: any) {
-        let timeslotId = timeslot.state.userTimeslots[index].id;
+        let timeslotId = timeslot.state.userTimeslots[index].id.toString();
         let userId = user.state.personalData.id;
+
         timeslotsRepository.removeUserTimeslot(userId, timeslotId);
         this.qrCodesList.splice(index, 1);
     }
