@@ -36,8 +36,6 @@ async function getUserTimelots(userId: string) {
       userTimeslots.push(new Timeslot(data.id, data.date, data.from, data.til))
     }
 
-    console.log('RESPONSE');
-    console.log(userTimeslots);
     return userTimeslots;
   } catch (error) {
     // @ts-ignore
@@ -66,9 +64,6 @@ async function reserveTimelot(userId: string, storeId: string, timeslotId: strin
     console.error(error);
   }
 }
-
-
-
 
 const timeslotsRepository = {
   async getTimeslots() {

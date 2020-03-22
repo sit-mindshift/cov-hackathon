@@ -2,7 +2,7 @@
 <div id="qrcode">
 <b-card-group deck v-for="qrCode in qrCodesList" :key="qrCode" >
   <b-card
-    title="NEW Code"
+    title="Your Code"
     :img-src="getQRCodeData(qrCode)"
     img-alt="Image"
     img-top
@@ -26,7 +26,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import user from "../store/models/user";
-import timeslot from "../store/models/timeslot";
 
 @Component({})
 export default class extends Vue {
