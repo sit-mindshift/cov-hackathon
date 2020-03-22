@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.apache.commons.lang.StringUtils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,13 +32,29 @@ public class StoreService {
     }
 
     public ResponseEntity<StoreList> getStores(String latitude, String longitude, String span) {
+
+        // Fill up to needed length
+        if (latitude.length() < 8) {
+            latitude = StringUtils.rightPad(latitude, 8, "0");
+            System.out.println(latitude);
+        }
+
+        // Fill up to needed length
+        if (longitude.length() <= (5 + longitude.indexOf("."))) {
+            longitude = StringUtils.rightPad(longitude, 6 + longitude.indexOf("."), "0");
+            System.out.println(longitude);
+        }
+
+        // Trim down to needed length
         latitude = latitude.replace(".", "").substring(0, Math.min(latitude.length(), 7));
         longitude = longitude.replace(".", "").substring(0, Math.min(longitude.length(), 5 + longitude.indexOf(".")));
+
+
         return ResponseEntity.ok().body(webClient.get().uri(buildStoresURI(latitude, longitude, span))
                 .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(StoreList.class).block());
     }
 
     private String buildStoresURI(String latitude, String longitude, String span) {
-        return STORES_SEARCH_ENDPOINT + "/" + latitude  + "/" + span + "/" + longitude + "/" + span;
+        return STORES_SEARCH_ENDPOINT + "/" + latitude + "/" + span + "/" + longitude + "/" + span;
     }
 }
