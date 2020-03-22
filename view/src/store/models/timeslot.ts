@@ -2,6 +2,7 @@
 import store, {RootState} from '../store';
 import {BareActionContext, getStoreBuilder} from 'vuex-typex';
 import timeslotRepository from '@/repositories/timeslotRepository';
+import user from "./user";
 
 export class Timeslot {
   public id: number;
@@ -20,10 +21,13 @@ export class Timeslot {
 
 export interface TimeslotState {
   timeslots: Timeslot[];
+  userTimeslots: Timeslot[];
+  
 }
 
 const initialTimeslotState: TimeslotState = {
   timeslots: [],
+  userTimeslots: [],
 };
 const b = getStoreBuilder<RootState>().module('timeslots', initialTimeslotState);
 
@@ -47,6 +51,17 @@ async function readTimeslotList(context: BareActionContext<TimeslotState, RootSt
   timeslots.setTimeslotList({timeslots: newTimeslot});
 }
 
+// action
+async function readUserTimeslotList(context: BareActionContext<TimeslotState, RootState>) {
+  console.log('CALLING readusertimeslotlist');
+  const newUserTimeslot: Timeslot[] = await timeslotRepository.getUserTimeslots("5e77678014aff82a4c6318aa")
+    || initialTimeslotState.userTimeslots;
+  timeslots.setTimeslotList({timeslots: newUserTimeslot});
+  // user.dispatchReadQRCodeData();
+}
+
+
+
 
 // state
 const stateGetter = b.state();
@@ -64,11 +79,14 @@ const timeslots = {
   getTimeslotById(i: number) {
     return timeslotByIdGetter()(i);
   },
+
   // mutations
   setTimeslotList: b.commit(setTimeslotList),
+  
 
   // actions
   dispatchReadTimeslotList: b.dispatch(readTimeslotList),
+  dispatchReadUserTimeslotData: b.dispatch(readUserTimeslotList),
 
 };
 
