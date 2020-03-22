@@ -1,6 +1,12 @@
 <template>
-<div id="qrcode">
-<b-card-group deck v-for="qrCode in qrCodesList" :key="qrCode" >
+<div v-if="qrCodesList && qrCodesList.length == 0">
+    <p>You have no QR Codes.</p>
+    <p>Select a store and a timeslot here to generate your QR Code</p>
+    <b-button href="/" variant="info" class="m-1">Click here</b-button>
+</div>
+
+<div v-else id="qrcode">
+  <b-card-group deck v-for="(qrCode, index) in qrCodesList" :key="qrCode" >
   <b-card
     title="Your Code"
     :img-src="getQRCodeData(qrCode)"
@@ -13,9 +19,9 @@
     <b-card-text>
       Happy Shopping ad Lidl!
     </b-card-text>
-
-    <b-button href="#" variant="primary">Cancel Slot</b-button>
-  </b-card>
+    <span>{{ index }} </span>
+    <b-button v-on:click="invalidate()" href="#" variant="primary">Cancel Slot</b-button>
+  </b-card>   
 
 
 </b-card-group>
@@ -36,8 +42,12 @@ export default class extends Vue {
 
     public created() {
         user.dispatchReadQRCodeData();
-        console.log(this.qrCodesList);
     }
+
+    public invalidate() {
+        user.dispatchReadQRCodeData();
+    }
+
 
     get qrCodesList() {
       return user.state.qrcodeData;
