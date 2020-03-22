@@ -65,7 +65,6 @@ public class TimeSlotResource {
                 System.out.println(timeslot.getId());
                 if (timeslot.getId().equals(timeSlotID)) {
                     reservedTimeSlotsOptional.get().getInvalidTimeSlots().add(timeslot);
-                    System.out.println("x");
                 }
             });
 
