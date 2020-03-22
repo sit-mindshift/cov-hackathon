@@ -11,7 +11,7 @@ import VueMapkit from 'vue-mapkit';
 
 Vue.use(VueMapkit, {
     authorizationCallback(done: any) {
-      done()
+      done(process.env.APPLE_MAPS_TOKEN)
     },
     // you can use options from mapkit documentation as well
     language: 'de',
