@@ -2,6 +2,7 @@ package com.sit.cov.hackatron.backend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -14,6 +15,7 @@ import java.time.LocalTime;
 @Setter
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(exclude = {"id"})
 @Document(collection = "timeslot")
 public class TimeSlot {
     @Id
