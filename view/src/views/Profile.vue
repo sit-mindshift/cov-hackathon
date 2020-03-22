@@ -41,12 +41,15 @@
 
             </b-row>
 
+            <!--
             <b-row>
                 <b-col>
                     <hr/>
                     <small class="text-secondary">your profile was created on {{createdOn}}</small>
                 </b-col>
             </b-row>
+            -->
+
         </b-container>
     </div>
 </template>
@@ -54,29 +57,30 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import HeadLine from '@/components/HeadLine.vue';
+import user from '../store/models/user';
 
 @Component({ components: {HeadLine} })
 export default class Profile extends Vue {
 
+    get user() {
+        return user;
+    }
+
     // todo wire correct attributes
     get email(): string {
-        return 'heiko@mail.de';
+        return user?.state?.personalData?.email;
     }
 
     get userName(): string {
-        return 'xxxShoppingLover_69xxx';
+        return user?.state?.personalData?.username;
     }
 
     get firstName(): string {
-        return 'Heiko';
+        return user?.state?.personalData?.firstName;
     }
 
     get lastName(): string {
-        return 'Heikomann';
-    }
-
-    get createdOn(): string {
-        return '19.19.1919';
+        return user?.state?.personalData?.lastName;
     }
 
 }
