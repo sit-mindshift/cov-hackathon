@@ -6,12 +6,11 @@ import timeslot from "@/store/models/timeslot";
 async function getQRCodes() {
   try {
     let userId = user.state.personalData.id;
-    console.log('GET QR CODES FOR USER: '+ userId);
 
     const response =
-      await httpClient.get('http://localhost:8080/qr-api/', {
+      await httpClient.get('/qr-api/', {
         params: {
-          value: userId
+          userId: userId
         }});
     return response;
   } catch (error) {
