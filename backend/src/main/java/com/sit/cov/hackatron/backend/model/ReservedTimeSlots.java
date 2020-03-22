@@ -19,11 +19,14 @@ import lombok.Setter;
 public class ReservedTimeSlots {
     @Id
     private String userId;
+
+    private String storeId;
     private List<TimeSlot> timeSlots;
     private List<TimeSlot> invalidTimeSlots = new ArrayList<>();
 
-    public ReservedTimeSlots(String userId, List<TimeSlot> timeSlots) {
+    public ReservedTimeSlots(String userId, String storeId, List<TimeSlot> timeSlots) {
         this.userId = userId;
+        this.storeId = storeId;
         this.timeSlots = timeSlots;
     }
 }

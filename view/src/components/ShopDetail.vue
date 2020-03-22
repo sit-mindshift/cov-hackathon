@@ -25,7 +25,6 @@
   import { Component, Vue } from 'vue-property-decorator';
   import HeadLine from '@/components/HeadLine.vue'
   import shops, {Shop} from '../store/models/shop';
-  import timeslots, {Timeslot} from '../store/models/timeslot';
   import timeslotsRepository from "@/repositories/timeslotRepository";
 
   import router from '@/router';
@@ -49,18 +48,17 @@
 
     get timeslotList() {
       // TODO call dispatcher instead of repository / or pre-load more timeslots
-      // return timeslots.allTimeslots;
-      // return timeslots.dispatchReadTimeslotList;
-
-      return timeslotsRepository.getTimeslots;
+      return timeslotsRepository.getTimeslots();
     }
 
     public reserveTimeslot(record: any, index: any){
-      // TODO get pass real userId to backend
-      let customerId = "1";
+      // TODO pass real userId to backend
+      let userId = "1";
+      let storeId = this.id;
       let timeslotId = record.id;
 
-      return timeslotsRepository.reserveTimelot(customerId, timeslotId);
+      console.log('reserving timeslot '+ timeslotId + ' of store '+ storeId + ' for user ' + userId);
+      return timeslotsRepository.reserveTimelot(userId, storeId, timeslotId); 
     }
   }
 </script>
