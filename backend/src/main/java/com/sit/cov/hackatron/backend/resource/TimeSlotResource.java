@@ -108,4 +108,10 @@ public class TimeSlotResource {
             return reservedTimeslotsRepository.save(reservedTimeSlots);
         }
     }
+    
+    @DeleteMapping(value= "/timeslots")
+    public void deleteAllTimeslots() {
+        reservedTimeslotsRepository.deleteAll();
+        timeslotRepository.deleteAll();
+    }
 }
