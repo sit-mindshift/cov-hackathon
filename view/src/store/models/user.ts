@@ -81,14 +81,14 @@ function setQRCodeData(state: UserState, payload: {data: any}) {
 }
 
 function setUser(state: UserState, payload: {data: any}) {
-  Vue.set(state, "personalData", payload);
+  Vue.set(state, 'personalData', payload);
 }
 
 // action
 async function readQRCodeData(context: BareActionContext<UserState, RootState>) {
   const data: any = await qrcodeRepository.getQRCodes()
     || initialUserState.qrcodeData;
-  user.setQRCodeData({data: data});
+  user.setQRCodeData({data});
 }
 
 // state
@@ -106,7 +106,7 @@ const user = {
   setQRCodeData: b.commit(setQRCodeData),
   setUser: b.commit(setUser),
 
-  //action
+  // action
   dispatchReadQRCodeData: b.dispatch(readQRCodeData),
 
 };

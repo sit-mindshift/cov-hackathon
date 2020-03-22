@@ -25,7 +25,7 @@ export class Shop {
     this.street = street;
 
     // https://css-tricks.com/snippets/javascript/strip-html-tags-in-javascript/
-    const withComma = openinghours.replace(/(<([^>]+)>)/ig,", ");
+    const withComma = openinghours.replace(/(<([^>]+)>)/ig,', ');
     this.openinghours = withComma.substring(0, withComma.length - 2);
   }
 }
