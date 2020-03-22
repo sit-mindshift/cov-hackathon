@@ -23,7 +23,10 @@ export class Shop {
     this.zipcode = zipcode;
     this.city = city;
     this.street = street;
-    this.openinghours = openinghours;
+
+    // https://css-tricks.com/snippets/javascript/strip-html-tags-in-javascript/
+    const withComma = openinghours.replace(/(<([^>]+)>)/ig,", ");
+    this.openinghours = withComma.substring(0, withComma.length - 2);
   }
 }
 
