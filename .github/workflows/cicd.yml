@@ -11,13 +11,16 @@ env:
   SERVER_DB: shopsafe-db
   SERVER_IMAGE: shopsafe-server
   SERVER_DEPLOYMENT_NAME: backend
-  VIEW_IMAGE: shopsafe-view
   GKE_SERVER_CLUSTER: shopsave-k8s-cluster
   GKE_ZONE: us-central1-c
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GKE_KEY: ${{ secrets.GKE_AUTH_BASE64 }}
   BACKEND_WORKING_DIRECTORY: ./backend
+  VIEW_IMAGE: shopsafe-view
+  VIEW_WORKING_DIRECTORY: ./view
+  VIEW_DEPLOYMENT_NAME: view
   REGISTRY_HOSTNAME: gcr.io
+  API-URL: http://35.232.171.127:8080/
   
 jobs:
   setup-build-publish-deploy:
@@ -39,16 +42,24 @@ jobs:
       with:
         java-version: 11
     # Build
-    - name: Build with Gradle
+    - name: Build Backend with Gradle
       run: ./gradlew build
       working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }} 
-    - name: Docker
+    - name: Docker Backend
       run: |        
         docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$SERVER_IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           --build-arg JAR_FILE=build/libs/*.jar .
       working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
+      
+      - name: Docker View      
+      run: |        
+        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$VIEW_IMAGE":"$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          --build-arg API_URL="$API-URL" .
+      working-directory: ${{ env.VIEW_WORKING_DIRECTORY }}
         
         
     # Setup gcloud CLI
@@ -60,6 +71,7 @@ jobs:
     # Configure docker to use the gcloud command-line tool as a credential helper
     - run: gcloud auth configure-docker       
     - run: docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA    
+    - run: docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$VIEW_IMAGE:$GITHUB_SHA    
     - run: gcloud container clusters get-credentials $GKE_SERVER_CLUSTER --zone $GKE_ZONE --project=$GKE_PROJECT
     - run: kubectl set image deployment/$SERVER_DEPLOYMENT_NAME $SERVER_IMAGE=$REGISTRY_HOSTNAME/$GKE_PROJECT/$SERVER_IMAGE:$GITHUB_SHA
     
