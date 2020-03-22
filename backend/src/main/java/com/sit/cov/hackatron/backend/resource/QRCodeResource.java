@@ -16,9 +16,8 @@ import java.util.Optional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sit.cov.hackatron.backend.model.ReservedTimeSlots;
-import com.sit.cov.hackatron.backend.model.TimeSlot;
 import com.sit.cov.hackatron.backend.service.QRCodeGeneratorService;
-import com.sit.cov.hackatron.backend.repository.ReservedTimeslotRepository;
+import com.sit.cov.hackatron.backend.repository.ReservedTimeslotsRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +30,7 @@ public class QRCodeResource {
 
     public static final String QR_ENDPOINT = "/qr-api/";
     private final QRCodeGeneratorService qrCodeGeneratorService;
-    private final ReservedTimeslotRepository reservedTimeslotRepository;
+    private final ReservedTimeslotsRepository reservedTimeslotsRepository;
 
     @PostMapping(value = QR_ENDPOINT, produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
@@ -44,7 +43,7 @@ public class QRCodeResource {
     @ResponseBody
     public ResponseEntity<String[]> getQRCodeForUser(@RequestParam final String userId) throws JsonProcessingException {
 
-        final Optional<ReservedTimeSlots> reservedTimeSlots = reservedTimeslotRepository.findById(userId);
+        final Optional<ReservedTimeSlots> reservedTimeSlots = reservedTimeslotsRepository.findById(userId);
         final List<String> qrCodes = new ArrayList<String>();
         if(reservedTimeSlots.isPresent()){
         reservedTimeSlots.get().getTimeSlots().forEach(timeslot -> {
