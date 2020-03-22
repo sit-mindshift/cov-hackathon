@@ -1,9 +1,9 @@
 <template>
   <div>
     <head-line>Shop Detail </head-line>
-    <b-table striped hover :items="shopDetail" :fields="shopFields" >
-    </b-table>
-
+      <div class="tablespace">
+        <b-table striped hover :items="shopDetail" :fields="shopFields" ></b-table>
+      </div>
     <head-line>Time Slot</head-line>
     <b-container>
       <b-row>
@@ -86,4 +86,8 @@
 .shop-map {
    color: 300px;
  }
+.tablespace {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
 </style>
