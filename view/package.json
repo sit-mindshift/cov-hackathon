@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@types/leaflet": "^1.5.12",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap-vue": "^2.7.0",
     "core-js": "^3.6.4",
     "jsonwebtoken": "^8.5.1",
